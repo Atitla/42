@@ -1,5 +1,5 @@
 #include "libft.h"
-char *itoa(int n){
+char *ft_itoa(int n){
 	char	*ascii;
 	int		negative;
 	size_t	length;
