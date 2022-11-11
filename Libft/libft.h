@@ -1,3 +1,4 @@
+#include<stdlib.h>
 void * calloc( size_t elementCount, size_t elementSize );
 void *ft_memcpy(void *dest, const void *src, size_t n);
 int ft_isprint (int c);
