@@ -1,0 +1,50 @@
+int	main()
+{
+	char str[12] = "bcaaqsdsfgq";
+	char *dup = ft_strdup(str);
+	printf("%s",dup);
+	free(dup);
+}
+
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+		(void) argc;
+		int	*t = ft_range(atoi(argv[1]), atoi(argv[2]));
+		for (int i = 0; i < atoi(argv[2]); i++)
+			printf("t[%d] = %d\n", i, t[i]);
+}
+
+int main()
+{
+	int *tab;
+	int ret = ft_ultimate_range(&tab, 0, 2147483647);
+
+	printf("return = %d\n", ret);
+	for (int i = 0; i < 2147483647; i+=1000)
+		printf("t[%d] = %d\n", i, (tab)[i]);
+	free(tab);
+}
+
+#include <stdio.h>
+
+int main(int argc, char **argv)
+{
+	char	*tab[] = {"salut","","","","","","trkl","mgl"};
+	char	*r = ft_strjoin(8, tab, "jghdjfghfgxhsgh");
+	printf("%s",r);
+	free(r);
+}
+
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+	(void) argc;
+	char **res = ft_split(argv[1], argv[2]);
+	int i = 0;
+	while (res[i])
+	{
+		printf("t[%d] = %s\n", i, res[i]);
+		i++;
+	}
+}
