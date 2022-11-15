@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:33 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:57:35 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/15 23:30:46 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,4 @@ char *ft_itoa(int n){
 		ascii[length] = '-';
 	ft_strrev(ascii);
 	return(ascii);
-	
-	
-	
-	
 }
