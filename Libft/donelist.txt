@@ -12,7 +12,7 @@
 • ft_strlcat P
 • ft_toupper D
 • ft_tolower D
-• ft_strchr
+• ft_strchr D
 • ft_strrchr
 • ft_strncmp D
 • ft_memchr D
