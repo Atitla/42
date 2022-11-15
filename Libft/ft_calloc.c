@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/15 21:57:04 by ecunha            #+#    #+#             */
+/*   Updated: 2022/11/15 21:57:09 by ecunha           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-void * ft_calloc( size_t elementCount, size_t elementSize ){
+void * calloc( size_t elementCount, size_t elementSize ){
 	int size;
 	int i;
 	void *tab;
