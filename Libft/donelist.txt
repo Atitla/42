@@ -15,14 +15,14 @@
 • ft_strchr
 • ft_strrchr
 • ft_strncmp D
-• ft_memchr
-• ft_memcmp
+• ft_memchr D
+• ft_memcmp D
 • ft_strnstr D
 • ft_atoi D
 • ft_calloc D
 • ft_strdup D
 • ft_strjoin P
-• ft_substr
+• ft_substr D
 • ft_strtrim
 • ft_split P
 • ft_itoa D
