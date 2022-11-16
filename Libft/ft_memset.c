@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:50 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 00:19:47 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 02:08:49 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void *ft_memset(void *b, int c, size_t len){
 	size_t i;
 
 	i = 0;
-	if (!b)
+	if (!b || len)
 		return(0);
 	while (i < len)
 	{
