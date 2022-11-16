@@ -6,79 +6,56 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:33 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 00:13:03 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 01:11:59 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-static int ft_abs(int i)
+
+static int
+	ft_abs(int nbr)
 {
-	return ((i >= 0) ? i : -i);
+	return ((nbr < 0) ? -nbr : nbr);
 }
 
-static void ft_strrev(char *str)
+static void
+	ft_strrev(char *str)
 {
-	int	length;
-	int	i;
-	char	temp;
+	size_t	length;
+	size_t	i;
+	char	tmp;
 
-	length = 0;
+	length = ft_strlen(str);
 	i = 0;
-	while (str[length])
-		length++;
-	length -= 1;
-	while (i < length)
+	while (i < length / 2)
 	{
-		temp = str[i];
-		str[i] = str[length];
-		str[length] = temp;
+		tmp = str[i];
+		str[i] = str[length - i - 1];
+		str[length - i - 1] = tmp;
 		i++;
-		length--;
 	}
-	return (str);
 }
 
-static int	ft_intlen(int nbr)
+char
+	*ft_itoa(int n)
 {
-	int len;
-	
-	len = 0;
-	if (nbr <= 0)
-		++len;
-	while (nbr != 0)
-	{
-		++len;
-		nbr = nbr / 10;
-	}
-	return (len);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*ascii;
-	int		negative;
-	long p;
+	char	*str;
+	int		is_neg;
 	size_t	length;
 
-	negative = 0;
-	p = n;
-	length = ft_intlen(n);
-	if (p < 0)
-		negative += 1;
-	ascii = (char *)ft_calloc(sizeof(*ascii) * (length + 1), sizeof(char));
-	if (!ascii)
+	is_neg = (n < 0);
+	if (!(str = ft_calloc(11 + is_neg, sizeof(*str))))
 		return (NULL);
-	if (p == 0)
-		ascii[0] = 0;
-		length = 0;
-	while (p != 0)
+	if (n == 0)
+		str[0] = '0';
+	length = 0;
+	while (n != 0)
 	{
-		ascii[length] = '0' + ft_abs(p % 10);
-		p = p / 10;
-		length++;
+		str[length++] = '0' + ft_abs(n % 10);
+		n = (n / 10);
 	}
-	if (negative == 1)
-		ascii[length] = '-';
-	ft_strrev(ascii);
-	return (ascii);
+	if (is_neg)
+		str[length] = '-';
+	ft_strrev(str);
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:59 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:58:01 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 01:33:49 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 
 char	*ft_strdup(char *src)
 {
-	char	*dest;
+	int		i;
+	int		len;
+	char	*str;
 
-	dest = malloc((ft_strlen(src) + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	return (ft_strcpy(dest, src));
+	len = 0;
+	while (src[len])
+		len++;
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (!str)
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = src[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
 }

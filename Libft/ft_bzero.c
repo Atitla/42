@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:56:58 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:56:59 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 00:20:00 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,4 @@ void	*ft_bzero(void *s, size_t n){
 		i++;
 	}
 	return(s);
-}
-
-int main (void){
-
-	int i = 0;
-	int array[] = {12, 553, 96 ,23, 456, 54};
-	int array2[] = {12, 553, 96 ,23, 456, 54};
-	bzero(array, 12);
-	ft_bzero(array2, 12);
-	while (i < 6)
-	{
-		printf("%d\n", array[i]);
-		printf("%d\n", array2[i]);
-		i++;
-	}
-	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/12 12:08:42 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 01:12:12 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,4 @@ int ft_atoi (char* str){
 	return (number * j);
 	
 
-}
-int main(int ac, char **av){
-
-	(void) ac;
-	printf("%d\n",atoi(av[1]));
-	printf("%d",atoi(av[1]));
 }

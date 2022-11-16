@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 21:58:04 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 00:30:23 by ecunha           ###   ########.fr       */
+/*   Created: 2022/11/16 00:40:46 by ecunha            #+#    #+#             */
+/*   Updated: 2022/11/16 00:43:11 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+char	*ft_strrchr(const char *s, int c)
 {
-	int unsigned	i;
+	int		i;
+	char *copystring;
 
-	i = 0;
-	if (size == 0 || size == 1)
-		return (ft_strlen(src));
-	else
+	copystring = (char *)s;
+	i = ft_strlen(copystring);
+	while (i >= 0)
 	{
-		while (src[i])
-		{	
-			dest[i] = src[i];
-			i++;
-			if (i == size - 1)
-			{
-				dest[i] = '\0';
-				return (ft_strlen(src));
-			}
-		}
+		if (s[i] == c)
+			return ((char *)s + i);
+		i--;
 	}
-	dest[i] = '\0';
-	return (ft_strlen(src));
+	return (NULL);
 }
