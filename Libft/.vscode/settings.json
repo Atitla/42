@@ -3,7 +3,7 @@
 		"libft.h": "c"
 	},
 	"files.watcherExclude": {
-		"**/._*": true,
-		"**/*.o": true
+		"*.o": true,
+		"**/._*": true
 	}
 }

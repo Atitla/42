@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:46 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 00:29:08 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 03:00:18 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void *	ft_memmove(void *dst, const void *src, size_t len)
 	i = 0;
 	d = (unsigned char *)dst;
 	s = (unsigned char *)src;
+	if ((!dst && !src) && !len)
+		return (NULL);
 	if (d > s)
 		while (i < len)
 		{

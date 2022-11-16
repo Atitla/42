@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/11/16 02:03:18 by ecunha           ###   ########.fr        #
+#    Updated: 2022/11/16 02:19:43 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,6 @@ OBJS_BONUS = $(addprefix $(OBJS_DIR), $(addsuffix _bonus.o, $(FILES_BONUS)))
 $(NAME): $(OBJS)
 	@$(AR) $@ $^
 	@echo "$(GREEN)					😳😎libft compiled perfectly!😎😳$(DEF_COLOR)"
-	@sleep 0.7
 	@echo "$(BLUE) MAKE COMMANDS LIST :$(DEF_COLOR)"
 	@echo "$(CYAN) 		make clean (remove objects)$(DEF_COLOR)"
 	@echo "$(CYAN) 		make fclean (remove objects and executables)$(DEF_COLOR)"

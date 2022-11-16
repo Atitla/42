@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:39 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 00:20:12 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 02:57:10 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
 	d = dest;
 	s = src;
 	i = 0;
+	if (!s && !d)
+		return (NULL);
 	while (i < n)
 	{
 		d[i] = s[i];
