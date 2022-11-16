@@ -6,13 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/12 12:08:42 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 04:54:03 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_atoi (char* str){
+int ft_atoi (const char* str){
 	int i;
 	int number;
 	int j;
@@ -20,14 +20,15 @@ int ft_atoi (char* str){
 	i = 0;
 	j = 1;
 	number = 0;
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
 		i++;
-	if (str[i] == '-'){
-		j *= -1;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			j *= -1;
 		i++;
 	}
-	if (str[i] == '+')
-		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		number = (number * 10) + (str[i] - 48);
@@ -36,10 +37,4 @@ int ft_atoi (char* str){
 	return (number * j);
 	
 
-}
-int main(int ac, char **av){
-
-	(void) ac;
-	printf("%d\n",atoi(av[1]));
-	printf("%d",atoi(av[1]));
 }

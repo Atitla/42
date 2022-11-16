@@ -7,6 +7,7 @@ char * ft_strchr( const char * string, int searchedChar ){
 	char *ptr;
 
 	ptr = (char *)string;
+	i = 0;
 	while (ptr)
 	{
 		if(*ptr == searchedChar)

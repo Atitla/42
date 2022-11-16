@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:58:04 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:58:07 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 00:30:23 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,4 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 	}
 	dest[i] = '\0';
 	return (ft_strlen(src));
-}
-
-int main(){
-
-//    char str1[40] = "bonjous";
-//    char str2[40];
-//    unsigned int i = strlcpy(str2, str1, 50);
-//    printf("---strlcpy---\n%s\nret:%d\n",str2,i);
-
-    char str3[40] = "bonjous";
-    char str4[40];
-    unsigned int j = ft_strlcpy(str4, str3, 50);
-    printf("---ft_strlcpy---\n%s\nret:%d\n",str4,j);
 }
