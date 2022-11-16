@@ -6,12 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:04 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:57:09 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/16 05:20:25 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-void * calloc( size_t elementCount, size_t elementSize ){
+void *ft_calloc( size_t elementCount, size_t elementSize )
+{
 	int size;
 	int i;
 	void *tab;
@@ -23,5 +24,4 @@ void * calloc( size_t elementCount, size_t elementSize ){
 		return (NULL);
 	ft_bzero(tab, size);
 	return(tab);
-	
 }
