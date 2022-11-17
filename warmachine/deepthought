@@ -3,7 +3,7 @@ $> hostname; uname -msr
 z3r10p1.42lyon.fr
 Darwin 18.7.0 x86_64
 $> date
-Thu Nov 17 01:11:32 CET 2022
+Thu Nov 17 03:56:11 CET 2022
 $> gcc --version
 Apple clang version 11.0.0 (clang-1100.0.33.17)
 Target: x86_64-apple-darwin18.7.0
@@ -88,7 +88,7 @@ $> make bonus
 make: *** No rule to make target `ft_lstnew_bonus.o', needed by `bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r--  1 ecunha  4222  20840 Nov 17 01:11 /Users/ecunha/42/warmachine/dirlibft/libft.a
+-rw-r--r--  1 ecunha  4222  20840 Nov 17 03:56 /Users/ecunha/42/warmachine/dirlibft/libft.a
 
 = Part2_functions ==============================================================
 
@@ -205,7 +205,24 @@ char                            *ft_strstr(const char *big, const char *little);
 $> norminette ft_split.c | grep -E '(Error|Warning)'
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_split.c main.c libft.a -o user_exe
 
-clang: error: no such file or directory: '/Users/ecunha/42/warmachine/dirlibft//ft_split.c'
+= Test 1 ===================================================
+$> ./user_exe 01
+Command './user_exe 01' got killed by an Abort
+= Test 2 ===================================================
+$> ./user_exe 02
+Command './user_exe 02' got killed by an Abort
+= Test 3 ===================================================
+$> ./user_exe 03
+Command './user_exe 03' got killed by an Abort
+= Test 4 ===================================================
+$> ./user_exe 04
+Command './user_exe 04' got killed by an Abort
+= Test 5 ===================================================
+$> ./user_exe 05
+Command './user_exe 05' got killed by an Abort
+= Test 6 ===================================================
+$> ./user_exe 06
+Command './user_exe 06' got killed by an Abort
 
 = ft_itoa.c ====================================================================
 $> norminette ft_itoa.c | grep -E '(Error|Warning)'
