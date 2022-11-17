@@ -6,16 +6,17 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 04:54:03 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 00:43:35 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_atoi (const char* str){
-	int i;
-	int number;
-	int j;
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	number;
+	int	j;
 
 	i = 0;
 	j = 1;
@@ -35,6 +36,4 @@ int ft_atoi (const char* str){
 		i++;
 	}
 	return (number * j);
-	
-
 }

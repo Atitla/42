@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/18 00:21:11 by ecunha            #+#    #+#             */
+/*   Updated: 2022/11/18 00:25:22 by ecunha           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-# define BUFF_SIZE 32
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	size_t			content_size;
@@ -23,7 +34,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
-void 				*ft_calloc( size_t elementCount, size_t elementSize );
+void				*ft_calloc( size_t elementCount, size_t elementSize );
 char				*ft_strcpy(char *dst, const char *src);
 unsigned int		ft_strlcpy(char *dest, char *src, unsigned int size);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
@@ -33,8 +44,8 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *big, const char *little);
-char				*ft_strnstr
-					(const char *big, const char *little, size_t len);
+char				*ft_strnstr(const char *big,
+						const char *little, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				**ft_split(char const *str, char c);

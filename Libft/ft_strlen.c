@@ -6,13 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:59:38 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 04:56:02 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 00:31:32 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	int	i;
 

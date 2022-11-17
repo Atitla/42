@@ -6,11 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:21 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:57:23 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 00:40:36 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-int	ft_isascii(int c){
+
+int	ft_isascii(int c)
+{
 	return (c >= 0 && c <= 127);
 }

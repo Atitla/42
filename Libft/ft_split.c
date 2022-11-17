@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 01:21:23 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/17 03:56:09 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 00:18:29 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	*ft_strndup(const char *src, int n)
 	j = 0;
 	while (src[i] && i < n)
 		i++;
-	dest = malloc(sizeof(char) * i + 1);
-	while (src[j] && j < n)
+	dest = (char *)malloc(sizeof(char) * (i + 1));
+	while (j < n)
 	{
 		dest[j] = src[j];
 		j++;
@@ -75,7 +75,7 @@ char	**ft_split(const char *str, char c)
 	char	**split;
 
 	i = 0;
-	split = malloc(sizeof(char *) * count_word(str, c) + 1);
+	split = malloc(sizeof(char *) * (count_word(str, c) + 1));
 	if (!split)
 		return (NULL);
 	while (*str)
@@ -83,23 +83,13 @@ char	**ft_split(const char *str, char c)
 		while (*str && is_a_separator(*str, c))
 			str++;
 		if (*str)
+		{
 			split[i] = ft_strndup(str, range_to_sep(str, c));
-		str += range_to_sep(str, c);
-		i++;
+			i++;
+		}
+		while (*str && !is_a_separator(*str, c))
+			str++;
 	}
-	split[i] = NULL;
+	split[i] = 0;
 	return (split);
 }
-//#include <stdio.h>
-//int main(int argc, char **argv)
-//{
-//    (void)argc;
-//    char **res = ft_split("j,gjmfjmdfmhmh", 'j');
-//    int i = 0;
-//    while (res[i])
-//    {
-//        printf("t[%d] = %s\n", i, res[i]);
-//        i++;
-//    }
-//    printf("%s",res[i]);
-//}
