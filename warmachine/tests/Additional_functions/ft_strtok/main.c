@@ -12,9 +12,9 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft.h"
+#include "../../../libft.h"
 
-static void		ft_print_result(char const *s)
+void	ft_print_result(char const *s)
 {
 	int		len;
 
@@ -24,32 +24,42 @@ static void		ft_print_result(char const *s)
 	write(1, s, len);
 }
 
-static void		check_strtok(char *delim)
+int		main(int argc, const char *argv[])
 {
 	char	str[] = "abc,def;ghi,jkl.mno,pqr";
-	char	*token;
-
-	if ((token = ft_strtok(str, delim)))
-	{
-		ft_print_result(token);
-		while ((token = ft_strtok(NULL, delim)))
-			ft_print_result(token);
-	}
-	else
-		ft_print_result("NULL");
-}
-
-int				main(int argc, const char *argv[])
-{
+	char  *token;
 	int		arg;
 
 	if (argc == 1)
 		return (0);
 	if ((arg = atoi(argv[1])) == 1)
-		check_strtok(",");
+	{
+		if ((token = ft_strtok(str, ",")))
+		{
+			ft_print_result(token);
+			while ((token = ft_strtok(NULL, ",")))
+				ft_print_result(token);
+		}
+		else
+			ft_print_result("NULL");
+	}
 	else if (arg == 2)
-		check_strtok("y");
+	{
+		if ((token = ft_strtok(str, "y")))
+			ft_print_result(token);
+		else
+			ft_print_result("NULL");
+	}
 	else if (arg == 3)
-		check_strtok(",;.");
+	{
+		if ((token = ft_strtok(str, ",;.")))
+		{
+			ft_print_result(token);
+			while ((token = ft_strtok(NULL, ",;.")))
+				ft_print_result(token);
+		}
+		else
+			ft_print_result("NULL");
+	}
 	return (0);
 }

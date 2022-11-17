@@ -13,7 +13,7 @@
 • ft_toupper D
 • ft_tolower D
 • ft_strchr D
-• ft_strrchr
+• ft_strrchr D
 • ft_strncmp D
 • ft_memchr D
 • ft_memcmp D

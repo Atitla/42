@@ -25,6 +25,7 @@ size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
 void 				*ft_calloc( size_t elementCount, size_t elementSize );
 char				*ft_strcpy(char *dst, const char *src);
+unsigned int		ft_strlcpy(char *dest, char *src, unsigned int size);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
@@ -72,7 +73,6 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
-int					ft_abs(int nb);
 int					ft_islower(int c);
 int					ft_isupper(int c);
 //void				ft_putnbr_base(int nbr, char *base);

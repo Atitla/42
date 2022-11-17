@@ -1,8 +1,15 @@
-# Libftest
+# PREAMBLE
+This is an edit of prev libftest made by @jtoty to fit with the 2019 project libft. <br/>
+(ORIGINAL REP : https://github.com/jtoty/Libftest) <br/>
+This update was made by @lmartin <br/>
+
+# libft-war-machine
 <img align="right" src="./srcs/img_readme.png" width="50%"/>
 This repository contains script to test your libft project.
 The script will do the following tests :
 
+- Check if the author file exists
+- Check content of the author file
 - Check if libft.h exists
 - Check norme of libft.h
 - Check if the Makefile file exists
@@ -27,12 +34,8 @@ Makefile up to date.
 ### Installation
 
 ```bash
-git clone https://github.com/jtoty/Libftest
+git clone https://github.com/y3ll0w42/libft-war-machine
 ```
-The project needs `clang` compiler. Make sure it is installed.
-
-#### Old libft subject
-To test the old libft subject, you have to go to the branch [old-libft](https://github.com/jtoty/Libftest/tree/old-libft).
 
 ### Configuration
 
@@ -42,13 +45,29 @@ project.
 You can also choose the colors that will be used and the path where the
 deepthought file will be created.
 
+#### Custom directories
+
+If you use custom directories for your header and source files; you should specify there name in my_config.sh.
+
+The following variables must be set:
+```
+HEADER_DIR
+SRC_DIR
+```
+Exemple:
+```
+HEADER_DIR="includes"
+SRC_DIR="srcs"
+```
+
+
 ## Running script
 
-Run the script from the directory where you cloned
+Go to the directory where you cloned and run the script
 ```bash
 bash grademe.sh
 ```
-or run the script with the path
+or simply run the script with the path
 ```bash
 bash /path/where/you/cloned/grademe.sh
 ```
@@ -57,6 +76,7 @@ bash /path/where/you/cloned/grademe.sh
 | Option | Description |
 | --- | --- |
 | `-h`<br />`--help` | Display help and exit |
+| `-d` | Allows to perform the tests even if the files are in directories |
 | `-c` | Disable color |
 | `-s` | Disable searching Makefile and author files |
 | `-m` | When compiling library, test all the Makefile's rules (instead of doing only make re and checking if other rules exist). |
@@ -81,12 +101,13 @@ bash grademe.sh ft_atoi -f ft_strlen -n
 ```
 
 ### Supported functions
-All the supported functions are listed [on this page](https://github.com/jtoty/Libftest/blob/master/supported_functions.md).
+All the supported functions are listed [on this page](https://github.com/y3ll0w42/libft-war-machine/blob/master/supported_functions.md).
 ## Contribution
 
 Any suggestions or bugs reporting ?
-Contact jtoty@student.42.fr
+Contact lmartin@student.42.fr
 
 ### Contributors
+- jtoty : https://github.com/jtoty
 - jmichaud : https://github.com/MrJe
 - tlernoul

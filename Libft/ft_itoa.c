@@ -6,20 +6,18 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:33 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 01:11:59 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/17 01:09:22 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int
-	ft_abs(int nbr)
+static int	ft_abs(int nbr)
 {
 	return ((nbr < 0) ? -nbr : nbr);
 }
 
-static void
-	ft_strrev(char *str)
+static void	ft_strrev(char *str)
 {
 	size_t	length;
 	size_t	i;
@@ -36,8 +34,7 @@ static void
 	}
 }
 
-char
-	*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*str;
 	int		is_neg;

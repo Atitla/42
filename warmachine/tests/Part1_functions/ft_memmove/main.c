@@ -13,16 +13,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "libft.h"
+#include "../../../libft.h"
 
-static void		check_memmove(void *dest, void *src, int n)
-{
-	if (dest != ft_memmove(dest, src, n))
-		write(1, "dest's adress was not returned\n", 31);
-	write(1, dest, 22);
-}
-
-int				main(int argc, const char *argv[])
+int		main(int argc, const char *argv[])
 {
 	char	src[] = "lorem ipsum dolor sit amet";
 	char	*dest;
@@ -33,14 +26,34 @@ int				main(int argc, const char *argv[])
 	if (argc == 1)
 		return (0);
 	else if ((arg = atoi(argv[1])) == 1)
-		check_memmove(dest, "consectetur", 5);
+	{
+		if (dest != ft_memmove(dest, "consectetur", 5))
+			write(1, "dest's adress was not returned\n", 31);
+		write(1, dest, 22);
+	}
 	else if (arg == 2)
-		check_memmove(dest, "con\0sec\0\0te\0tur", 10);
+	{
+		if (dest != ft_memmove(dest, "con\0sec\0\0te\0tur", 10))
+			write(1, "dest's adress was not returned\n", 31);
+		write(1, dest, 22);
+	}
 	else if (arg == 3)
-		check_memmove(dest, src, 8);
+	{
+		if (dest != ft_memmove(dest, src, 8))
+			write(1, "dest's adress was not returned\n", 31);
+		write(1, dest, 22);
+	}
 	else if (arg == 4)
-		check_memmove(src, dest, 8);
+	{
+		if (src != ft_memmove(src, dest, 8))
+			write(1, "dest's adress was not returned\n", 31);
+		write(1, dest, 22);
+	}
 	else if (arg == 5)
-		check_memmove(src, dest, 0);
+	{
+		if (src != ft_memmove(src, dest, 0))
+			write(1, "dest's adress was not returned\n", 31);
+		write(1, dest, 22);
+	}
 	return (0);
 }

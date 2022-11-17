@@ -6,14 +6,15 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:58:22 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:58:23 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/17 00:27:12 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c){
-	if (c >= 97 || c <= 122)
+int	ft_toupper(int c)
+{
+	if (c >= 97 && c <= 122)
 		c -= 32;
-		return(c);
+	return(c);
 }
