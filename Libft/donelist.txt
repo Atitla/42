@@ -9,7 +9,7 @@
 • ft_memcpy D
 • ft_memmove D
 • ft_strlcpy D
-• ft_strlcat P
+• ft_strlcat D
 • ft_toupper D
 • ft_tolower D
 • ft_strchr D

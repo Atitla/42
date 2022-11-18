@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:21:11 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 00:25:22 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 01:04:44 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char				*ft_strnstr(const char *big,
 						const char *little, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-char				**ft_split(char const *str, char c);
 
 int					ft_atoi(const char *str);
+char				*ft_itoa(int n);
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -59,6 +59,8 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+int					ft_islower(int c);
+int					ft_isupper(int c);
 
 //void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 //char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -66,12 +68,10 @@ int					ft_tolower(int c);
 //char				*ft_strjoin(char const *s1, char const *s2);
 //char				*ft_strtrim(char const *s);
 //char				**ft_strsplit(char const *s, char c);
-
-char				*ft_itoa(int n);
+char				**ft_split(char const *str, char c);
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
-void				ft_putendl(char const *s);
 void				ft_putnbr(int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
@@ -84,18 +84,4 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-
-int					ft_islower(int c);
-int					ft_isupper(int c);
-//void				ft_putnbr_base(int nbr, char *base);
-//char				*ft_itoa_base(int value, int base);
-//int					get_next_line(const int fd, char **line);
-//char				**copy_array_str(char **origin);
-//char				*create_pathname(char *daddy, char *son);
-//char				*copy_str_from_array(char **origin, char *target);
-//char				**add_str_to_array(char **source, char *target);
-//void				erase_char_array(char **array);
-//size_t				len_till_c(char *src, int c);
-//void				ft_putnbrdl(int n);
-
 #endif
