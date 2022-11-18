@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:21:11 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 01:04:44 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 05:54:38 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_list
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
-void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -65,8 +64,8 @@ int					ft_isupper(int c);
 //void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 //char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 //char				*ft_strsub(char const *s, unsigned int start, size_t len);
-//char				*ft_strjoin(char const *s1, char const *s2);
-//char				*ft_strtrim(char const *s);
+char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strtrim(char const *s, char const *set);
 //char				**ft_strsplit(char const *s, char c);
 char				**ft_split(char const *str, char c);
 
