@@ -6,11 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:25 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:57:27 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 00:40:32 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-int		ft_isdigit(int c){
+
+int	ft_isdigit(int c)
+{
 	return (c >= '0' && c <= '9');
 }

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 00:40:46 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/16 00:43:11 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 00:26:52 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	int		i;
-	char *copystring;
+	char	*copystring;
 
 	copystring = (char *)s;
 	i = ft_strlen(copystring);

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -8,13 +6,58 @@
 #    By: jtoty <jtoty@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 18:27:09 by jtoty             #+#    #+#              #
-#    Updated: 2017/01/23 18:27:10 by jtoty            ###   ########.fr        #
+#    Updated: 2021/02/04 07:13:42 by lmartin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+#!/bin/bash
+
+check_turned_in_file()
+{
+	source "${PATH_TEST}"/my_config.sh
+	text="= $1 "
+	printf "\n${text}" >> "${PATH_DEEPTHOUGHT}"/deepthought
+	printf "%.s=" $(seq 1 $(( 80 - ${#text} ))) >> "${PATH_DEEPTHOUGHT}"/deepthought
+	printf "\n" >> "${PATH_DEEPTHOUGHT}"/deepthought
+
+	if [ -e "${PATH_LIBFT}"/${SRC_DIR}/$1 ]
+	then
+		retvalue=1
+		return "$retvalue"
+	else
+        if [ -e "${PATH_LIBFT}"/${SRC_DIR}/$($1 | sed 's/_bonus//g') ]
+		then
+			retvalue=1
+			return "$retvalue"
+		else
+			printf "\033[${NORME_COL}G"
+			printf "${COLOR_FAIL}NTI${DEFAULT}"
+			printf "\033[${CHEAT_COL}G"
+			printf "${COLOR_FAIL}NTI${DEFAULT}"
+			printf "\033[${COMPIL_COL}G"
+			printf "${COLOR_FAIL}NTI${DEFAULT}"
+			printf "\033[${TEST_COL}G"
+			printf "${COLOR_FAIL}NTI${DEFAULT}"
+			printf "\033[${RESULT_COL}G"
+			printf "${COLOR_FAIL}NTI${DEFAULT}\n"
+			printf "Nothing turned in\n" >> "${PATH_DEEPTHOUGHT}"/deepthought
+			retvalue=0
+			return "$retvalue"
+		fi
+	fi
+}
+
+
 test_function()
 {
-	print_part_header
+	printf "\n${COLOR_PART}$(echo ${part} | cut -d _ -f 1) functions\n\n"
+	printf "${COLOR_TITLE}"
+	printf "FUNCTION"
+	printf "\033[${NORME_COL}GNORME"
+	printf "\033[${CHEAT_COL}GFORBIDDEN FUNC."
+	printf "\033[${COMPIL_COL}GCOMPIL."
+	printf "\033[${TEST_COL}GTESTS"
+	printf "\033[${RESULT_COL}GRESULT\n${DEFAULT}"
 
 	let	"i=0"
 	let	"success=0"
@@ -25,8 +68,9 @@ test_function()
 		then
 		let	"total += 1"
 			printf "${COLOR_FUNC}"
-			printf "${function}"
-			check_turned_in_functions $function
+			func_name=$(echo "$function" | cut -d . -f 1 | sed 's/_bonus//g')
+			printf "${func_name}"
+			check_turned_in_file $function
 			file=$?
 			if [ $file -eq 1 ]
 			then
@@ -42,7 +86,12 @@ test_function()
 				else
 					printf "\033[${NORME_COL}G${DEFAULT}disabled"
 				fi
-				compilation $function
+				if [ -e "${PATH_TEST}"/dirlibft/${SRC_DIR}/$1 ]
+				then
+					compilation $function
+				else
+					compilation $(echo ${function} | sed 's/_bonus//g')
+				fi
 				check_compilation
 				check=$?
 				if [ $check -eq 1 ]
@@ -80,28 +129,12 @@ test_function()
 					let "success += 1"
 				fi
 			fi
-			if [ -e ${PATH_TEST}/user_exe ]
+			if [ -e "${PATH_TEST}"/user_exe ]
 			then
-				rm -f ${PATH_TEST}/user_exe
+				rm -f "${PATH_TEST}"/user_exe
 			fi
 		fi
 		let	"i += 1"
 	done
 	printf "\n${COLOR_TOTAL}Total : ${success}/${total}${DEFAULT}\n"
-}
-# launch tests
-launch_tests()
-{
-	for part in ${tab_all_part[*]}
-	do
-		activate_part=$(echo ACTIVATE_${part} | tr '[:lower:]' '[:upper:]' | rev | cut -c 6- | rev)
-		if [ ${!activate_part} -eq 1 ]
-		then
-			text="= ${part}tions "
-			printf "\n${text}" >> ${PATH_DEEPTHOUGHT}/deepthought
-			printf "%.s=" $(seq 1 $(( 80 - ${#text} ))) >> ${PATH_DEEPTHOUGHT}/deepthought
-			printf "\n" >> ${PATH_DEEPTHOUGHT}/deepthought
-			test_function $(echo ${part}[*])
-		fi
-	done
 }

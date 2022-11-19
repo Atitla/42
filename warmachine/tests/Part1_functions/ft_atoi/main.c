@@ -12,14 +12,14 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft.h"
+#include "../../../libft.h"
 
-static void		ft_print_result2(char c)
+void	ft_print_result2(char c)
 {
 	write(1, &c, 1);
 }
 
-static void		ft_print_result(int n)
+void	ft_print_result(int n)
 {
 	if (n >= 0)
 	{
@@ -36,7 +36,7 @@ static void		ft_print_result(int n)
 	}
 }
 
-int				 main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
 	int		arg;
 

@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft.h"
+#include "../../../libft.h"
 
-static void		ft_print_result(char const *s)
+void	ft_print_result(char const *s)
 {
 	int		len;
 
@@ -12,35 +12,61 @@ static void		ft_print_result(char const *s)
 	write(1, s, len);
 }
 
-static void		check_strcasestr(const char *haystack, const char *needle)
+int		main(int argc, const char *argv[])
 {
 	const char	*str;
-
-	if (!(str = ft_strcasestr(haystack, needle)))
-		ft_print_result("NULL");
-	else
-		ft_print_result(str);
-}
-
-int				main(int argc, const char *argv[])
-{
 	int			arg;
 
 	if (argc == 1)
 		return (0);
 	else if ((arg = atoi(argv[1])) == 1)
-		check_strcasestr("lorEm ipsum dolor sit amet", "loRem");
+	{
+		if (!(str = ft_strcasestr("lorEm ipsum dolor sit amet", "loRem")))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
 	else if (arg == 2)
-		check_strcasestr("lorem iPsum dolor sit amet", "iPSum");
+	{
+		if (!(str = ft_strcasestr("lorem iPsum dolor sit amet", "iPSum")))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
 	else if (arg == 3)
-		check_strcasestr("lorem iPSum dolor sit lorem ipsum dolor", "ipsum");
+	{
+		if (!(str = ft_strcasestr("lorem iPSum dolor sit lorem ipsum dolor", "ipsum")))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
 	else if (arg == 4)
-		check_strcasestr("lorem ipsum dolor sit amet", "");
+	{
+		if (!(str = ft_strcasestr("lorem ipsum dolor sit amet", "")))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
 	else if (arg == 5)
-		check_strcasestr("lorem ipsum dolor sit amet", "ipSUmm");
+	{
+		if (!(str = ft_strcasestr("lorem ipsum dolor sit amet", "ipSUmm")))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
 	else if (arg == 6)
-		check_strcasestr("lorem ipsum dolor sit amet", "dOl");
+	{
+		if (!(str = ft_strcasestr("lorem ipsum dolor sit amet", "dOl")))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
 	else if (arg == 7)
-		check_strcasestr("lorem ipsum dolor sit amet", "consECtetur");
+	{
+		if (!(str = ft_strcasestr("lorem ipsum dolor sit amet", "consECtetur")))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
 	return (0);
 }

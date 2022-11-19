@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -11,6 +9,8 @@
 #    Updated: 2017/01/23 18:26:28 by jtoty            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#!/bin/bash
 
 func_check_update()
 {
@@ -42,11 +42,11 @@ func_check_update()
 					then
 						printf "${GREEN}\nUpdate done\n${DEFAULT}"
 						printf "\nChangelog\n"
-						if [ "$(awk 'BEGIN {p=0}{if ($1 ~ /^~/){p+=1};if (p == 1) {print}}' ${PATH_TEST}/changelog | awk 'END {if ($0 != "") {print}}')" == "" ]
+						if [ "$(awk 'BEGIN {p=0}{if ($1 ~ /^~/){p+=1};if (p == 1) {print}}' "${PATH_TEST}"/changelog | awk 'END {if ($0 != "") {print}}')" == "" ]
 						then
-							head -n $(($(awk 'BEGIN {p=0}{if ($1 ~ /^~/){p+=1};if (p == 1) {print}}' ${PATH_TEST}/changelog | wc -l) - 1)) ${PATH_TEST}/changelog
+							head -n $(($(awk 'BEGIN {p=0}{if ($1 ~ /^~/){p+=1};if (p == 1) {print}}' "${PATH_TEST}"/changelog | wc -l) - 1)) "${PATH_TEST}"/changelog
 						else
-							head -n $(awk 'BEGIN {p=0}{if ($1 ~ /^~/){p+=1};if (p == 1) {print}}' ${PATH_TEST}/changelog | wc -l) ${PATH_TEST}/changelog
+							head -n $(awk 'BEGIN {p=0}{if ($1 ~ /^~/){p+=1};if (p == 1) {print}}' "${PATH_TEST}"/changelog | wc -l) "${PATH_TEST}"/changelog
 						fi
 					else
 						printf "${GREEN}\nThe original version has been restored.\n${DEFAULT}"

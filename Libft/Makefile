@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/11/16 02:19:43 by ecunha           ###   ########.fr        #
+#    Updated: 2022/11/18 03:31:49 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,6 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = @rm -f
 HEADER = libft.h
-DEF_COLOR = \033[0;39m
-YELLOW = \033[0;93m
-GREEN = \033[0;92m
-BLUE = \033[0;94m
-CYAN = \033[0;96m
-RED = \033[0;31m
-
 FILES = ft_memset \
 		ft_bzero \
 		ft_memcpy \
@@ -48,16 +41,6 @@ FILES = ft_memset \
 		ft_calloc \
 		ft_strdup \
 		ft_substr \
-
-
-
-
-
-
-
-
-
-
 
 FILES_BONUS = 	ft_lstnew \
 	  		ft_lstadd_front \

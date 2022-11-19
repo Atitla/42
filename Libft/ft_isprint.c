@@ -6,12 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:29 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/15 21:57:31 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/18 00:37:11 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-int	ft_isprint (int c){
-	return(c >= 32 && c <= 126);
-}
 
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}

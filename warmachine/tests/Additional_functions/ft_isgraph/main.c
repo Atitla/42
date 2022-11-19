@@ -12,9 +12,9 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft.h"
+#include "../../../libft.h"
 
-static void		ft_print_result(int n)
+void	ft_print_result(int n)
 {
 	if (n)
 		write(1, "1", 1);
@@ -22,35 +22,76 @@ static void		ft_print_result(int n)
 		write(1, "0", 1);
 }
 
-static void		check_isgraph(int start, int end)
+int		main(int argc, const char *argv[])
 {
-	while (start <= end)
-	{
-		ft_print_result(ft_isgraph(start));
-		start++;
-	}
-}
-
-int				main(int argc, const char *argv[])
-{
+	int		i;
 	int		arg;
 
 	alarm(5);
 	if (argc == 1)
 		return (0);
 	else if ((arg = atoi(argv[1])) == 1)
-		check_isgraph(0, 47);
+	{
+		i = 0;
+		while (i <= 47)
+		{
+			ft_print_result(ft_isgraph(i));
+			i++;
+		}
+	}
 	else if (arg == 2)
-		check_isgraph('0', '9');
+	{
+		i = '0';
+		while (i <= '9')
+		{
+			ft_print_result(ft_isgraph(i));
+			i++;
+		}
+	}
 	else if (arg == 3)
-		check_isgraph(58, 64);
+	{
+		i = 58;
+		while (i <= 64)
+		{
+			ft_print_result(ft_isgraph(i));
+			i++;
+		}
+	}
 	else if (arg == 4)
-		check_isgraph('A', 'Z');
+	{
+		i = 'A';
+		while (i <= 'Z')
+		{
+			ft_print_result(ft_isgraph(i));
+			i++;
+		}
+	}
 	else if (arg == 5)
-		check_isgraph(91, 96);
+	{
+		i = 91;
+		while (i <= 96)
+		{
+			ft_print_result(ft_isgraph(i));
+			i++;
+		}
+	}
 	else if (arg == 6)
-		check_isgraph('a', 'z');
+	{
+		i = 'a';
+		while (i <= 'z')
+		{
+			ft_print_result(ft_isgraph(i));
+			i++;
+		}
+	}
 	else if (arg == 7)
-		check_isgraph(123, 127);
+	{
+		i = 123;
+		while (i <= 127)
+		{
+			ft_print_result(ft_isgraph(i));
+			i++;
+		}
+	}
 	return (0);
 }

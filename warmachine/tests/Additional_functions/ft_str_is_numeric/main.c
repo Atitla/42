@@ -12,9 +12,9 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft.h"
+#include "../../../libft.h"
 
-static void	ft_print_result(int n)
+void	ft_print_result(int n)
 {
 	if (n)
 		write(1, "1", 1);
@@ -22,38 +22,84 @@ static void	ft_print_result(int n)
 		write(1, "0", 1);
 }
 
-static void		check_str_is_numeric(int start, int end)
+int		main(int argc, const char *argv[])
 {
-	char	str[] = "0123456789012345678901";
-
-	while (start <= end)
-	{
-		str[0] = start;
-		ft_print_result(ft_str_is_numeric(str));
-		start++;
-	}
-}
-
-int			main(int argc, const char *argv[])
-{
+	int		i;
+	char	str[] = "loremipsumdolorsitamet";
 	int		arg;
 
 	alarm(5);
 	if (argc == 1)
 		return (0);
 	else if ((arg = atoi(argv[1])) == 1)
-		check_str_is_numeric(0, 47);
+	{
+		i = 0;
+		while (i <= 47)
+		{
+			str[0] = i;
+			ft_print_result(ft_str_is_numeric(str));
+			i++;
+		}
+	}
 	else if (arg == 2)
-		check_str_is_numeric('0', '9');
+	{
+		i = '0';
+		while (i <= '9')
+		{
+			str[0] = i;
+			ft_print_result(ft_str_is_numeric(str));
+			i++;
+		}
+	}
 	else if (arg == 3)
-		check_str_is_numeric(58, 64);
+	{
+		i = 58;
+		while (i <= 64)
+		{
+			str[0] = i;
+			ft_print_result(ft_str_is_numeric(str));
+			i++;
+		}
+	}
 	else if (arg == 4)
-		check_str_is_numeric('A', 'Z');
+	{
+		i = 'A';
+		while (i <= 'Z')
+		{
+			str[0] = i;
+			ft_print_result(ft_str_is_numeric(str));
+			i++;
+		}
+	}
 	else if (arg == 5)
-		check_str_is_numeric(91, 96);
+	{
+		i = 91;
+		while (i <= 96)
+		{
+			str[0] = i;
+			ft_print_result(ft_str_is_numeric(str));
+			i++;
+		}
+	}
 	else if (arg == 6)
-		check_str_is_numeric('a', 'z');
+	{
+		i = 'a';
+		while (i <= 'z')
+		{
+			str[0] = i;
+			ft_print_result(ft_str_is_numeric(str));
+			i++;
+		}
+	}
 	else if (arg == 7)
-		check_str_is_numeric(123, 127);
+	{
+		i = 123;
+		while (i <= 127)
+		{
+			str[0] = i;
+			ft_print_result(ft_str_is_numeric(str));
+			i++;
+		}
+	}
 	return (0);
 }
