@@ -12,22 +12,12 @@
 
 #include "libft.h"
 
-<<<<<<< HEAD
 static int	ft_abs(int nbr)
-=======
-static int
-	ft_abs(int nbr)
->>>>>>> 7c9e364ff28836393573e8fa9c5a0cb1b6caa36c
 {
 	return ((nbr < 0) ? -nbr : nbr);
 }
 
-<<<<<<< HEAD
 static void	ft_strrev(char *str)
-=======
-static void
-	ft_strrev(char *str)
->>>>>>> 7c9e364ff28836393573e8fa9c5a0cb1b6caa36c
 {
 	size_t	length;
 	size_t	i;
@@ -44,7 +34,7 @@ static void
 	}
 }
 
-ùgitchar	*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*str;
 	int		is_neg;
