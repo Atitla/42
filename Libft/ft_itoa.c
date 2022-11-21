@@ -40,12 +40,12 @@ static void	ft_strrev(char *str)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		is_neg;
+	int		signe;
 	size_t	i;
 
 	if(n < 0)
-		is_neg = 1;
-	str = ft_calloc(11 + is_neg, sizeof(char));
+		signe = 1;
+	str = ft_calloc(11 + signe, sizeof(char));
 	if (!str)
 		return (NULL);
 	if (n == 0)
@@ -56,7 +56,7 @@ char	*ft_itoa(int n)
 		str[i++] = '0' + ft_abs(n % 10);
 		n = (n / 10);
 	}
-	if (is_neg)
+	if (signe)
 		str[i] = '-';
 	ft_strrev(str);
 	return (str);
