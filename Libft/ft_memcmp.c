@@ -14,7 +14,6 @@
 
 int	ft_memcmp( const void *pointer1, const void *pointer2, size_t size )
 {
-	size_t				i;
 	const unsigned char	*str1;
 	const unsigned char	*str2;
 
@@ -22,7 +21,6 @@ int	ft_memcmp( const void *pointer1, const void *pointer2, size_t size )
 		return (0);
 	str1 = (const unsigned char *)pointer1;
 	str2 = (const unsigned char *)pointer2;
-	i = 0;
 	while (size)
 	{
 		if (*str1 != *str2)

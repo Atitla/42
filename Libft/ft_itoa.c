@@ -41,22 +41,23 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 	int		is_neg;
-	size_t	length;
+	size_t	i;
 
-	is_neg = (n < 0);
-	str = ft_calloc(11 + is_neg, sizeof(*str));
+	if(n < 0)
+		is_neg = 1;
+	str = ft_calloc(11 + is_neg, sizeof(char));
 	if (!str)
 		return (NULL);
 	if (n == 0)
 		str[0] = '0';
-	length = 0;
+	i = 0;
 	while (n != 0)
 	{
-		str[length++] = '0' + ft_abs(n % 10);
+		str[i++] = '0' + ft_abs(n % 10);
 		n = (n / 10);
 	}
 	if (is_neg)
-		str[length] = '-';
+		str[i] = '-';
 	ft_strrev(str);
 	return (str);
 }

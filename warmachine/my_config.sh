@@ -5,7 +5,7 @@
 ###################################
 
 #Edit the next line with the path of your libft project.
-PATH_LIBFT="/Users/ecunha/42/libft"
+PATH_LIBFT="/Users/este/Documents/vscode/42/libft"
 
 #If you use a relative path, don't put double quotes.
 #For example :
