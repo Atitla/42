@@ -43,6 +43,7 @@ char	*ft_itoa(int n)
 	int		signe;
 	size_t	i;
 
+	signe = 0;
 	if(n < 0)
 		signe = 1;
 	str = ft_calloc(11 + signe, sizeof(char));

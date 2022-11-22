@@ -30,7 +30,10 @@ FILES = ft_memset \
 		ft_strrchr \
 		ft_strnstr \
 		ft_strncmp \
+		ft_strtrim \
+		ft_split \
 		ft_atoi \
+		ft_itoa \
 		ft_isalpha \
 		ft_isdigit \
 		ft_isalnum \
@@ -41,6 +44,13 @@ FILES = ft_memset \
 		ft_calloc \
 		ft_strdup \
 		ft_substr \
+		ft_strmapi \
+		ft_striteri \
+		ft_strjoin \
+		ft_putchar_fd \
+		ft_putnbr_fd \
+		ft_putstr_fd \
+
 
 FILES_BONUS = 	ft_lstnew \
 	  		ft_lstadd_front \
@@ -60,11 +70,9 @@ OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 OBJS_BONUS = $(addprefix $(OBJS_DIR), $(addsuffix _bonus.o, $(FILES_BONUS)))
 
-
 %.o:%.c $(HEADER) Makefile
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -c -o $@ $<
-
 $(NAME): $(OBJS)
 	@$(AR) $@ $^
 	@echo "$(GREEN)					😳😎libft compiled perfectly!😎😳$(DEF_COLOR)"

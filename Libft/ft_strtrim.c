@@ -33,6 +33,8 @@ char *ft_strtrim(char const *s1, char const *set)
 	int end;
 
 	str = (char *)s1;
+	if (!str)
+		return(NULL);
 	while (is_a_separator(*str, (char *)set))
 		str++;
 	end = ft_strlen(str);
@@ -41,6 +43,8 @@ char *ft_strtrim(char const *s1, char const *set)
 	while (is_a_separator(str[end - 1], (char *)set))
 		end--;
 	dest = malloc(sizeof(char) * (end + 1));
+	if (!dest)
+		return (NULL);
 	ft_strlcpy(dest, str, (end + 1));
 	return (dest);
 }
