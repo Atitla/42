@@ -13,7 +13,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	is_a_separator(const char c, char charset)
+static char **ft_free(char **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	return(NULL);
+}
+static int	is_a_separator(const char c, char charset)
 {
 	if (c == charset)
 		return (1);
@@ -31,6 +44,8 @@ char	*ft_strndup(const char *src, int n)
 	while (src[i] && i < n)
 		i++;
 	dest = (char *)malloc(sizeof(char) * (i + 1));
+	if (!dest)
+		return (NULL);
 	while (j < n)
 	{
 		dest[j] = src[j];
@@ -40,7 +55,7 @@ char	*ft_strndup(const char *src, int n)
 	return (dest);
 }
 
-int	range_to_sep(const char *str, char charset)
+static int	range_to_sep(const char *str, char charset)
 {
 	int	i;
 
@@ -50,7 +65,7 @@ int	range_to_sep(const char *str, char charset)
 	return (i);
 }
 
-int	count_word(const char *str, char charset)
+static int	count_word(const char *str, char charset)
 {
 	int	i;
 	int	word;
@@ -85,6 +100,8 @@ char	**ft_split(const char *str, char c)
 		if (*str)
 		{
 			split[i] = ft_strndup(str, range_to_sep(str, c));
+			if (!split)
+				return (NULL);
 			i++;
 		}
 		while (*str && !is_a_separator(*str, c))

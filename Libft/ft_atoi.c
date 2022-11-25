@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	number;
-	int	j;
+	int				i;
+	long long int	number;
+	int				j;
 
 	i = 0;
 	j = 1;
@@ -32,8 +32,13 @@ int	ft_atoi(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		number = (number * 10) + (str[i] - 48);
-		i++;
+		if (number * j > LLONG_MAX)
+			return (-1);
+		else if (number * j < LLONG_MIN)
+			return(0);
+		else
+			number = (number * 10) + (str[i] - 48);
+			i++;
 	}
 	return (number * j);
 }
