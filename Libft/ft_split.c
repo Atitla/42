@@ -72,6 +72,8 @@ static int	count_word(const char *str, char charset)
 
 	i = 0;
 	word = 0;
+	if (!charset)
+		return (0);
 	while (str[i])
 	{
 		while (str[i] && is_a_separator(str[i], charset))
@@ -90,6 +92,8 @@ char	**ft_split(const char *str, char c)
 	char	**split;
 
 	i = 0;
+	if (!str)
+		return (NULL);
 	split = malloc(sizeof(char *) * (count_word(str, c) + 1));
 	if (!split)
 		return (NULL);
@@ -100,8 +104,8 @@ char	**ft_split(const char *str, char c)
 		if (*str)
 		{
 			split[i] = ft_strndup(str, range_to_sep(str, c));
-			if (!split)
-				return (NULL);
+			if (!split[i])
+				return (ft_free(split));
 			i++;
 		}
 		while (*str && !is_a_separator(*str, c))
