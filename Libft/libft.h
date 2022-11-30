@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:21:11 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 05:54:38 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 23:38:00 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
 void				*ft_calloc( size_t elementCount, size_t elementSize );
-unsigned int		ft_strlcpy(char *dest, char *src, unsigned int size);
+size_t				ft_strlcpy(char *dest, char *src, unsigned int size);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 05:40:00 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 05:53:52 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 23:37:08 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ static int	is_a_separator(char c, char *charset)
 	return (0);
 }
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char *str;
-	char *dest;
-	int end;
+	char	*str;
+	char	*dest;
+	int		end;
 
 	str = (char *)s1;
 	if (!str)
-		return(NULL);
+		return (NULL);
 	while (is_a_separator(*str, (char *)set))
 		str++;
 	end = ft_strlen(str);
 	if (end == 0)
-		return("\0");
+		return (dest = ft_calloc(1, 1));
 	while (is_a_separator(str[end - 1], (char *)set))
 		end--;
 	dest = malloc(sizeof(char) * (end + 1));

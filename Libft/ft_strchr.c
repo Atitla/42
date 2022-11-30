@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:29:26 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 00:31:50 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 23:38:09 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ char	*ft_strchr(const char *s, int c)
 {
 	while (*s != '\0')
 	{
-		if ((unsigned char)*s == (unsigned char)c)
+		if ((char)*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
-	if (c == 0)
+	if ((char)c == '\0')
 		return ((char *)s);
 	return (NULL);
 }

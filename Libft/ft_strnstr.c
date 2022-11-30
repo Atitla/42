@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:58:12 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 00:31:11 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:51:47 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	j;
 
 	if ((!haystack) && len == 0)
-		return(0);
+		return (0);
 	if (!needle[0])
 		return ((char *)haystack);
 	i = 0;

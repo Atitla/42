@@ -6,16 +6,16 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 01:21:23 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 00:18:29 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 23:49:32 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-static char **ft_free(char **array)
+static char	**ft_free(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])
@@ -24,13 +24,7 @@ static char **ft_free(char **array)
 		i++;
 	}
 	free(array);
-	return(NULL);
-}
-static int	is_a_separator(const char c, char charset)
-{
-	if (c == charset)
-		return (1);
-	return (0);
+	return (NULL);
 }
 
 char	*ft_strndup(const char *src, int n)
@@ -60,7 +54,7 @@ static int	range_to_sep(const char *str, char charset)
 	int	i;
 
 	i = 0;
-	while (str[i] && !is_a_separator(str[i], charset))
+	while (str[i] && charset != str[i])
 		i++;
 	return (i);
 }
@@ -73,14 +67,14 @@ static int	count_word(const char *str, char charset)
 	i = 0;
 	word = 0;
 	if (!charset)
-		return (0);
+		return (1);
 	while (str[i])
 	{
-		while (str[i] && is_a_separator(str[i], charset))
+		while (str[i] && charset == str[i])
 			i++;
 		if (str[i])
 			word++;
-		while (str[i] && !is_a_separator(str[i], charset))
+		while (str[i] && charset != str[i])
 			i++;
 	}
 	return (word);
@@ -99,7 +93,7 @@ char	**ft_split(const char *str, char c)
 		return (NULL);
 	while (*str)
 	{
-		while (*str && is_a_separator(*str, c))
+		while (*str && c == str[0])
 			str++;
 		if (*str)
 		{
@@ -108,9 +102,9 @@ char	**ft_split(const char *str, char c)
 				return (ft_free(split));
 			i++;
 		}
-		while (*str && !is_a_separator(*str, c))
+		while (*str && c != str[0])
 			str++;
 	}
-	split[i] = 0;
+	split[i] = NULL;
 	return (split);
 }

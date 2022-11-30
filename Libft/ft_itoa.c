@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:33 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/17 21:25:31 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:37:35 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_itoa(int n)
 	size_t	i;
 
 	signe = 0;
-	if(n < 0)
+	if (n < 0)
 		signe = 1;
 	str = ft_calloc(11 + signe, sizeof(char));
 	if (!str)

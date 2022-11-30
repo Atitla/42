@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 00:43:35 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:36:37 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_atoi(const char *str)
 		if (number * j > LLONG_MAX)
 			return (-1);
 		else if (number * j < LLONG_MIN)
-			return(0);
+			return (0);
 		else
 			number = (number * 10) + (str[i] - 48);
 			i++;

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 00:33:47 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/17 00:19:47 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/11/30 21:48:05 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t n)
 	size_t	len_src;
 
 	if ((!dst || !src) && n == 0)
-		return(0);
+		return (0);
 	len_src = ft_strlen(src);
 	len_dest = ft_strlen(dst);
 	j = len_dest;
