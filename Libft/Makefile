@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/12/01 02:59:15 by ecunha           ###   ########.fr        #
+#    Updated: 2022/12/01 04:13:11 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,11 @@ FILES = ft_memset \
 		ft_lstadd_front \
 		ft_lstsize \
 		ft_lstlast \
-
-
+		ft_lstadd_back \
+		ft_lstdelone \
+		ft_lstclear \
+		ft_lstiter \
+		ft_lstmap \
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
