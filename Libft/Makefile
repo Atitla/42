@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/12/01 02:21:15 by ecunha           ###   ########.fr        #
+#    Updated: 2022/12/01 02:59:15 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,9 @@ FILES = ft_memset \
 		ft_putstr_fd \
 		ft_putendl_fd \
 		ft_lstnew \
-		
+		ft_lstadd_front \
+		ft_lstsize \
+		ft_lstlast \
 
 
 
