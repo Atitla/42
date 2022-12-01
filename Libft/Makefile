@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/12/01 04:13:11 by ecunha           ###   ########.fr        #
+#    Updated: 2022/12/01 22:14:40 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 OBJS_BONUS = $(addprefix $(OBJS_DIR), $(addsuffix _bonus.o, $(FILES_BONUS)))
 
 %.o:%.c $(HEADER) Makefile
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -I libft.h -c -o $@ $<
 $(NAME): $(OBJS)
 	@$(AR) $@ $^
 
@@ -82,6 +82,6 @@ clean:
 	@$(RM) $(OBJS) $(OBJS_BONUS)
 fclean: clean
 	@$(RM) $(NAME)
-re: clean all
+re: fclean all
 
 .PHONY: bonus all clean fclean re speed
