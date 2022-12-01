@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/11/18 03:31:49 by ecunha           ###   ########.fr        #
+#    Updated: 2022/12/01 02:21:15 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,9 @@ FILES = ft_memset \
 		ft_putnbr_fd \
 		ft_putstr_fd \
 		ft_putendl_fd \
+		ft_lstnew \
+		
+
 
 
 SRCS_DIR = ./
@@ -62,36 +65,18 @@ OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 OBJS_BONUS = $(addprefix $(OBJS_DIR), $(addsuffix _bonus.o, $(FILES_BONUS)))
 
 %.o:%.c $(HEADER) Makefile
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -c -o $@ $<
 $(NAME): $(OBJS)
 	@$(AR) $@ $^
-	@echo "$(GREEN)					😳😎libft compiled perfectly!😎😳$(DEF_COLOR)"
-	@echo "$(BLUE) MAKE COMMANDS LIST :$(DEF_COLOR)"
-	@echo "$(CYAN) 		make clean (remove objects)$(DEF_COLOR)"
-	@echo "$(CYAN) 		make fclean (remove objects and executables)$(DEF_COLOR)"
-	@echo "$(CYAN) 		make re (cleans everything and recompiles)$(DEF_COLOR)"
-	@echo "$(CYAN) 		make bonus (compiles the bonus exercices)$(DEF_COLOR)"
-	@echo "$(GREEN)		make speed (does an AWESOME libft compilation ¡¡¡¡MUST TRY!!!!)$(DEF_COLOR)"
-	
-	
-speed: 
-	@open https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 bonus: $(OBJS) $(OBJS_BONUS)
 	@$(AR) $(NAME) $^
-	@echo "$(GREEN)😳😎bonus compiled!😎😳$(DEF_COLOR)"
-
 all: $(NAME)
 
 clean:
 	@$(RM) $(OBJS) $(OBJS_BONUS)
-	@echo "$(CYAN)libft object files cleaned!$(DEF_COLOR)"
-	
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
-
 re: clean all
 
 .PHONY: bonus all clean fclean re speed

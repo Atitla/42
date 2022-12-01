@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:21:11 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/30 23:38:00 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/12/01 02:11:18 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 typedef struct s_list
 {
 	void			*content;
-	size_t			content_size;
 	struct s_list	*next;
-}					t_list;
+}			t_list;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -68,10 +67,10 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
-//t_list				*ft_lstnew(void const *content, size_t content_size);
+t_list				*ft_lstnew(void const *content);
 //void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 //void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 //void				ft_lstadd(t_list **alst, t_list *new);
 //void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-//t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+//t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 #endif

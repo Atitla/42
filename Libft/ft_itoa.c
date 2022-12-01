@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:33 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/30 21:37:35 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/12/01 01:28:08 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ static void	ft_strrev(char *str)
 	}
 }
 
+int	ft_intlen(int n)
+{
+	int	i;
+
+	i = 0;
+	while (n != 0)
+	{
+		i++;
+		n = n / 10;
+	}
+	if (i == 0)
+		return (1);
+	return (i);
+}
+
 char	*ft_itoa(int n)
 {
 	char	*str;
@@ -46,7 +61,7 @@ char	*ft_itoa(int n)
 	signe = 0;
 	if (n < 0)
 		signe = 1;
-	str = ft_calloc(11 + signe, sizeof(char));
+	str = ft_calloc((ft_intlen(n) + signe) + 1, sizeof(char));
 	if (!str)
 		return (NULL);
 	if (n == 0)
