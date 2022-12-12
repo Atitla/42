@@ -6,16 +6,15 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/12/01 22:14:40 by ecunha           ###   ########.fr        #
+#    Updated: 2022/12/12 22:24:53 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
-RM = @rm -f
+RM = rm -f
 HEADER = libft.h
 FILES = ft_memset \
 		ft_bzero \
@@ -50,38 +49,37 @@ FILES = ft_memset \
 		ft_putchar_fd \
 		ft_putnbr_fd \
 		ft_putstr_fd \
-		ft_putendl_fd \
-		ft_lstnew \
-		ft_lstadd_front \
-		ft_lstsize \
-		ft_lstlast \
-		ft_lstadd_back \
-		ft_lstdelone \
-		ft_lstclear \
-		ft_lstiter \
-		ft_lstmap \
+		ft_putendl_fd
 
-SRCS_DIR = ./
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-SRCS_BONUS = $(addprefix $(SRCS_DIR), $(addsuffix _bonus.c, $(FILES_BONUS)))
+FILES_BONUS =	ft_lstnew \
+				ft_lstadd_front \
+				ft_lstsize \
+				ft_lstlast \
+				ft_lstadd_back \
+				ft_lstdelone \
+				ft_lstclear \
+				ft_lstiter \
+				ft_lstmap \
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 OBJS_BONUS = $(addprefix $(OBJS_DIR), $(addsuffix _bonus.o, $(FILES_BONUS)))
 
 %.o:%.c $(HEADER) Makefile
-	@$(CC) $(CFLAGS) -I libft.h -c -o $@ $<
+	$(CC) $(CFLAGS) -I $(HEADER) -c -o $@ $<
+%_bonus.o:%.c $(HEADER) Makefile
+	$(CC) $(CFLAGS) -I $(HEADER) -c -o $@ $<
 $(NAME): $(OBJS)
-	@$(AR) $@ $^
+	$(AR) $@ $^
 
 bonus: $(OBJS) $(OBJS_BONUS)
-	@$(AR) $(NAME) $^
+	$(AR) $(NAME) $^
 all: $(NAME)
 
 clean:
-	@$(RM) $(OBJS) $(OBJS_BONUS)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 re: fclean all
 
-.PHONY: bonus all clean fclean re speed
+.PHONY: bonus all clean fclean re
