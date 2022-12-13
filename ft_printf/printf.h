@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putcharcount.c                                  :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 04:17:30 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/13 05:21:10 by ecunha           ###   ########.fr       */
+/*   Created: 2022/12/13 04:57:57 by ecunha            #+#    #+#             */
+/*   Updated: 2022/12/13 05:18:08 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#ifndef PRINTF_H
+# define PRINTF_H
 
-int	ft_putcharcount(int nbr)
-{
-	return (write(1, &nbr, 1));
-}
+# include <unistd.h>
+# include <stdarg.h>
+
+int	ft_printf(const char *format, ...);
+int	ft_putcharcount(int nbr);
+int	ft_putnbr(int nb);
+
+#endif
