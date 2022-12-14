@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 04:17:30 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/13 05:21:10 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/12/14 21:49:45 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_putcharcount(int nbr)
 {

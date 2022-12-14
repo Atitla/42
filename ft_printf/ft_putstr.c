@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 04:57:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/13 05:18:08 by ecunha           ###   ########.fr       */
+/*   Created: 2022/09/05 12:32:12 by ecunha            #+#    #+#             */
+/*   Updated: 2022/12/14 21:49:36 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+int	ft_putstr(char *str)
+{
+	int	i;
+	int	count;
 
-int	ft_printf(const char *format, ...);
-int	ft_putcharcount(int nbr);
-int	ft_putnbr(int nb);
-
-#endif
+	i = -1;
+	count = 0;
+	while (str[++i])
+		count += ft_putcharcount(str[i]);
+	return (count);
+}
