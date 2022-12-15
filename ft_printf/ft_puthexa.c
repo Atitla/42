@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_puthexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 12:32:12 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/15 03:50:36 by ecunha           ###   ########.fr       */
+/*   Created: 2022/12/15 02:50:56 by ecunha            #+#    #+#             */
+/*   Updated: 2022/12/15 05:34:45 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_puthexa(unsigned long nbr, int upper)
 {
-	int	i;
-	int	count;
+	int				count;
+	unsigned long	n;
 
 	count = 0;
-	if (str == NULL)
-		count += write(1, "(null)", 6);
+	n = nbr;
+	if (n >= 16)
+	{
+		count += ft_puthexa((n / 16), upper);
+		count += ft_puthexa((n % 16), upper);
+	}
 	else
 	{
-		i = -1;
-		while (str[++i])
-			count += ft_putcharcount(str[i], 1);
+		if (n < 10)
+			count += ft_putcharcount(n + '0', 1);
+		else
+		{
+			if (upper == 0)
+				count += ft_putcharcount(n - 10 + 'a', 1);
+			else
+				count += ft_putcharcount(n - 10 + 'A', 1);
+		}
 	}
 	return (count);
 }

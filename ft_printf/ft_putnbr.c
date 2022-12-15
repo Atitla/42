@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 05:14:25 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/14 22:22:00 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/12/15 00:30:00 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_putnbr(int nb)
 	count = 0;
 	if (nb < 0)
 	{
-		count += ft_putcharcount('-');
+		count += ft_putcharcount('-', 1);
 		n = -nb;
 	}
 	else
@@ -30,6 +30,6 @@ int	ft_putnbr(int nb)
 		count += ft_putnbr(n / 10);
 		n %= 10;
 	}
-	count += ft_putcharcount(n + '0');
+	count += ft_putcharcount(n + '0', 1);
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 04:57:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/14 22:22:10 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/12/15 03:33:00 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include <stdlib.h>
 
 int	ft_printf(const char *format, ...);
-int	ft_putcharcount(int nbr);
+int	ft_putcharcount(int nbr, int lgt);
 int	ft_putnbr(int nb);
 int	ft_putunbr(unsigned int nb);
 int	ft_putstr(char *str);
+int	ft_putptr(void *ptr);
+int	ft_puthexa(unsigned long nbr, int upper);
 #endif

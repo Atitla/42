@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 05:14:25 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/14 22:21:54 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/12/15 00:29:38 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	ft_putunbr(unsigned int nb)
 		count += ft_putnbr(n / 10);
 		n %= 10;
 	}
-	count += ft_putcharcount(n + '0');
+	count += ft_putcharcount(n + '0', 1);
 	return (count);
 }

@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 12:32:12 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/15 03:50:36 by ecunha           ###   ########.fr       */
+/*   Created: 2022/12/15 00:24:04 by ecunha            #+#    #+#             */
+/*   Updated: 2022/12/15 03:34:37 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_putptr(void *ptr)
 {
-	int	i;
-	int	count;
+	int	lenght;
 
-	count = 0;
-	if (str == NULL)
-		count += write(1, "(null)", 6);
+	lenght = 0;
+	lenght += ft_putcharcount('0', 1);
+	lenght += ft_putcharcount('x', 1);
+	if (ptr == 0)
+	{
+		lenght += ft_putcharcount('0', 1);
+	}
 	else
 	{
-		i = -1;
-		while (str[++i])
-			count += ft_putcharcount(str[i], 1);
+		lenght += ft_puthexa((unsigned long)ptr, 0);
 	}
-	return (count);
+	return (lenght);
 }

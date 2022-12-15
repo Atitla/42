@@ -6,13 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 04:17:30 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/14 21:49:45 by ecunha           ###   ########.fr       */
+/*   Updated: 2022/12/15 01:29:18 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putcharcount(int nbr)
+int	ft_putcharcount(int nbr, int lgt)
 {
-	return (write(1, &nbr, 1));
+	return (write(1, &nbr, lgt));
 }
