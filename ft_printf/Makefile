@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefilee                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2022/12/15 03:39:31 by ecunha           ###   ########.fr        #
+#    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
+#    Updated: 2023/03/29 03:22:10 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES = ft_printf \
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-%.o:%.c $(HEADER) Makefile
+%.o:%.c $(HEADER)
 	$(CC) $(CFLAGS) -I $(HEADER) -c -o $@ $<
 $(NAME): $(OBJS)
 	$(AR) $@ $^
