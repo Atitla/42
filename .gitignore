@@ -4,3 +4,4 @@ a.out
 libft-unit-test/
 libft/libft.a
 Libft/libft.a
+ft_printf/printfTester
