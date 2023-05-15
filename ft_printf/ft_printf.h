@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 04:57:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/15 03:33:00 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/05/15 11:57:39 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <string.h>
 
 int	ft_printf(const char *format, ...);
 int	ft_putcharcount(int nbr, int lgt);
