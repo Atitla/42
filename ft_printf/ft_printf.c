@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 22:54:08 by ecunha            #+#    #+#             */
-/*   Updated: 2023/05/15 12:42:36 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/05/16 12:57:06 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (print_lenght);
 }
-
-//nt	main(int argc, char const *argv[])
-//
-//	(void)argc;
-//	long int a = 42756945613; //22756945613
-///	int *b = &a;
-//	printf(" %c %c %c ", '0', 0, '1');
-//	printf(" %c %c %c ", '1', '2', '3');
-//	//printf("\n");
-//	ft_printf(" %c %c %c ", '0', 0, '1');
-//	ft_printf(" %c %c %c ", '1', '2', '3');
-//	//printf("\n");
-//
