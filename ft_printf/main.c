@@ -1,9 +1,7 @@
 #include "ft_printf.h"
 
-int	main(int argc, char const *argv[])
+int	main(void)
 {
-	(void)argc;
-	(void)argv;
 	int count1 = 0;
 	int count2 = 0;
 	void *front = 0;
@@ -112,4 +110,9 @@ int	main(int argc, char const *argv[])
 	ft_printf("Head: %s, %d, %p\n", front, front, front);
 	printf("\n");
 	printf("%i\n%i\n", count1, count2);
+	printf("\n");
+	ft_printf("%%%%%%%%%%%%%%%%%%%%%%%");
+	printf("\n");
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+	printf("\n");
 }

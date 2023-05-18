@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 22:54:08 by ecunha            #+#    #+#             */
-/*   Updated: 2023/05/16 15:43:19 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/05/18 13:36:38 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,13 @@ int	ft_printf(const char *format, ...)
 		if ((char)format[i] != '%')
 			print_lenght += ft_putcharcount(format[i], 1);
 		else
+		{
+			if (format[i] == '%' && format[i + 1] == '\0')
+			{
+				return (print_lenght);
+			}
 			print_lenght += ft_print(ap, format[++i]);
+		}
 		i++;
 	}
 	va_end(ap);
