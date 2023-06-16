@@ -1,18 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/05/19 15:52:59 by ecunha           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = mlx
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+NAME = mlx_test
+CC = gcc
+CFLAGS = -Wall -Wextra
 RM = rm -f
 AR = ar rcs
 HEADER = ft_printf.h
