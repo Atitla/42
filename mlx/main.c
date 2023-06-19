@@ -14,7 +14,7 @@ typedef struct	s_vars {
 	int		endian;
 }				t_vars;
 
-inline int	my_mlx_pixel_put(int x, int y, int color, t_vars *data)
+int	my_mlx_pixel_put(int x, int y, int color, t_vars *data)
 {
 	char	*dst;
 
@@ -23,10 +23,10 @@ inline int	my_mlx_pixel_put(int x, int y, int color, t_vars *data)
 	return (0);
 }
 
-int fractal(int x, int y)
-{
+//int fractal(int x, int y)
+//{
 
-}
+//}
 
 int	main(void)
 {
@@ -42,11 +42,10 @@ int	main(void)
 	while (i < 1920 * 1080)
 	{
 		my_mlx_pixel_put(i % WIGHT, i / WIGHT, ARGB(0, 255, 0, 0), &vars);
-		if (i > 1)
+		if (i % 1920 == 1)
 			mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
 		i++;
 	}
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img, 0, 0);
 		mlx_loop(vars.mlx);
-
 }
