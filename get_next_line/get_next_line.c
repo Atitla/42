@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/21 15:54:47 by ecunha            #+#    #+#             */
+/*   Updated: 2023/06/21 15:57:57 by ecunha           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_free(char *buffer, char *buf)
@@ -38,6 +50,7 @@ char	*ft_next(char *buffer)
 	free(buffer);
 	return (line);
 }
+
 /*
 	-allocate res if don't exist
 	-allocate buffer
@@ -50,6 +63,7 @@ char	*ft_next(char *buffer)
 	-free buffer
 	-return res
 */
+
 char	*read_file(int fd, char *res)
 {
 	char	*buffer;
@@ -75,6 +89,7 @@ char	*read_file(int fd, char *res)
 	free(buffer);
 	return (res);
 }
+
 /*
 	check if buffer is empty
 		yes = return NULL
@@ -85,34 +100,37 @@ char	*read_file(int fd, char *res)
 			if buffer[i] == \n line[i] == \n
 			return line
 */
-char *ft_line(char *buffer){
 
-	char *line;
-	int i;
+char	*ft_line(char *buffer)
+{
+	char	*line;
+	int		i;
 
 	i = 0;
 	if (!buffer[i])
-		return(NULL);
+		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	line = ft_calloc(i + 2, sizeof(char));
 	if (!line)
-		return(NULL);
+		return (NULL);
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
 		i++;
 	}
-	if (buffer[i] == '\n')
+	if (buffer[i] || buffer[i] == '\n')
 		line[i] = '\n';
 	return (line);
 }
+
 /*
-	-buffer = copy buffer until \n or eof
+	-buffer = copy file into buffer until \n or eof
 	-line = alloc buffer + copy buffer until \n or eof
-	-buffer = copy buffer from \n to next /n or eof
+	-buffer = copy buffer from \n to the next \n or eof
 */
+
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
@@ -121,7 +139,9 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
-	if (!buffer){
+	if (!buffer)
+	{
+		free(buffer);
 		return (NULL);
 	}
 	line = ft_line(buffer);
