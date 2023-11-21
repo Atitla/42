@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 21:58:04 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/21 13:57:53 by ecunha           ###   ########.fr       */
+/*   Created: 2022/12/13 05:14:25 by ecunha            #+#    #+#             */
+/*   Updated: 2022/12/15 00:30:00 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcpy(char *dest, char *src, unsigned int size)
+int	ft_putnbr(int nb)
 {
-	size_t	i;
+	int				count;
+	unsigned int	n;
 
-	i = 0;
-	if (size > 0)
+	count = 0;
+	if (nb < 0)
 	{
-		while (src[i] && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
+		count += ft_putcharcount('-', 1);
+		n = -nb;
 	}
-	while (src[i])
-		i++;
-	return (i);
+	else
+		n = nb;
+	if (n > 9)
+	{
+		count += ft_putnbr(n / 10);
+		n %= 10;
+	}
+	count += ft_putcharcount(n + '0', 1);
+	return (count);
 }

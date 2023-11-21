@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_putcharcount.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 21:58:04 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/21 13:57:53 by ecunha           ###   ########.fr       */
+/*   Created: 2022/12/13 04:17:30 by ecunha            #+#    #+#             */
+/*   Updated: 2023/03/29 03:19:21 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcpy(char *dest, char *src, unsigned int size)
+int	ft_putcharcount(int nbr, int lgt)
 {
-	size_t	i;
-
-	i = 0;
-	if (size > 0)
-	{
-		while (src[i] && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
-	}
-	while (src[i])
-		i++;
-	return (i);
+	return (write(1, &nbr, lgt));
 }

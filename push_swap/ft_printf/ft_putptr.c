@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 21:58:04 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/21 13:57:53 by ecunha           ###   ########.fr       */
+/*   Created: 2022/12/15 00:24:04 by ecunha            #+#    #+#             */
+/*   Updated: 2023/05/18 15:00:09 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlcpy(char *dest, char *src, unsigned int size)
+int	ft_putptr(void *ptr)
 {
-	size_t	i;
+	int	lenght;
 
-	i = 0;
-	if (size > 0)
+	lenght = 0;
+	if (ptr == 0)
+		lenght += write(1, "(nil)", 5);
+	else
 	{
-		while (src[i] && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
+		lenght += ft_putcharcount('0', 1);
+		lenght += ft_putcharcount('x', 1);
+		lenght += ft_puthexa((unsigned long)ptr, 0);
 	}
-	while (src[i])
-		i++;
-	return (i);
+	return (lenght);
 }

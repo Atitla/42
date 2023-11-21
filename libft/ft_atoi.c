@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/01 23:17:48 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:58:58 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_isspace(const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
+	while (str[i] == 32 || str[i] == 10 || str[i] == '\t' || str[i] == '\v'
 		|| str[i] == '\f' || str[i] == '\r')
 		i++;
 	return (i);
@@ -46,7 +46,7 @@ int	ft_atoi(const char *str)
 			return (0);
 		else
 			number = (number * 10) + (str[i] - 48);
-			i++;
+		i++;
 	}
 	return (number * j);
 }
