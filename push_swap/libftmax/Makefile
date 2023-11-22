@@ -6,11 +6,11 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2023/11/22 13:18:29 by ecunha           ###   ########.fr        #
+#    Updated: 2023/11/22 14:39:46 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = libftmax.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
@@ -49,31 +49,33 @@ FILES = ft_memset \
 		ft_putchar_fd \
 		ft_putnbr_fd \
 		ft_putstr_fd \
-		ft_putendl_fd
-
-FILES_BONUS =	ft_lstnew \
-				ft_lstadd_front \
-				ft_lstsize \
-				ft_lstlast \
-				ft_lstadd_back \
-				ft_lstdelone \
-				ft_lstclear \
-				ft_lstiter \
-				ft_lstmap \
+		ft_putendl_fd \
+		ft_printf \
+		ft_putcharcount \
+		ft_putstr \
+		ft_putnbr \
+		ft_puthexa \
+		ft_putptr \
+		ft_putunbr \
+		ft_lstnew \
+		ft_lstadd_front \
+		ft_lstsize \
+		ft_lstlast \
+		ft_lstadd_back \
+		ft_lstdelone \
+		ft_lstclear \
+		ft_lstiter \
+		ft_lstmap \
+		get_next_line \
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
-OBJS_BONUS = $(addprefix $(OBJS_DIR), $(addsuffix _bonus.o, $(FILES_BONUS)))
 
 %.o:%.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -I. -c $< -o $@
-%_bonus.o:%.c $(HEADER) Makefile
 	$(CC) $(CFLAGS) -I. -c $< -o $@
 $(NAME): $(OBJS)
 	$(AR) $@ $^
 
-bonus: $(OBJS) $(OBJS_BONUS)
-	$(AR) $(NAME) $^
 all: $(NAME)
 
 clean:
@@ -82,4 +84,4 @@ fclean: clean
 	$(RM) $(NAME)
 re: fclean all
 
-.PHONY: bonus all clean fclean re
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:21:11 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/22 13:23:49 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/22 13:37:15 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }			t_list;
+
+# ifndef BUFFER_SIZE_GNL
+#  define BUFFER_SIZE_GNL 5
+# endif
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -77,4 +82,14 @@ int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+int					ft_printf(const char *format, ...);
+int					ft_putcharcount(int nbr, int lgt);
+int					ft_putnbr(int nb);
+int					ft_putunbr(unsigned int nb);
+int					ft_putstr(char *str);
+int					ft_putptr(void *ptr);
+int					ft_puthexa(unsigned long nbr, int upper);
+
+char				*get_next_line(int fd);
 #endif

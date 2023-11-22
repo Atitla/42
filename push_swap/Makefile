@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/11/20 14:42:13 by ecunha           ###   ########.fr        #
+#    Updated: 2023/11/22 14:03:44 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,15 @@ FILES = push_swap
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-%.o:%.c $(HEADER)
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+# Path to the library and its Makefile
+LIB_DIR := libftmax/
+LIB_MAKEFILE := libftmax/Makefile
+
+# Include the library's Makefile
+include $(LIB_MAKEFILE)
+
+%.o:%.c $(HEADER) libftmax.a
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -L$(LIB_DIR) -llibftmax
 $(NAME): $(OBJS)
 	$(CC) $@ $^
 all: $(NAME)
