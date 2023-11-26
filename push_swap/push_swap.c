@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/25 14:35:03 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/25 19:00:12 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,14 @@ t_llist	*ft_lstnew(int content)
 	newlist -> next = NULL;
 	return (newlist);
 }
+void radix_sort(t_llist **stack_a_ptr, t_llist **stack_b_ptr)
+{
 
+	int		y;
+	while ( >> y != 0)
+		y++;
+
+}
 void	push_swap(t_llist *lst, void (*f)(int))
 {
 	printf("stack_a:\n");
