@@ -4,7 +4,7 @@
 void displayBinary(int num) {
     int i;
     for (i = sizeof(int) * 8 - 1; i >= 0; i--) {
-        printf("%d", (num >> i) & 1);
+        printf("%d", (num >> i != 0));
     }
     printf("\n");
 }
