@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/28 00:20:50 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:48:02 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	push_swap(t_llist *lst, void (*f)(int))
 
 void	push_swap2(t_llist *lst, void (*f)(int))
 {
-	printf("stack_a:\n");
+	printf("index a:\n");
 	if (!f)
 		return ;
 	while (lst)
