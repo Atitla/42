@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:52:38 by mfinette          #+#    #+#              #
-#    Updated: 2023/11/22 14:39:46 by ecunha           ###   ########.fr        #
+#    Updated: 2023/11/28 01:29:53 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FILES = ft_memset \
 		ft_strlen \
 		ft_strlcpy \
 		ft_strlcat \
+		ft_strcmp \
 		ft_strchr \
 		ft_strrchr \
 		ft_strnstr \
@@ -57,15 +58,6 @@ FILES = ft_memset \
 		ft_puthexa \
 		ft_putptr \
 		ft_putunbr \
-		ft_lstnew \
-		ft_lstadd_front \
-		ft_lstsize \
-		ft_lstlast \
-		ft_lstadd_back \
-		ft_lstdelone \
-		ft_lstclear \
-		ft_lstiter \
-		ft_lstmap \
 		get_next_line \
 
 OBJS_DIR = ./

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:52:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/27 22:41:59 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/28 00:40:07 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
-
+# include "./libftmax/libft.h"
 typedef struct t_llist {
 	int				content;
 	int				index;
@@ -33,5 +33,6 @@ void				ft_lstadd_front(t_llist **lst, t_llist *new);
 void				print_int(int n);
 t_llist				*init_stack(int argc, char **argv);
 void				push_swap2(t_llist *lst, void (*f)(int));
+void	indexer(t_llist **stack_a_head, t_llist *end, t_llist *copy);
 
 #endif

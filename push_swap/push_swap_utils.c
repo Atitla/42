@@ -6,23 +6,47 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 23:28:52 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/27 23:20:40 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/28 00:18:10 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	indexer(t_llist **stack_a_head, t_llist *end)
+//void	indexer(t_llist **stack_a_head, t_llist *end)
+//{
+//	int		i;
+//	t_llist	*stack_a;
+//
+//	i = 1;
+//	stack_a = (*stack_a_head);
+//	while (stack_a->next != end)
+//	{
+//		stack_a->index = i;
+//		i++;
+//		stack_a = stack_a->next;
+//	}
+//}
+void	indexer(t_llist **stack_a_head, t_llist *end, t_llist *copy)
 {
 	int		i;
 	t_llist	*stack_a;
+	t_llist *current;
 
 	i = 1;
 	stack_a = (*stack_a_head);
 	while (stack_a->next != end)
 	{
-		stack_a->index = i;
-		i++;
+		current = copy;
+		while (current != NULL)
+		{
+			if (current->content == stack_a->content)
+			{
+				stack_a->index = i;
+				break;
+			}
+			current = current->next;
+			i++;
+		}
 		stack_a = stack_a->next;
 	}
 }
@@ -107,7 +131,7 @@ void	bubble_sort(t_llist **stack_a_head, int max_index, t_llist *end)
 		}
 		i++;
 	}
-	indexer(stack_a_head, end);
+	indexer(stack_a_head, end, copy);
 	//free_llist();
 	push_swap(copy->next, print_int);
 	push_swap2(copy->next, print_int);

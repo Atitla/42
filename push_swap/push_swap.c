@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/27 23:19:23 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/28 00:20:50 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,26 @@
 void	print_int(int n)
 {
 	printf("%i->", n);
+}
+
+int	check_args(int argc, char **argv)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	while(i < argc)
+	{
+		j = i + 1;
+		while(j < argc)
+		{
+			if(ft_strcmp(argv[i], argv[j]) == 0)
+				return(1);
+			j++;
+		}
+		i++;
+	}
+	return(0);
 }
 
 void	ft_lstadd_front(t_llist **lst, t_llist *new)
@@ -119,6 +139,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
+	check_args(argc, argv);
 	stack_a_head = init_stack(argc, argv);
 	if (stack_a_head == NULL)
 		return (0);
