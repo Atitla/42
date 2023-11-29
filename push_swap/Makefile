@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/11/27 13:36:23 by ecunha           ###   ########.fr        #
+#    Updated: 2023/11/29 14:59:44 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ DEBUG_FLAGS = -ggdb3 -DDEBUG
 RM = rm -f
 HEADER = push_swap.h
 FILES = push_swap \
-		push_swap_utils
+		push_swap_utils \
+		rules
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))

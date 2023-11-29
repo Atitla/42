@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/28 13:48:02 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:22:59 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_llist	*ft_lstnew(int content)
 
 void	push_swap(t_llist *lst, void (*f)(int))
 {
-	printf("stack_a:\n");
+	//printf("stack_a:\n");
 	if (!f)
 		return ;
 	while (lst)
@@ -93,6 +93,7 @@ void	push_swap2(t_llist *lst, void (*f)(int))
 		return ;
 	while (lst)
 	{
+		lst = lst -> next;
 		if (lst->next == NULL)
 		{
 			printf("%i", lst->content);
@@ -100,7 +101,6 @@ void	push_swap2(t_llist *lst, void (*f)(int))
 			break ;
 		}
 		f(lst->index);
-		lst = lst -> next;
 	}
 	printf("\n");
 }
@@ -133,29 +133,36 @@ t_llist	*init_stack(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_llist		*stack_a_head;
-	t_llist		*end;
-	t_llist		*next;
-	//t_llist		*stack_b_head;
+	t_llist		*a_end;
+	t_llist		*stack_b_head;
+	t_llist		*b_end;
 
 	if (argc < 2)
 		return (0);
 	check_args(argc, argv);
 	stack_a_head = init_stack(argc, argv);
-	if (stack_a_head == NULL)
+	stack_b_head = init_stack(0,0);
+	if (stack_a_head == NULL || stack_b_head == NULL)
 		return (0);
-	end = stack_a_head;
-	while (end->next != NULL)
-		end = end->next;
+	a_end = stack_a_head;
+	while (a_end->next != NULL)
+		a_end = a_end->next;
+	b_end = stack_b_head;
+	while (b_end->next != NULL)
+		b_end = b_end->next;
 	push_swap(stack_a_head->next, print_int);
-	bubble_sort(&stack_a_head, argc - 1, end);
+	// printf("%i\n",stack_b_head->next->content);
+	// pb(&stack_b_head, &stack_a_head);
+	// push_swap(stack_a_head->next, print_int);
+	// printf("%i\n",stack_b_head->next->content);
+	// pa(&stack_a_head, &stack_b_head);
+	// push_swap(stack_a_head->next, print_int);
+	// printf("%i\n",stack_b_head->next->content);
+	bubble_sort(&stack_a_head, argc - 1, a_end);
+	radix_sort(&stack_a_head, &stack_b_head, a_end,b_end, argc - 1);
 	push_swap(stack_a_head->next, print_int);
 	push_swap2(stack_a_head, print_int);
-	while (stack_a_head != end)
-	{
-		next = stack_a_head->next;
-		free(stack_a_head);
-		stack_a_head = next;
-	}
-	free(end);
+	free_llist(stack_a_head);
+	free_llist(stack_b_head);
 	return (0);
 }
