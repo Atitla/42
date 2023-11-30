@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 23:28:52 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/30 01:08:27 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/30 18:11:00 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,43 +145,26 @@ void	radix_sort(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_
 		i++;
 	while (i > j)
 	{
-		printf("i = %i\n", i);
-		printf("j = %i\n", j);
 		k = 0;
-		while (k < max_index)
+		while (k < max_index && k < 32)
 		{
-			if (((*stack_a_ptr)->next->index >> k & 1) == 1)
+			if (((*stack_a_ptr)->next->index >> j & 1) == 0)
 			{
-				printf("avant pb :\n");
-				push_swap((*stack_a_ptr), print_int);
-				printf("!!!!!!!!!!!!!!!!!!!!!\n");
-				push_swap((*stack_b_ptr), print_int);
 				pb(stack_a_ptr, stack_b_ptr, a_end);
-				printf("apres pb :\n");
-				push_swap((*stack_a_ptr), print_int);
-				printf("!!!!!!!!!!!!!!!!!!!!!\n");
-				push_swap((*stack_b_ptr), print_int);
-
 			}
 			else
-				{
-				printf("avant ra :\n");
-				push_swap((*stack_a_ptr), print_int);
+			{
 				ra(stack_a_ptr, a_end);
-				printf("apres ra :\n");
-				push_swap((*stack_a_ptr), print_int);
-				}
+			}
 			k++;
 		}
 		while ((*stack_b_ptr)->next != b_end)
 		{
-			printf("avant pa ------------:\n");
-			push_swap((*stack_b_ptr), print_int);
 			pa(stack_a_ptr, stack_b_ptr, a_end);
-			printf("apres pa ------------:\n");
-			push_swap((*stack_b_ptr), print_int);
 		}
 		j++;
+		if (is_sorted(*stack_a_ptr))
+			return;
 	}
 }
 

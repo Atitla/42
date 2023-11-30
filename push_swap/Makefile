@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/11/29 14:59:44 by ecunha           ###   ########.fr        #
+#    Updated: 2023/11/30 17:32:50 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,13 @@ LIB := $(LIB_DIR)libftmax.a
 
 %.o:%.c $(HEADER)
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
 $(LIB):
 	$(MAKE) -C $(LIB_DIR)
+
 $(NAME): $(OBJS) $(LIB)
 	$(CC) -o $@ $^
+
 all: $(NAME)
 
 debug: CFLAGS += $(DEBUG_FLAGS)

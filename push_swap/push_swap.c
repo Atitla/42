@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/29 17:22:59 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/30 18:11:09 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,18 +150,8 @@ int	main(int argc, char **argv)
 	b_end = stack_b_head;
 	while (b_end->next != NULL)
 		b_end = b_end->next;
-	push_swap(stack_a_head->next, print_int);
-	// printf("%i\n",stack_b_head->next->content);
-	// pb(&stack_b_head, &stack_a_head);
-	// push_swap(stack_a_head->next, print_int);
-	// printf("%i\n",stack_b_head->next->content);
-	// pa(&stack_a_head, &stack_b_head);
-	// push_swap(stack_a_head->next, print_int);
-	// printf("%i\n",stack_b_head->next->content);
 	bubble_sort(&stack_a_head, argc - 1, a_end);
 	radix_sort(&stack_a_head, &stack_b_head, a_end,b_end, argc - 1);
-	push_swap(stack_a_head->next, print_int);
-	push_swap2(stack_a_head, print_int);
 	free_llist(stack_a_head);
 	free_llist(stack_b_head);
 	return (0);
