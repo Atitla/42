@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:52:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/29 17:51:14 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:37:31 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void				push_swap2(t_llist *lst, void (*f)(int));
 void				indexer(t_llist **stack_a_head, t_llist *end, t_llist *copy);
 void				free_llist(t_llist *head);
 void				radix_sort(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_llist *b_end, int max_index);
-void				pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_llist *b_end);
-void				pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_llist *b_end);
+void				pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end);
+void				pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *b_end);
 void				ra(t_llist **stack_a_ptr, t_llist *a_end);
 
 #endif

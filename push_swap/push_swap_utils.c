@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 23:28:52 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/29 18:48:59 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:08:27 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,15 +152,15 @@ void	radix_sort(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_
 		{
 			if (((*stack_a_ptr)->next->index >> k & 1) == 1)
 			{
-				// printf("avant pb :\n");
-				// push_swap((*stack_a_ptr), print_int);
-				// printf("!!!!!!!!!!!!!!!!!!!!!\n");
-				// push_swap((*stack_b_ptr), print_int);
-				pb(stack_a_ptr, stack_b_ptr, a_end, b_end);
-				// printf("apres pb :\n");
-				// push_swap((*stack_a_ptr), print_int);
-				// printf("!!!!!!!!!!!!!!!!!!!!!\n");
-				// push_swap((*stack_b_ptr), print_int);
+				printf("avant pb :\n");
+				push_swap((*stack_a_ptr), print_int);
+				printf("!!!!!!!!!!!!!!!!!!!!!\n");
+				push_swap((*stack_b_ptr), print_int);
+				pb(stack_a_ptr, stack_b_ptr, a_end);
+				printf("apres pb :\n");
+				push_swap((*stack_a_ptr), print_int);
+				printf("!!!!!!!!!!!!!!!!!!!!!\n");
+				push_swap((*stack_b_ptr), print_int);
 
 			}
 			else
@@ -177,7 +177,7 @@ void	radix_sort(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_
 		{
 			printf("avant pa ------------:\n");
 			push_swap((*stack_b_ptr), print_int);
-			pa(stack_a_ptr, stack_b_ptr, a_end, b_end);
+			pa(stack_a_ptr, stack_b_ptr, a_end);
 			printf("apres pa ------------:\n");
 			push_swap((*stack_b_ptr), print_int);
 		}

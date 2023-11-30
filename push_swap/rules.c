@@ -6,104 +6,45 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:10:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/29 18:51:41 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/30 00:37:22 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sab(t_llist **stack_a_ptr)
-{
-	t_llist	*first;
-	t_llist	*second;
-	t_llist	*stack_aob;
-
-	if (stack_a_ptr == NULL)
-		return ;
-	stack_aob = *stack_a_ptr;
-	if (stack_aob == NULL || stack_aob->next == NULL)
-		return ;
-	first = stack_aob;
-	second = stack_aob->next;
-	first->next = second->next;
-	second->next = first;
-	*stack_a_ptr = second;
-}
-
-void	ss(t_llist **stack_a_ptr, t_llist **stack_b_ptr)
-{
-	sab(stack_a_ptr);
-	sab(stack_b_ptr);
-}
-
-void	pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_llist *b_end)
+void	pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end)
 {
 	t_llist	*tempa;
-	t_llist	*tempb;
+	t_llist	*node_to_move;
 
 	if (*stack_a_ptr == NULL || (*stack_a_ptr)->next == a_end)
 		return ;
-	if ((*stack_a_ptr)->next->next != NULL)
-		tempa = (*stack_a_ptr)->next->next;
+	node_to_move = (*stack_a_ptr)->next; // store the node you want to move in a temporary variable
+	if (node_to_move->next != NULL)
+		tempa = node_to_move->next;
 	else
-		tempa = (*stack_a_ptr)->next;
-	if ((*stack_b_ptr)->next == b_end)
-		tempb = (*stack_b_ptr)->next;
-	else
-		tempb = (*stack_b_ptr)->next->next;
-	(*stack_b_ptr)->next = (*stack_a_ptr)->next;
-	(*stack_a_ptr)->next = tempa;
-	(*stack_b_ptr)->next->next = tempb;
-
+		tempa = node_to_move;
+	(*stack_a_ptr)->next = tempa; // update stack_a_ptr->next
+	node_to_move->next = (*stack_b_ptr)->next; // update the next of the node you're moving
+	(*stack_b_ptr)->next = node_to_move; // now change stack_b_ptr->next
 }
 
-void	pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_llist *b_end)
-{
-	t_llist	*tempa;
-	t_llist	*tempb;
-	t_llist	*buf;
 
-	buf = NULL;
-	if (*stack_a_ptr == NULL || (*stack_a_ptr)->next == a_end)
-		return ;
-	tempa = (*stack_a_ptr)->next->next;
-	if ((*stack_b_ptr)->next == b_end)
-		tempb = (*stack_b_ptr)->next;
-	else
-	{
-		buf = (*stack_b_ptr)->next;
-		tempb = (*stack_b_ptr)->next->next;
-	}
-	(*stack_b_ptr)->next = (*stack_a_ptr)->next;
-	if (buf)
-	{
-		(*stack_b_ptr)->next->next = buf;
-		(*stack_b_ptr)->next->next->next = tempb;
-
-	}
-	(*stack_a_ptr)->next = tempa;
-
-}
-
-void	pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_llist *b_end)
+void	pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *b_end)
 {
 	t_llist	*tempb;
-	t_llist	*tempa;
+	t_llist	*node_to_move;
 
 	if (*stack_b_ptr == NULL || (*stack_b_ptr)->next == b_end)
 		return ;
-	if ((*stack_b_ptr)->next->next != NULL)
-		tempb = (*stack_b_ptr)->next->next;
+	node_to_move = (*stack_b_ptr)->next; // store the node you want to move in a temporary variable
+	if (node_to_move->next != NULL)
+		tempb = node_to_move->next;
 	else
-		tempb = (*stack_b_ptr)->next;
-	if ((*stack_a_ptr)->next == a_end)
-		tempa = (*stack_a_ptr)->next;
-	else
-		tempa = (*stack_a_ptr)->next->next;
-	(*stack_a_ptr)->next = (*stack_b_ptr)->next;
-	(*stack_b_ptr)->next = tempb;
-	(*stack_a_ptr)->next->next = tempa;
-
+		tempb = node_to_move;
+	(*stack_b_ptr)->next = tempb; // update stack_a_ptr->next
+	node_to_move->next = (*stack_a_ptr)->next; // update the next of the node you're moving
+	(*stack_a_ptr)->next = node_to_move; // now change stack_b_ptr->next
 }
 
 void	ra(t_llist **stack_a_ptr, t_llist *a_end)
