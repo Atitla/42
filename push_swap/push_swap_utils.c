@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 23:28:52 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/30 18:11:00 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/11/30 23:35:15 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,10 @@ void	radix_sort(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end, t_
 	j = 0;
 	while (max_index >> i != 0)
 		i++;
-	while (i > j)
+	while (i >= j)
 	{
 		k = 0;
-		while (k < max_index && k < 32)
+		while (k < max_index)
 		{
 			if (((*stack_a_ptr)->next->index >> j & 1) == 0)
 			{
