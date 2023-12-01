@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/21 13:58:58 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/01 18:27:11 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ int	ft_atoi(const char *str)
 			number = (number * 10) + (str[i] - 48);
 		i++;
 	}
+	if (number < -2147483648 || number > 2147483647)
+		return(write(2, "Error\n", 6));
 	return (number * j);
 }

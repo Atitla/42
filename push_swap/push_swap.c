@@ -6,35 +6,32 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/30 18:11:09 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/01 18:38:08 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_int(int n)
-{
-	printf("%i->", n);
-}
-
 int	check_args(int argc, char **argv)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
-	while(i < argc)
+	while (i < argc)
 	{
 		j = i + 1;
-		while(j < argc)
+		while (j < argc)
 		{
-			if(ft_strcmp(argv[i], argv[j]) == 0)
-				return(1);
+			if (ft_strcmp(argv[i], argv[j]) == 0)
+				return (ft_error());
 			j++;
 		}
 		i++;
 	}
-	return(0);
+	if (is_only_num(argv) == 0)
+		return(ft_error());
+	return (0);
 }
 
 void	ft_lstadd_front(t_llist **lst, t_llist *new)
@@ -53,7 +50,6 @@ void	ft_lstadd_front(t_llist **lst, t_llist *new)
 	new -> next = temp;
 }
 
-
 t_llist	*ft_lstnew(int content)
 {
 	t_llist	*newlist;
@@ -67,49 +63,12 @@ t_llist	*ft_lstnew(int content)
 	return (newlist);
 }
 
-void	push_swap(t_llist *lst, void (*f)(int))
-{
-	//printf("stack_a:\n");
-	if (!f)
-		return ;
-	while (lst)
-	{
-		if (lst->next == NULL)
-		{
-			printf("%i", lst->content);
-			printf("nill");
-			break ;
-		}
-		f(lst->content);
-		lst = lst -> next;
-	}
-	printf("\n");
-}
-
-void	push_swap2(t_llist *lst, void (*f)(int))
-{
-	printf("index a:\n");
-	if (!f)
-		return ;
-	while (lst)
-	{
-		lst = lst -> next;
-		if (lst->next == NULL)
-		{
-			printf("%i", lst->content);
-			printf("nill");
-			break ;
-		}
-		f(lst->index);
-	}
-	printf("\n");
-}
-
 t_llist	*init_stack(int argc, char **argv)
 {
 	t_llist		*head;
 	t_llist		*end;
 	int			i;
+	int			tuple;
 
 	head = (t_llist *)malloc(sizeof(t_llist));
 	end = (t_llist *)malloc(sizeof(t_llist));
@@ -124,10 +83,12 @@ t_llist	*init_stack(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		ft_lstadd_front(&head, ft_lstnew(atoi(argv[argc - i])));
+		if (ft_atoi(argv[argc - i]))
+			return(NULL);
+		ft_lstadd_front(&head, ft_lstnew(ft_atoi(argv[argc - i])));
 		i++;
 	}
-	return head;
+	return (head);
 }
 
 int	main(int argc, char **argv)
@@ -137,11 +98,10 @@ int	main(int argc, char **argv)
 	t_llist		*stack_b_head;
 	t_llist		*b_end;
 
-	if (argc < 2)
+	if (check_args(argc, argv) != 0 || argc < 3)
 		return (0);
-	check_args(argc, argv);
 	stack_a_head = init_stack(argc, argv);
-	stack_b_head = init_stack(0,0);
+	stack_b_head = init_stack(0, 0);
 	if (stack_a_head == NULL || stack_b_head == NULL)
 		return (0);
 	a_end = stack_a_head;
@@ -150,9 +110,11 @@ int	main(int argc, char **argv)
 	b_end = stack_b_head;
 	while (b_end->next != NULL)
 		b_end = b_end->next;
-	bubble_sort(&stack_a_head, argc - 1, a_end);
-	radix_sort(&stack_a_head, &stack_b_head, a_end,b_end, argc - 1);
-	free_llist(stack_a_head);
-	free_llist(stack_b_head);
-	return (0);
+	if (bubble_sort(&stack_a_head, argc - 1, a_end) == 1)
+		return (free_llist(stack_a_head), free_llist(stack_b_head), 0);
+	//if ((argc - 1) >= 3 && (argc - 1) <= 5)
+	//	ft_sort_liltab(&stack_a_head, &stack_b_head, a_end, argc - 1);
+	//else
+	radix_sort(&stack_a_head, &stack_b_head, a_end, argc - 1);
+	return (free_llist(stack_a_head),free_llist(stack_b_head), 0);
 }
