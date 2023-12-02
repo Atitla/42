@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/01 18:38:08 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/02 02:40:29 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_args(int argc, char **argv)
 		i++;
 	}
 	if (is_only_num(argv) == 0)
-		return(ft_error());
+		return (ft_error());
 	return (0);
 }
 
@@ -50,10 +50,12 @@ void	ft_lstadd_front(t_llist **lst, t_llist *new)
 	new -> next = temp;
 }
 
-t_llist	*ft_lstnew(int content)
+t_llist	*ft_lstnew(int content, int *boo)
 {
 	t_llist	*newlist;
 
+	if (boo != 0)
+		return (NULL);
 	newlist = malloc(sizeof(t_llist));
 	if (!newlist)
 		return (NULL);
@@ -68,24 +70,20 @@ t_llist	*init_stack(int argc, char **argv)
 	t_llist		*head;
 	t_llist		*end;
 	int			i;
-	int			tuple;
+	int			boo;
 
-	head = (t_llist *)malloc(sizeof(t_llist));
-	end = (t_llist *)malloc(sizeof(t_llist));
-	if (head == NULL || end == NULL)
+	boo = 0;
+	head = ft_assign(&end);
+	if (head == NULL)
 		return (NULL);
-	head->content = 0;
-	head->next = end;
-	head->index = 0;
-	end->content = 0;
-	end->next = NULL;
-	end->index = 0;
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_atoi(argv[argc - i]))
-			return(NULL);
-		ft_lstadd_front(&head, ft_lstnew(ft_atoi(argv[argc - i])));
+		printf("\n%i\n", ft_atoi (argv[argc - i], &boo));
+		if (boo != 0)
+			return (free_llist (head), NULL);
+		ft_lstadd_front(&head, ft_lstnew(ft_atoi(argv[argc - i], &boo), &boo));
+		print_llist_data(head);
 		i++;
 	}
 	return (head);
@@ -100,10 +98,10 @@ int	main(int argc, char **argv)
 
 	if (check_args(argc, argv) != 0 || argc < 3)
 		return (0);
-	stack_a_head = init_stack(argc, argv);
 	stack_b_head = init_stack(0, 0);
+	stack_a_head = init_stack(argc, argv);
 	if (stack_a_head == NULL || stack_b_head == NULL)
-		return (0);
+		return (free_llist(stack_b_head), 0);
 	a_end = stack_a_head;
 	while (a_end->next != NULL)
 		a_end = a_end->next;
@@ -116,5 +114,5 @@ int	main(int argc, char **argv)
 	//	ft_sort_liltab(&stack_a_head, &stack_b_head, a_end, argc - 1);
 	//else
 	radix_sort(&stack_a_head, &stack_b_head, a_end, argc - 1);
-	return (free_llist(stack_a_head),free_llist(stack_b_head), 0);
+	return (free_llist (stack_a_head), free_llist (stack_b_head), 0);
 }

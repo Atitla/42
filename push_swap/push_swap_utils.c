@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 23:28:52 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/01 15:24:38 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/02 02:13:23 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_llist	*copy_list(t_llist *head, t_llist *end)
 	new_head = init_stack(0, 0);
 	while (current != end)
 	{
-		new_node = ft_lstnew(current->content);
+		new_node = ft_lstnew(current->content, (void *) 0);
 		if (!new_node)
 		{
 			while (new_head != NULL)

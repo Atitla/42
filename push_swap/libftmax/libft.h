@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 00:21:11 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/28 01:29:59 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/02 00:16:57 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char				*ft_strnstr(const char *big,
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 
-int					ft_atoi(const char *str);
+int					ft_atoi(const char *str, int *boo);
 char				*ft_itoa(int n);
 
 int					ft_isalpha(int c);
