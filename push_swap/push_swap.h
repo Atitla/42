@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:52:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 02:37:44 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/02 16:21:08 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, \
 					t_llist *b_end);
 void				ra(t_llist **stack_a_ptr, t_llist *a_end);
 int					is_only_num(char **argv);
-void	print_llist_data(t_llist *head);
+int					get_len_char(char ***str);
+void				print_llist_data(t_llist *head);
 
 #endif

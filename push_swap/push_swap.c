@@ -6,30 +6,35 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 02:40:29 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/02 16:18:49 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_args(int argc, char **argv)
+int	check_args(int *argc, char ***argv)
 {
 	int	i;
 	int	j;
+	int	k;
 
+	k = 0;
+	if ((*argc) == 2)
+		(*argv) = ft_split((*argv)[1], ' ');
+	(*argc) = (get_len_char(argv));
 	i = 0;
-	while (i < argc)
+	while (i < *argc)
 	{
 		j = i + 1;
-		while (j < argc)
+		while (j < *argc)
 		{
-			if (ft_strcmp(argv[i], argv[j]) == 0)
+			if (ft_strcmp((*argv)[i], (*argv)[j]) == 0)
 				return (ft_error());
 			j++;
 		}
 		i++;
 	}
-	if (is_only_num(argv) == 0)
+	if (is_only_num((*argv)) == 0)
 		return (ft_error());
 	return (0);
 }
@@ -54,7 +59,7 @@ t_llist	*ft_lstnew(int content, int *boo)
 {
 	t_llist	*newlist;
 
-	if (boo != 0)
+	if (*boo != 0)
 		return (NULL);
 	newlist = malloc(sizeof(t_llist));
 	if (!newlist)
@@ -79,11 +84,9 @@ t_llist	*init_stack(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		printf("\n%i\n", ft_atoi (argv[argc - i], &boo));
 		if (boo != 0)
 			return (free_llist (head), NULL);
 		ft_lstadd_front(&head, ft_lstnew(ft_atoi(argv[argc - i], &boo), &boo));
-		print_llist_data(head);
 		i++;
 	}
 	return (head);
@@ -96,7 +99,7 @@ int	main(int argc, char **argv)
 	t_llist		*stack_b_head;
 	t_llist		*b_end;
 
-	if (check_args(argc, argv) != 0 || argc < 3)
+	if (check_args(&argc, &argv) != 0)
 		return (0);
 	stack_b_head = init_stack(0, 0);
 	stack_a_head = init_stack(argc, argv);

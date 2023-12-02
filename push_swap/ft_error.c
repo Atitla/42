@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:21:31 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 02:45:07 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/02 17:31:13 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	print_llist_data(t_llist *head)
 	}
 }
 
-
 t_llist	*ft_assign(t_llist **end)
 {
 	t_llist	*head;
@@ -49,6 +48,18 @@ t_llist	*ft_assign(t_llist **end)
 	return (head);
 }
 
+int	get_len_char(char ***str)
+{
+	int		i;
+	char	**temp;
+
+	temp = *str;
+	i = 0;
+	while (temp[i])
+		i++;
+	return (i);
+}
+
 int	is_only_num(char **argv)
 {
 	int	i;
@@ -62,8 +73,12 @@ int	is_only_num(char **argv)
 		{
 			if (ft_isdigit(argv[i][j]) != 1 && argv[i][j] != '-')
 				return (0);
+			else if (argv[i][j] == '-' && argv[i][j + 1] == '-')
+				return (0);
 			j++;
 		}
+		if (argv[i][j - 1] == '-')
+			return 0;
 		i++;
 	}
 	return (1);
@@ -74,3 +89,5 @@ int	is_only_num(char **argv)
 //{
 //
 //}
+
+
