@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:10:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 17:16:01 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:03:27 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,29 @@ void	ra(t_llist **stack_a_ptr, t_llist *a_end)
 
 void	rra(t_llist **stack_a_ptr, t_llist *a_end)
 {
-	t_llist	*temp;
 	t_llist	*stack_a_lastelem;
+	t_llist	*stack_a_firstelem;
 
-	if (*stack_a_ptr == NULL || a_end == NULL)
-		return ;
-	if ((*stack_a_ptr)->next == NULL || a_end->next != NULL)
-		return ;
+	//if (*stack_a_ptr == NULL || a_end == NULL || (*stack_a_ptr)->next == NULL)
+	//	return ;
 	stack_a_lastelem = (*stack_a_ptr);
-	while (stack_a_lastelem->next->next != a_end)
+	while (stack_a_lastelem->next != a_end)
 		stack_a_lastelem = stack_a_lastelem->next;
-	temp = (*stack_a_ptr)->next;
-	(*stack_a_ptr)->next->next = a_end;
+	printf("content last elem:%i\n", stack_a_lastelem->content);
+	if (stack_a_lastelem == *stack_a_ptr) // La pile a un seul élément
+		return ;
+	// Trouver l'avant-dernier élément
+	stack_a_firstelem = (*stack_a_ptr)->next;
+	while (stack_a_firstelem->next->next != a_end)
+		stack_a_firstelem = stack_a_firstelem->next;
+	printf("content first elem :%i\n", stack_a_firstelem->content);
+	// Faire pointer le dernier élément sur le début de la pile
 	stack_a_lastelem->next = (*stack_a_ptr)->next;
-	(*stack_a_ptr)->next = temp;
-	printf("ra\n");
+	// Le nouvel avant-dernier élément devient la fin de la pile
+	stack_a_firstelem->next = a_end;
+	// Mettre à jour le pointeur de début de pile
+	(*stack_a_ptr)->next = stack_a_lastelem;
+	printf("rra\n");
 }
 
 int	bubble_sort(t_llist **stack_a_head, int max_index, t_llist *end)

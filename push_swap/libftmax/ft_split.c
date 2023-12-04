@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 01:21:23 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 16:13:56 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/03 12:54:25 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ char	*ft_strndup(const char *src, int n)
 	dest = (char *)malloc(sizeof(char) * (i + 1));
 	if (!dest)
 		return (NULL);
-	while (j < n)
+	while (j < i)
 	{
 		dest[j] = src[j];
 		j++;
 	}
-	dest[n] = '\0';
+	dest[j] = '\0';
 	return (dest);
 }
 
@@ -91,7 +91,7 @@ char	**ft_split(const char *str, char c)
 	split = malloc(sizeof(char *) * (count_word(str, c) + 2));
 	if (!split)
 		return (NULL);
-	split[0] = ft_strndup("./push_swap", 12);
+	split[0] = ft_strndup("push_swap", 11);
 	while (*str)
 	{
 		while (*str && c == str[0])

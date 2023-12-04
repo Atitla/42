@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 16:18:49 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:05:16 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	check_args(int *argc, char ***argv)
 {
 	int	i;
 	int	j;
-	int	k;
 
-	k = 0;
 	if ((*argc) == 2)
 		(*argv) = ft_split((*argv)[1], ' ');
 	(*argc) = (get_len_char(argv));
@@ -34,7 +32,10 @@ int	check_args(int *argc, char ***argv)
 		}
 		i++;
 	}
-	if (is_only_num((*argv)) == 0)
+	if (is_only_num((*argv)) == 0 && ft_strcmp((*argv)[0], "push_swap") == 0)
+		return (ft_free_tab((*argv)), ft_error());
+	else if (is_only_num((*argv)) == 0 && \
+			ft_strcmp((*argv)[0], "push_swap") != 0)
 		return (ft_error());
 	return (0);
 }
@@ -94,28 +95,32 @@ t_llist	*init_stack(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_llist		*stack_a_head;
-	t_llist		*a_end;
-	t_llist		*stack_b_head;
-	t_llist		*b_end;
+	t_llist		*stack_a;
+	t_llist		*stack_b;
+	t_ends		stack_ends;
 
 	if (check_args(&argc, &argv) != 0)
 		return (0);
-	stack_b_head = init_stack(0, 0);
-	stack_a_head = init_stack(argc, argv);
-	if (stack_a_head == NULL || stack_b_head == NULL)
-		return (free_llist(stack_b_head), 0);
-	a_end = stack_a_head;
-	while (a_end->next != NULL)
-		a_end = a_end->next;
-	b_end = stack_b_head;
-	while (b_end->next != NULL)
-		b_end = b_end->next;
-	if (bubble_sort(&stack_a_head, argc - 1, a_end) == 1)
-		return (free_llist(stack_a_head), free_llist(stack_b_head), 0);
+	stack_b = init_stack(0, 0);
+	stack_a = init_stack(argc, argv);
+	if (stack_a == NULL || stack_b == NULL)
+		return (free_llist(stack_b), 0);
+	stack_ends.a_end = stack_a;
+	stack_ends.b_end = stack_b;
+	stack_ends.a_end = find_end_stack(stack_ends.a_end);
+	stack_ends.b_end = find_end_stack(stack_ends.b_end);
+	print_llist_data(stack_a);
+	rra(&stack_a, stack_ends.a_end);
+	print_llist_data(stack_a);
+	rra(&stack_a, stack_ends.a_end);
+	print_llist_data(stack_a);
+	//if (bubble_sort(&stack_a, argc - 1, stack_ends.a_end) == 1)
+	//	return (free_llist(stack_a), free_llist(stack_b), 0);
 	//if ((argc - 1) >= 3 && (argc - 1) <= 5)
-	//	ft_sort_liltab(&stack_a_head, &stack_b_head, a_end, argc - 1);
+	//	ft_sort_liltab(&stack_a, &stack_b, stack_ends, argc - 1);
 	//else
-	radix_sort(&stack_a_head, &stack_b_head, a_end, argc - 1);
-	return (free_llist (stack_a_head), free_llist (stack_b_head), 0);
+	//	radix_sort(&stack_a, &stack_b, stack_ends.a_end, argc - 1);
+	if (ft_strcmp(argv[0], "push_swap") == 0)
+		ft_free_tab(argv);
+	return (free_llist (stack_a), free_llist (stack_b), 0);
 }

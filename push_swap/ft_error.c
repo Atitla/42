@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:21:31 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 17:31:13 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/04 14:09:25 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ t_llist	*ft_assign(t_llist **end)
 	return (head);
 }
 
+t_llist	*find_end_stack(t_llist *end)
+{
+	while (end->next != NULL)
+		end = end->next;
+	return (end);
+}
+
 int	get_len_char(char ***str)
 {
 	int		i;
@@ -58,6 +65,21 @@ int	get_len_char(char ***str)
 	while (temp[i])
 		i++;
 	return (i);
+}
+
+void	ft_free_tab(char **tab)
+{
+	int	i;
+
+	if (!tab)
+		return ;
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 int	is_only_num(char **argv)
@@ -78,16 +100,9 @@ int	is_only_num(char **argv)
 			j++;
 		}
 		if (argv[i][j - 1] == '-')
-			return 0;
+			return (0);
 		i++;
 	}
 	return (1);
 }
-
-//void	ft_sort_liltab(t_llist **stack_a_head, t_llist **stack_b_head,
-//		*a_end, int argc)
-//{
-//
-//}
-
 

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:52:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 16:21:08 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/04 13:52:01 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ typedef struct t_llist {
 	int				index;
 	struct t_llist	*next;
 }	t_llist;
+
+typedef struct t_ends {
+	struct t_llist	*a_end;
+	struct t_llist	*b_end;
+}	t_ends;
 
 t_llist				*ft_lstnew(int content, int *boo);
 t_llist				*init_stack(int argc, char **argv);
@@ -45,8 +50,11 @@ void				pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, \
 void				pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, \
 					t_llist *b_end);
 void				ra(t_llist **stack_a_ptr, t_llist *a_end);
+void				rra(t_llist **stack_a_ptr, t_llist *a_end);
 int					is_only_num(char **argv);
 int					get_len_char(char ***str);
 void				print_llist_data(t_llist *head);
+void				ft_free_tab(char **tab);
+t_llist				*find_end_stack(t_llist *end);
 
 #endif
