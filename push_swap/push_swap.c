@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/04 14:05:16 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:13:11 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,12 @@ int	main(int argc, char **argv)
 	stack_ends.b_end = stack_b;
 	stack_ends.a_end = find_end_stack(stack_ends.a_end);
 	stack_ends.b_end = find_end_stack(stack_ends.b_end);
-	print_llist_data(stack_a);
-	rra(&stack_a, stack_ends.a_end);
-	print_llist_data(stack_a);
-	rra(&stack_a, stack_ends.a_end);
-	print_llist_data(stack_a);
-	//if (bubble_sort(&stack_a, argc - 1, stack_ends.a_end) == 1)
-	//	return (free_llist(stack_a), free_llist(stack_b), 0);
-	//if ((argc - 1) >= 3 && (argc - 1) <= 5)
-	//	ft_sort_liltab(&stack_a, &stack_b, stack_ends, argc - 1);
-	//else
-	//	radix_sort(&stack_a, &stack_b, stack_ends.a_end, argc - 1);
+	if (bubble_sort(&stack_a, argc - 1, stack_ends.a_end) == 1)
+		return (free_llist(stack_a), free_llist(stack_b), 0);
+	if ((argc - 1) >= 2 && (argc - 1) <= 5)
+		ft_sort(&stack_a, &stack_b, stack_ends, argc - 1);
+	else
+		radix_sort(&stack_a, &stack_b, stack_ends.a_end, argc - 1);
 	if (ft_strcmp(argv[0], "push_swap") == 0)
 		ft_free_tab(argv);
 	return (free_llist (stack_a), free_llist (stack_b), 0);

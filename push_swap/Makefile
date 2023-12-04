@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/12/01 13:39:55 by ecunha           ###   ########.fr        #
+#    Updated: 2023/12/04 17:04:17 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ HEADER = push_swap.h
 FILES = push_swap \
 		push_swap_utils \
 		rules \
-		ft_error
+		ft_error \
+		sort_little_tab
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))

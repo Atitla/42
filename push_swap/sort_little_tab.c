@@ -6,110 +6,140 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:26:13 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/04 13:31:22 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:42:12 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_llist	*biggest_index(t_llist *stack, t_llist *end)
+static void	ft_sort_three(t_llist **stack_a, t_llist *a_end)
 {
-	int		index_max;
-	t_llist	*current;
+	int	a;
+	int	b;
+	int	c;
 
-	current = stack->next;
-	index_max = 0;
-	while (current->next != end)
+	a = (*stack_a)->next->content;
+	b = (*stack_a)->next->next->content;
+	c = (*stack_a)->next->next->next->content;
+	if (a > b && b > c && c < a)
 	{
-		if (current->index > index_max)
-			index_max = current->index;
-		current = current->next;
+		sab(stack_a);
+		ra(stack_a, a_end);
+		ra(stack_a, a_end);
 	}
-	return (current);
-}
-
-t_llist	*smallest_index(t_llist *stack, t_llist *end)
-{
-	int		index_min;
-	t_llist	*current;
-
-	current = stack->next;
-	index_min = 0;
-	while (current->next != end)
+	else if (a < b && b > c && c > a)
 	{
-		if (current->index < index_min)
-			index_min = current->index;
-		current = current->next;
+		ra(stack_a, a_end);
+		sab(stack_a);
+		rra(stack_a, a_end);
 	}
-	return (current);
+	else if (a < b && b > c && c < a)
+		rra(stack_a, a_end);
+	else if (a < b && b > c && c < a)
+		sab(stack_a);
+	else if (a > b && b < c && c < a)
+		ra(stack_a, a_end);
+	else if (a > b && b < c && c > a)
+		sab(stack_a);
+	else if (is_sorted((*stack_a)))
+		return ;
+	else
+		printf("=====bizzare la=====\n");
 }
+//
+//static void	ft_sort_by_smallest(t_llist **stack_a, t_llist **stack_b, \
+//			t_ends ends, int size)
+//{
+//	while (size > 3)
+//	{
+//		while ((*stack_a)->next->index > 1)
+//			ra(stack_a, ends.a_end);
+//		pb(stack_a, stack_b, ends.a_end);
+//		size--;
+//	}
+//	ft_sort_three(stack_a, ends.a_end);
+//	while (stack_b)
+//		pa(stack_a, stack_b, ends.b_end);
+//}
+//
+//static void	ft_sort_by_greatest(t_llist **stack_a, t_llist **stack_b, \
+//			t_ends ends, int size)
+//{
+//	t_llist	*current_a;
+//	t_llist	*current_b;
+//
+//	current_a = (*stack_a)->next ;
+//	current_b = (*stack_b)->next ;
+//	while (size > 3)
+//	{
+//		while ((*stack_a)->next->index < size)
+//			ra(stack_a, ends.a_end);
+//		pb(stack_a, stack_b, ends.a_end);
+//		size--;
+//	}
+//	ft_sort_three(stack_a, ends.a_end);
+//	while (current_b != ends.b_end)
+//	{
+//		pa(stack_a, stack_b, ends.b_end);
+//		ra(stack_a, ends.a_end);
+//	}
+//}
+//
 
-static void	ft_sort_by_smallest(t_llist *stack_a, t_llist *stack_b, \
+static void	ft_sort_four(t_llist **stack_a, t_llist **stack_b, \
 			t_ends ends, int size)
 {
+	t_llist	*current_a;
+
+	current_a = (*stack_a)->next ;
 	while (size > 3)
 	{
-		while ((stack_a)->index > smallest_index(stack_a, ends.a_end)->index)
+		while ((*stack_a)->next->index < size)
 			ra(stack_a, ends.a_end);
 		pb(stack_a, stack_b, ends.a_end);
 		size--;
 	}
-	ft_sort_three(stack_a);
-	while (stack_b)
-		pa(stack_a, stack_b, ends.b_end);
-}
-
-static void	ft_sort_by_greatest(t_llist *stack_a, t_llist *stack_b, \
-			t_ends ends, int size)
-{
-	while (size > 3)
-	{
-		while ((stack_a)->index < biggest_index(stack_a, ends.a_end)->index)
-			ra(stack_a, ends.a_end);
-		pb(stack_a, stack_b, ends.a_end);
-		size--;
-	}
-	ft_sort_three(stack_a);
-	while (stack_b)
+	ft_sort_three(stack_a, ends.a_end);
+	while ((*stack_b)->next != ends.b_end)
 	{
 		pa(stack_a, stack_b, ends.b_end);
 		ra(stack_a, ends.a_end);
 	}
 }
 
-void	ft_sort_three(t_llist *stack_a, t_llist *a_end)
+static void	ft_sort_five(t_llist **stack_a, t_llist **stack_b, \
+			t_ends ends)
 {
+	t_llist	*current_a;
+	int		i;
 
-}
-
-static void	ft_choose_shortest(t_llist *stack_a, t_llist *stack_b, \
-			t_ends ends, int size)
-{
-	int		index;
-	int		index_max;
-	t_llist	*current;
-
-	current = stack_a->next;
-	index = 0;
-	while (current->index < biggest_index(stack_a, ends.a_end)->index)
+	i = 1;
+	current_a = (*stack_a)->next ;
+	if (current_a->index > current_a->next->index &&)
 	{
-		index++;
-		current = current->next;
+		/* code */
 	}
-	if (index < size / 2)
-		ft_sort_by_greatest(stack_a, stack_b, ends, size);
-	else
-		ft_sort_by_smallest(stack_a, stack_b, ends, size);
+
+	while (i <= 2)
+	{
+		while ((*stack_a)->next->index > i)
+			ra(stack_a, ends.a_end);
+		pb(stack_a, stack_b, ends.a_end);
+		i++;
+	}
+	ft_sort_three(stack_a, ends.a_end);
+	while ((*stack_b)->next != ends.b_end)
+		pa(stack_a, stack_b, ends.b_end);
 }
 
-void	ft_sort(t_llist *stack_a, t_llist *stack_b, t_ends ends, int size)
+void	ft_sort(t_llist **stack_a, t_llist **stack_b, t_ends ends, int size)
 {
-	if (is_sorted(stack_a))
-		return ;
 	if (size == 2)
 		ra(stack_a, ends.a_end);
 	else if (size == 3)
 		ft_sort_three(stack_a, ends.a_end);
-	else
-		ft_choose_shortest(stack_a, stack_b, ends, size);
+	else if (size == 4)
+		ft_sort_four(stack_a, stack_b, ends, size);
+	else if (size == 5)
+		ft_sort_five(stack_a, stack_b, ends);
 }

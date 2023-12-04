@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:52:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/04 13:52:01 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:07:02 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ int					get_len_char(char ***str);
 void				print_llist_data(t_llist *head);
 void				ft_free_tab(char **tab);
 t_llist				*find_end_stack(t_llist *end);
+void				ft_sort(t_llist **stack_a, t_llist **stack_b, t_ends ends, int size);
+void	sab(t_llist **stack_a_ptr);
 
 #endif
