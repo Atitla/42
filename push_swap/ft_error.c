@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:21:31 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/04 14:09:25 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:10:57 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,6 @@ int	ft_error(void)
 {
 	write(2, "Error\n", 7);
 	return (1);
-}
-
-void	print_llist_data(t_llist *head)
-{
-	t_llist	*current;
-
-	current = head;
-	while (current != NULL)
-	{
-		printf("Content: %d\n", current->content);
-		printf("Index: %d\n", current->index);
-		current = current->next;
-	}
 }
 
 t_llist	*ft_assign(t_llist **end)
@@ -81,28 +68,3 @@ void	ft_free_tab(char **tab)
 	}
 	free(tab);
 }
-
-int	is_only_num(char **argv)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	while (argv[i] != NULL)
-	{
-		j = 0;
-		while (argv[i][j] != '\0')
-		{
-			if (ft_isdigit(argv[i][j]) != 1 && argv[i][j] != '-')
-				return (0);
-			else if (argv[i][j] == '-' && argv[i][j + 1] == '-')
-				return (0);
-			j++;
-		}
-		if (argv[i][j - 1] == '-')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-

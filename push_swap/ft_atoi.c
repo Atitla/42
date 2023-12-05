@@ -6,12 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/02 01:44:01 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:58:51 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "push_swap.h"
 
 int	ft_isspace(const char *str)
 {
@@ -37,8 +36,7 @@ int	ft_atoi_valid_int(long long int number, int *boo)
 	if (number < -2147483648 || number > 2147483647)
 	{
 		(*boo) = 1;
-		printf("%lld", number);
-		return (write (2, "Error\n", 6));
+		return (ft_error());
 	}
 	return (0);
 }

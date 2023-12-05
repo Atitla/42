@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 21:57:25 by ecunha            #+#    #+#             */
-/*   Updated: 2022/11/18 00:40:32 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:01:07 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 int	ft_isdigit(int c)
 {

@@ -6,9 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 01:02:20 by ecunha            #+#    #+#             */
-/*   Updated: 2023/11/28 01:02:35 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:59:47 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

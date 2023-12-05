@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:10:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/04 17:17:48 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:10:00 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,63 +105,4 @@ void	rra(t_llist **stack_a_ptr, t_llist *a_end)
 	stack_a_firstelem->next = a_end;
 	(*stack_a_ptr)->next = stack_a_lastelem;
 	printf("rra\n");
-}
-
-int	bubble_sort(t_llist **stack_a_head, int max_index, t_llist *end)
-{
-	int		i;
-	int		j;
-	t_llist	*current;
-	t_llist	*copy;
-
-	i = 0;
-	copy = copy_list((*stack_a_head), end);
-	current = copy->next;
-	while (i < max_index && current != end)
-	{
-		current = copy->next;
-		j = 0;
-		while (j < (max_index - i - 1))
-		{
-			if (current->next->content < current->content)
-				swap_nodes(current);
-			current = current->next;
-			j++;
-		}
-		i++;
-	}
-	if (indexer(stack_a_head, end, copy) == 1)
-		return (free_llist(copy), 1);
-	free_llist(copy);
-	return (0);
-}
-
-void	radix_sort(t_llist **stack_a_ptr, t_llist **stack_b_ptr, \
-		t_llist *a_end, int max_index)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	while (max_index >> i != 0)
-		i++;
-	while (i >= j)
-	{
-		k = 0;
-		while (k < max_index)
-		{
-			if (((*stack_a_ptr)->next->index >> j & 1) == 0)
-				pb(stack_a_ptr, stack_b_ptr, a_end);
-			else
-				ra(stack_a_ptr, a_end);
-			k++;
-		}
-		while ((*stack_b_ptr)->next->next != NULL)
-			pa(stack_a_ptr, stack_b_ptr, a_end);
-		j++;
-		if (is_sorted(*stack_a_ptr))
-			return ;
-	}
 }
