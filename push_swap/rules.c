@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 19:10:06 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/05 10:10:00 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:33:50 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	sab(t_llist **stack_a_ptr)
 	first->next = second->next;
 	second->next = first;
 	*stack_a_ptr = second;
-	printf("sa\n");
+	ft_printf("sa\n");
 }
 
 void	pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end)
@@ -46,7 +46,7 @@ void	pb(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *a_end)
 	(*stack_a_ptr)->next = tempa;
 	node_to_move->next = (*stack_b_ptr)->next;
 	(*stack_b_ptr)->next = node_to_move;
-	printf("pb\n");
+	ft_printf("pb\n");
 }
 
 void	pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *b_end)
@@ -64,7 +64,7 @@ void	pa(t_llist **stack_a_ptr, t_llist **stack_b_ptr, t_llist *b_end)
 	(*stack_b_ptr)->next = tempb;
 	node_to_move->next = (*stack_a_ptr)->next;
 	(*stack_a_ptr)->next = node_to_move;
-	printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	ra(t_llist **stack_a_ptr, t_llist *a_end)
@@ -83,7 +83,7 @@ void	ra(t_llist **stack_a_ptr, t_llist *a_end)
 	(*stack_a_ptr)->next->next = a_end;
 	stack_a_lastelem->next = (*stack_a_ptr)->next;
 	(*stack_a_ptr)->next = temp;
-	printf("ra\n");
+	ft_printf("ra\n");
 }
 
 void	rra(t_llist **stack_a_ptr, t_llist *a_end)
@@ -104,5 +104,5 @@ void	rra(t_llist **stack_a_ptr, t_llist *a_end)
 	stack_a_lastelem->next = (*stack_a_ptr)->next;
 	stack_a_firstelem->next = a_end;
 	(*stack_a_ptr)->next = stack_a_lastelem;
-	printf("rra\n");
+	ft_printf("rra\n");
 }

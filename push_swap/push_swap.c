@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 12:49:56 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/04 17:13:11 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:22:22 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,16 @@
 
 int	check_args(int *argc, char ***argv)
 {
-	int	i;
-	int	j;
-
 	if ((*argc) == 2)
 		(*argv) = ft_split((*argv)[1], ' ');
-	(*argc) = (get_len_char(argv));
-	i = 0;
-	while (i < *argc)
+	if ((*argv)[1] == NULL)
 	{
-		j = i + 1;
-		while (j < *argc)
-		{
-			if (ft_strcmp((*argv)[i], (*argv)[j]) == 0)
-				return (ft_error());
-			j++;
-		}
-		i++;
+		if (ft_strcmp((*argv)[0], "push_swap") == 0)
+			return (ft_free_tab((*argv)), ft_error());
 	}
+	(*argc) = (get_len_char(argv));
+	if (ft_cmpint(argc, argv) == 1)
+		return (1);
 	if (is_only_num((*argv)) == 0 && ft_strcmp((*argv)[0], "push_swap") == 0)
 		return (ft_free_tab((*argv)), ft_error());
 	else if (is_only_num((*argv)) == 0 && \
@@ -85,9 +77,13 @@ t_llist	*init_stack(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (boo != 0)
-			return (free_llist (head), NULL);
 		ft_lstadd_front(&head, ft_lstnew(ft_atoi(argv[argc - i], &boo), &boo));
+		if (boo != 0)
+		{
+			if (ft_strcmp(argv[0], "push_swap") == 0)
+				ft_free_tab(argv);
+			return (free_llist (head), NULL);
+		}
 		i++;
 	}
 	return (head);
@@ -109,7 +105,7 @@ int	main(int argc, char **argv)
 	stack_ends.b_end = stack_b;
 	stack_ends.a_end = find_end_stack(stack_ends.a_end);
 	stack_ends.b_end = find_end_stack(stack_ends.b_end);
-	if (bubble_sort(&stack_a, argc - 1, stack_ends.a_end) == 1)
+	if (bubble_sort(&stack_a, argc - 1, argv, stack_ends.a_end) == 1)
 		return (free_llist(stack_a), free_llist(stack_b), 0);
 	if ((argc - 1) >= 2 && (argc - 1) <= 5)
 		ft_sort(&stack_a, &stack_b, stack_ends, argc - 1);

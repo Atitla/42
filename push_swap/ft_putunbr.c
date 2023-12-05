@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 12:32:12 by ecunha            #+#    #+#             */
-/*   Updated: 2022/12/15 03:50:36 by ecunha           ###   ########.fr       */
+/*   Created: 2022/12/13 05:14:25 by ecunha            #+#    #+#             */
+/*   Updated: 2023/12/05 14:36:50 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "push_swap.h"
 
-int	ft_putstr(char *str)
+int	ft_putunbr(unsigned int nb)
 {
-	int	i;
-	int	count;
+	int				count;
+	unsigned int	n;
 
 	count = 0;
-	if (str == NULL)
-		count += write(1, "(null)", 6);
-	else
+	n = nb;
+	if (n > 9)
 	{
-		i = -1;
-		while (str[++i])
-			count += ft_putcharcount(str[i], 1);
+		count += ft_putnbr(n / 10);
+		n %= 10;
 	}
+	count += ft_putcharcount(n + '0', 1);
 	return (count);
 }

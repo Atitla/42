@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 00:24:04 by ecunha            #+#    #+#             */
-/*   Updated: 2023/05/18 15:00:09 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:36:50 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "push_swap.h"
 
 int	ft_putptr(void *ptr)
 {

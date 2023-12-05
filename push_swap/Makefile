@@ -6,13 +6,13 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/12/05 11:02:25 by ecunha           ###   ########.fr        #
+#    Updated: 2023/12/05 14:40:18 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -ggdb3
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 HEADER = push_swap.h
 FILES = push_swap \
@@ -26,6 +26,13 @@ FILES = push_swap \
 		ft_atoi \
 		ft_strcmp \
 		ft_isdigit \
+		ft_printf \
+		ft_putcharcount \
+		ft_putstr \
+		ft_putnbr \
+		ft_puthexa \
+		ft_putptr \
+		ft_putunbr \
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))

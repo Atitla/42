@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 10:09:08 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/05 10:10:41 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/05 13:41:34 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	ft_sort(t_llist **stack_a, t_llist **stack_b, t_ends ends, int size)
 		ft_choose_shortest(stack_a, stack_b, ends, size);
 }
 
-int	bubble_sort(t_llist **stack_a_head, int max_index, t_llist *end)
+int	bubble_sort(t_llist **stack_a_head, int max_index, \
+	char **argv, t_llist *end)
 {
 	int		i;
 	int		j;
@@ -45,7 +46,7 @@ int	bubble_sort(t_llist **stack_a_head, int max_index, t_llist *end)
 		}
 		i++;
 	}
-	if (indexer(stack_a_head, end, copy) == 1)
+	if (indexer(stack_a_head, end, argv, copy) == 1)
 		return (free_llist(copy), 1);
 	free_llist(copy);
 	return (0);
@@ -103,4 +104,28 @@ int	is_only_num(char **argv)
 		i++;
 	}
 	return (1);
+}
+
+int	ft_cmpint(int *argc, char ***argv)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < *argc)
+	{
+		j = i + 1;
+		while (j < *argc)
+		{
+			if (ft_strcmp((*argv)[i], (*argv)[j]) == 0)
+			{
+				if (ft_strcmp((*argv)[0], "push_swap") == 0)
+					ft_free_tab((*argv));
+				return (ft_error());
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
