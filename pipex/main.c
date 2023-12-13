@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/11 19:06:39 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/12 16:34:15 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ int	main(int argc, char **argv, char **envp)
 
 	if (id == 0)
 	{
-		//if (dup2(fd_infile, STDIN_FILENO) < 0)
-		//{
-		//	perror("Erreur lors de la redirection de stdin");
-		//	exit(EXIT_FAILURE);
-		//}
-//
-		//if (dup2(fd_outfile, STDOUT_FILENO) < 0)
-		//{
-		//	perror("Erreur lors de la redirection de stdout");
-		//	exit(EXIT_FAILURE);
-		//}
+		if (dup2(fd_infile, STDIN_FILENO) < 0)
+		{
+			perror("Erreur lors de la redirection de stdin");
+			exit(EXIT_FAILURE);
+		}
+
+		if (dup2(fd_outfile, STDOUT_FILENO) < 0)
+		{
+			perror("Erreur lors de la redirection de stdout");
+			exit(EXIT_FAILURE);
+		}
 
 		close(fd_infile);
 		close(fd_outfile);
-		path = ft_strjoin("/usr/local/sbin/", argv[2]);
+		path = ft_strjoin("/usr/bin/", argv[2]);
 		if (execve(path, command, envp) < 0)
 		{
 			perror("Erreur lors de l'exécution de la commande avec execve");
