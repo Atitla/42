@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/12 16:34:15 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/13 06:25:27 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/wait.h>
+#include "pipex.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -48,55 +43,43 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		fd_infile;
 	int		fd_outfile;
-	int		id;
+	int		id1;
+	int		id2;
 	char	*path;
-	char	*command_path;
-	char	*command[] = {argv[2], NULL};
+	int		pipefd[2];
+	(void)argc;
 
 	fd_infile = open(argv[1], O_RDONLY);
-	if (fd_infile < 0)
-	{
-		perror("Erreur lors de l'ouverture du fichier d'entrée");
-		exit(EXIT_FAILURE);
-	}
 
 	fd_outfile = open(argv[3], O_WRONLY | O_CREAT, 0644);
-	if (fd_outfile < 0)
-	{
-		perror("Erreur lors de l'ouverture du fichier de sortie");
-		exit(EXIT_FAILURE);
-	}
 
-	id = fork();
-	if (id < 0)
-	{
-		perror("Erreur lors de la création du processus enfant");
-		exit(EXIT_FAILURE);
-	}
+	pipe(pipefd);
+	id1 = fork();
 
-	if (id == 0)
+	if (id1 == 0)
 	{
-		if (dup2(fd_infile, STDIN_FILENO) < 0)
-		{
-			perror("Erreur lors de la redirection de stdin");
-			exit(EXIT_FAILURE);
-		}
-
-		if (dup2(fd_outfile, STDOUT_FILENO) < 0)
-		{
-			perror("Erreur lors de la redirection de stdout");
-			exit(EXIT_FAILURE);
-		}
+		dup2(fd_infile, STDIN_FILENO);
+		dup2(pipefd[0], STDOUT_FILENO);
 
 		close(fd_infile);
-		close(fd_outfile);
-		path = ft_strjoin("/usr/bin/", argv[2]);
-		if (execve(path, command, envp) < 0)
-		{
-			perror("Erreur lors de l'exécution de la commande avec execve");
-			exit(EXIT_FAILURE);
-		}
+		close(pipefd[0]);
+		char **commande = ft_split(argv[2], ' ');
+		path = ft_strjoin("/usr/bin/", commande[0]);
+		execve(path, commande, envp);
 	}
-	wait(NULL);
+	id2 = fork();
+	if (id2 == 0)
+	{
+		dup2(pipefd[1], STDIN_FILENO);
+		dup2(fd_outfile, STDOUT_FILENO);
+
+		close(pipefd[1]);
+		close(fd_outfile);
+		char **commande = ft_split(argv[2], ' ');
+		path = ft_strjoin("/usr/bin/", commande[0]);
+		execve(path, commande, envp);
+	}
+	waitpid(id1, NULL, 0);
+	waitpid(id2, NULL, 0);
 	return (0);
 }
