@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/15 11:19:43 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/15 15:13:43 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,17 @@ int	main(int argc, char **argv, char **envp)
 	int		id2;
 	char	*path;
 	int		pipefd[2];
+	char **commande = NULL;
+	int i;
 
-	if (argc < 4)
-		return (0);
+	if (argc < 4 || !argv[4])
+		return (1);
 	fd_infile = open(argv[1], O_RDONLY);
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT, 0777);
-
+	if (fd_outfile == -1)
+		return (1);
 	pipe(pipefd);
-
+	i = 0;
 	id1 = fork();
 	if (id1 == 0)
 	{
@@ -63,12 +66,12 @@ int	main(int argc, char **argv, char **envp)
 
 		close(fd_infile);
 		close(pipefd[1]);
-		char **commande = ft_split(argv[2], ' ');
+		close(pipefd[0]);
+		commande = ft_split(argv[2], ' ');
 		path = ft_strjoin("/usr/bin/", commande[0]);
 		execve(path, commande, envp);
-		return;
+		return (ft_free(commande),1);
 	}
-	waitpid(id1, NULL, 0);
 	id2 = fork();
 	if (id2 == 0)
 	{
@@ -78,12 +81,15 @@ int	main(int argc, char **argv, char **envp)
 		close(pipefd[0]);
 		close(pipefd[1]);
 		close(fd_outfile);
-		char **commande = ft_split(argv[3], ' ');
+		commande = ft_split(argv[3], ' ');
 		path = ft_strjoin("/usr/bin/", commande[0]);
 		execve(path, commande, envp);
+		return (ft_free(commande), 1);
 	}
 	close(pipefd[0]);
 	close(pipefd[1]);
+	waitpid(id1, NULL, 0);
 	waitpid(id2, NULL, 0);
+	//ft_free(commande);
 	return (0);
 }
