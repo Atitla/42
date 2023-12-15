@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/15 02:59:19 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/15 11:19:43 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	main(int argc, char **argv, char **envp)
 	int		id2;
 	char	*path;
 	int		pipefd[2];
-	(void)argc;
 
+	if (argc < 4)
+		return (0);
 	fd_infile = open(argv[1], O_RDONLY);
-
-	fd_outfile = open(argv[3], O_WRONLY | O_CREAT, 0644);
+	fd_outfile = open(argv[4], O_WRONLY | O_CREAT, 0777);
 
 	pipe(pipefd);
 
@@ -62,10 +62,11 @@ int	main(int argc, char **argv, char **envp)
 		dup2(pipefd[1], STDOUT_FILENO);
 
 		close(fd_infile);
-		close(pipefd[0]);
+		close(pipefd[1]);
 		char **commande = ft_split(argv[2], ' ');
 		path = ft_strjoin("/usr/bin/", commande[0]);
 		execve(path, commande, envp);
+		return;
 	}
 	waitpid(id1, NULL, 0);
 	id2 = fork();
@@ -74,13 +75,15 @@ int	main(int argc, char **argv, char **envp)
 
 		dup2(pipefd[0], STDIN_FILENO);
 		dup2(fd_outfile, STDOUT_FILENO);
-		close(pipefd[1]);
 		close(pipefd[0]);
+		close(pipefd[1]);
 		close(fd_outfile);
 		char **commande = ft_split(argv[3], ' ');
 		path = ft_strjoin("/usr/bin/", commande[0]);
 		execve(path, commande, envp);
 	}
+	close(pipefd[0]);
+	close(pipefd[1]);
 	waitpid(id2, NULL, 0);
 	return (0);
 }
