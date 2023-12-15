@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/13 06:25:27 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/15 02:59:19 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	main(int argc, char **argv, char **envp)
 	fd_outfile = open(argv[3], O_WRONLY | O_CREAT, 0644);
 
 	pipe(pipefd);
-	id1 = fork();
 
+	id1 = fork();
 	if (id1 == 0)
 	{
 		dup2(fd_infile, STDIN_FILENO);
-		dup2(pipefd[0], STDOUT_FILENO);
+		dup2(pipefd[1], STDOUT_FILENO);
 
 		close(fd_infile);
 		close(pipefd[0]);
@@ -67,19 +67,20 @@ int	main(int argc, char **argv, char **envp)
 		path = ft_strjoin("/usr/bin/", commande[0]);
 		execve(path, commande, envp);
 	}
+	waitpid(id1, NULL, 0);
 	id2 = fork();
 	if (id2 == 0)
 	{
-		dup2(pipefd[1], STDIN_FILENO);
-		dup2(fd_outfile, STDOUT_FILENO);
 
+		dup2(pipefd[0], STDIN_FILENO);
+		dup2(fd_outfile, STDOUT_FILENO);
 		close(pipefd[1]);
+		close(pipefd[0]);
 		close(fd_outfile);
-		char **commande = ft_split(argv[2], ' ');
+		char **commande = ft_split(argv[3], ' ');
 		path = ft_strjoin("/usr/bin/", commande[0]);
 		execve(path, commande, envp);
 	}
-	waitpid(id1, NULL, 0);
 	waitpid(id2, NULL, 0);
 	return (0);
 }
