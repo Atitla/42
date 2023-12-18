@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/13 08:14:38 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/18 16:54:50 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return ((char *) s2);
 	else if (!s2)
 		return ((char *) s1);
-	dest = malloc ((strlen(s1) + strlen(s2) + 1) * sizeof(char));
+	dest = malloc ((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
 	i = -1;
