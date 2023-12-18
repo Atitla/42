@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/18 17:35:43 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/18 17:58:45 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,8 @@ char	*ft_strdup(const char *src)
 	return (str);
 }
 
-int range_to_comm(char *commande)
+int remove_path(char *commande)
 {
-	int	i;
-	int	j;
-
-	i = ft_strlen(commande);
-	while(commande[i] != '/')
-		j++;
-	return (j);
 }
 
 int	match_path_count(char *command, char **path)
@@ -128,9 +121,9 @@ char **check_path(char **envp, char *command)
 	j = 0;
 	while(path[i])
 	{
-		ft_strjoin(path[i], "/");
 		if(access(ft_strjoin(path[i], command), X_OK) == 0)
 		{
+			ft_strjoin(path[i], "/");
 			match_path[j] = ft_strdup(ft_strjoin(path[i], command));
 			j++;
 		}
@@ -189,7 +182,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			commande = ft_split(argv[3], ' ');
 			path = commande[0];
-			pathlenght = range_to_comm(commande[0]);
+			commande = remove_path(commande);
 			execve(path, commande + pathlenght, envp);
 			ft_free(commande);
 			free(path);
