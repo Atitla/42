@@ -6,13 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 01:21:23 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/13 04:35:21 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/15 12:27:37 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	**ft_free(char **array)
+char	**ft_free(char **array)
 {
 	int	i;
 
