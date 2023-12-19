@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/13 06:25:27 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/14 01:13:20 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 
 	fd_infile = open(argv[1], O_RDONLY);
 
-	fd_outfile = open(argv[3], O_WRONLY | O_CREAT, 0644);
+	fd_outfile = open(argv[4], O_WRONLY | O_CREAT, 0644);
 
 	pipe(pipefd);
 	id1 = fork();
