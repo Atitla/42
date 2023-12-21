@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/18 17:58:45 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/21 12:41:33 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@ int	ft_strlen(const char *str)
 	while (str[i] != '\0')
 		i++;
 	return (i);
+}
+
+char	*ft_strrchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	while (i > 0)
+	{
+		if ((char)*s == (char)c)
+			return ((char *)s);
+		i--;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -51,7 +69,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 int	ft_strncmp(const char *s1, const char *s2, int n)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while ((s1[i] || s2[i]) && i < n)
@@ -81,55 +99,101 @@ char	*ft_strdup(const char *src)
 		str[i] = src[i];
 		i++;
 	}
-	str[i] = 0;
+	str[i] = '\0';
 	return (str);
 }
 
-int remove_path(char *commande)
+char	**remove_path(char **commande)
 {
+	char	*last_slash;
+	last_slash = ft_strrchr(commande[0], '/');
+	if (last_slash != NULL)
+	{
+		commande[0] = last_slash + 1;
+	}
+	return (commande);
 }
 
 int	match_path_count(char *command, char **path)
 {
 	int	i;
 	int	j;
+	char	*path_temp;
 
 	i = 0;
 	j = 0;
 	while (path[i])
 	{
-		if(access(ft_strjoin(path[i], command), X_OK) == 0)
+		path_temp = ft_strjoin(path[i], command);
+		if(access(path_temp, X_OK) == 0)
 			j++;
 		i++;
+		free(path_temp);
 	}
 	return (j);
+}
+
+char **putlastslash(char **path)
+{
+	int	i;
+	char	**path_temp;
+
+	i = 0;
+	while (path[i])
+		i++;
+	path_temp = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (path[i])
+	{
+		path_temp[i] = ft_strjoin(path[i], "/");
+		i++;
+	}
+	path_temp[i] = NULL;
+	return (path_temp);
+}
+
+char **pathmaker(char **envp)
+{
+	char	**path;
+	char	**path_temp;
+	int		i;
+
+	i = 0;
+	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
+		i++;
+	path_temp = ft_split((envp[i] + 5), ':');
+
+	path = putlastslash(path_temp);
+	ft_free(path_temp);
+	return (path);
 }
 
 char **check_path(char **envp, char *command)
 {
 	char	**path;
 	char	**match_path;
+	char	*path_temp;
+
 	int		i;
 	int		j;
 
-	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
-		i++;
-	path = ft_split((envp[i] + 5), ':');
+	path = pathmaker(envp);
 	match_path = malloc(sizeof(char *) * (match_path_count(command, path) + 1));
 	i = 0;
 	j = 0;
 	while(path[i])
 	{
-		if(access(ft_strjoin(path[i], command), X_OK) == 0)
+		path_temp = ft_strjoin(path[i], command);
+		if(access(path_temp, X_OK || W_OK || R_OK) == 0)
 		{
-			ft_strjoin(path[i], "/");
-			match_path[j] = ft_strdup(ft_strjoin(path[i], command));
+			match_path[j] = ft_strdup(path_temp);
 			j++;
 		}
 		i++;
+		free(path_temp);
 	}
 	match_path[j] = NULL;
+	ft_free(path);
 	return (match_path);
 }
 
@@ -143,8 +207,8 @@ int	main(int argc, char **argv, char **envp)
 	char	**path_list;
 	int		pipefd[2];
 	char **commande = NULL;
+	char **commande_temp;
 	int		i = 0;
-	int		pathlenght;
 
 	if (argc < 4 || !argv[4])
 		return (1);
@@ -162,12 +226,30 @@ int	main(int argc, char **argv, char **envp)
 		close(fd_infile);
 		close(pipefd[1]);
 		close(pipefd[0]);
-		commande = ft_split(argv[2], ' ');
-		path = ft_strjoin("/usr/bin/", commande[0]);
-		execve(path, commande, envp);
-		ft_free(commande);
-		free(path);
-		exit(EXIT_FAILURE);
+		if (argv[2][0] == '/')
+		{
+			commande = ft_split(argv[2], ' ');
+			path = commande[0];
+			commande_temp = remove_path(commande);
+			execve(path, commande_temp, envp);
+			perror("pipex ");
+			ft_free(commande);
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			commande = ft_split(argv[2], ' ');
+			path_list = check_path(envp, commande[0]);
+			while (path_list[i])
+			{
+				execve(path_list[i], commande, envp);
+				i++;
+			}
+			perror("pipex ");
+			ft_free(commande);
+			ft_free(path_list);
+			exit(EXIT_FAILURE);
+		}
 	}
 	id2 = fork();
 	if (id2 == 0)
@@ -182,10 +264,11 @@ int	main(int argc, char **argv, char **envp)
 		{
 			commande = ft_split(argv[3], ' ');
 			path = commande[0];
-			commande = remove_path(commande);
-			execve(path, commande + pathlenght, envp);
+			commande_temp = remove_path(commande);
+			execve(path, commande_temp, envp);
+			perror("pipex ");
 			ft_free(commande);
-			free(path);
+			exit(EXIT_FAILURE);
 		}
 		else
 		{
@@ -196,17 +279,15 @@ int	main(int argc, char **argv, char **envp)
 				execve(path_list[i], commande, envp);
 				i++;
 			}
+			perror("pipex ");
 			ft_free(commande);
 			ft_free(path_list);
+			exit(EXIT_FAILURE);
 		}
-		exit(EXIT_FAILURE);
 	}
 	close(pipefd[0]);
 	close(pipefd[1]);
 	waitpid(id1, NULL, 0);
 	waitpid(id2, NULL, 0);
-
-	//ft_free(commande);
-	//main return 1 si un execve fail
 	return (0);
 }

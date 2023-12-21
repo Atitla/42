@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/12/15 11:12:45 by ecunha           ###   ########.fr        #
+#    Updated: 2023/12/21 11:59:18 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -ggdb3
 RM = rm -f
-HEADER = push_swap.h
+HEADER = pipex.h
 FILES = pipex \
 		ft_split
 
