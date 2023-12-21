@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/21 12:41:33 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/21 18:39:09 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,97 +197,100 @@ char **check_path(char **envp, char *command)
 	return (match_path);
 }
 
-int	main(int argc, char **argv, char **envp)
+void	set_fd1(int fd_stdin, int *pipefd)
 {
-	int		fd_infile;
-	int		fd_outfile;
-	int		id1;
-	int		id2;
-	char	*path;
-	char	**path_list;
-	int		pipefd[2];
-	char **commande = NULL;
-	char **commande_temp;
-	int		i = 0;
+	dup2(fd_stdin, STDIN_FILENO);
+	dup2(pipefd[1], STDOUT_FILENO);
+	close(fd_stdin);
+	close(pipefd[1]);
+	close(pipefd[0]);
+}
 
-	if (argc < 4 || !argv[4])
-		return (1);
-	fd_infile = open(argv[1], O_RDONLY);
-	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd_outfile == -1)
-		return (1);
-	pipe(pipefd);
-	id1 = fork();
-	if (id1 == 0)
-	{
-		dup2(fd_infile, STDIN_FILENO);
-		dup2(pipefd[1], STDOUT_FILENO);
-
-		close(fd_infile);
-		close(pipefd[1]);
-		close(pipefd[0]);
-		if (argv[2][0] == '/')
-		{
-			commande = ft_split(argv[2], ' ');
-			path = commande[0];
-			commande_temp = remove_path(commande);
-			execve(path, commande_temp, envp);
-			perror("pipex ");
-			ft_free(commande);
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			commande = ft_split(argv[2], ' ');
-			path_list = check_path(envp, commande[0]);
-			while (path_list[i])
-			{
-				execve(path_list[i], commande, envp);
-				i++;
-			}
-			perror("pipex ");
-			ft_free(commande);
-			ft_free(path_list);
-			exit(EXIT_FAILURE);
-		}
-	}
-	id2 = fork();
-	if (id2 == 0)
-	{
-
-		dup2(pipefd[0], STDIN_FILENO);
-		dup2(fd_outfile, STDOUT_FILENO);
-		close(pipefd[0]);
-		close(pipefd[1]);
-		close(fd_outfile);
-		if (argv[3][0] == '/')
-		{
-			commande = ft_split(argv[3], ' ');
-			path = commande[0];
-			commande_temp = remove_path(commande);
-			execve(path, commande_temp, envp);
-			perror("pipex ");
-			ft_free(commande);
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			commande = ft_split(argv[3], ' ');
-			path_list = check_path(envp, commande[0]);
-			while (path_list[i])
-			{
-				execve(path_list[i], commande, envp);
-				i++;
-			}
-			perror("pipex ");
-			ft_free(commande);
-			ft_free(path_list);
-			exit(EXIT_FAILURE);
-		}
-	}
+void	set_fd2(int fd_stdout, int *pipefd)
+{
+	dup2(pipefd[0], STDIN_FILENO);
+	dup2(fd_stdout, STDOUT_FILENO);
 	close(pipefd[0]);
 	close(pipefd[1]);
-	waitpid(id1, NULL, 0);
+	close(fd_stdout);
+}
+
+int	child_process(char **argv, char **envp, int *pipefd, t_pipex *files, int comnum)
+{
+	char	**commande;
+	char	**commande_temp;
+	char	*path;
+	char	**path_list;
+	int		id;
+	int		i = 0;
+
+	id = fork();
+	if (id == 0)
+	{
+		if (comnum == 1)
+			set_fd1(files->fd1, pipefd);
+		else if (comnum == 2)
+			set_fd2(files->fd2, pipefd);
+		if (argv[comnum + 1][0] == '/')
+		{
+			commande = ft_split(argv[comnum + 1], ' ');
+			path = commande[0];
+			commande_temp = remove_path(commande);
+			execve(path, commande_temp, envp);
+			perror("pipex ");
+			ft_free(commande);
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			commande = ft_split(argv[comnum + 1], ' ');
+			path_list = check_path(envp, commande[0]);
+			while (path_list[i])
+			{
+				execve(path_list[i], commande, envp);
+				i++;
+			}
+			perror("pipex ");
+			ft_free(commande);
+			ft_free(path_list);
+			exit(EXIT_FAILURE);
+		}
+	}
+	return (id);
+}
+
+int	files_open(t_pipex *files, char **argv)
+{
+	files->fd1 = open(argv[1], O_RDONLY);
+	if (files->fd1 == -1)
+		perror("pipex ");
+	files->fd2 = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (files->fd2 == -1)
+		return (perror("pipex "), 1);
+	return(0);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_pipex files;
+	int		id1;
+	int		id2;
+	int		pipefd[2];
+
+
+	if (argc != 5 || !argv[4])
+		return (1);
+	if(files_open(&files, argv) == 1)
+		return(1);
+	pipe(pipefd);
+	if (files.fd1 != -1)
+		id1 = child_process(argv, envp, pipefd, &files, 1);
+	id2 = child_process(argv, envp, pipefd, &files, 2);
+	close(pipefd[0]);
+	close(pipefd[1]);
+	if (files.fd1 != -1)
+		waitpid(id1, NULL, 0);
 	waitpid(id2, NULL, 0);
 	return (0);
 }
+
