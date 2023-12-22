@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/21 18:39:09 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/22 16:13:49 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*ft_strdup(const char *src)
 char	**remove_path(char **commande)
 {
 	char	*last_slash;
+
 	last_slash = ft_strrchr(commande[0], '/');
 	if (last_slash != NULL)
 	{
@@ -116,8 +117,8 @@ char	**remove_path(char **commande)
 
 int	match_path_count(char *command, char **path)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*path_temp;
 
 	i = 0;
@@ -125,7 +126,7 @@ int	match_path_count(char *command, char **path)
 	while (path[i])
 	{
 		path_temp = ft_strjoin(path[i], command);
-		if(access(path_temp, X_OK) == 0)
+		if (access(path_temp, X_OK) == 0)
 			j++;
 		i++;
 		free(path_temp);
@@ -133,9 +134,9 @@ int	match_path_count(char *command, char **path)
 	return (j);
 }
 
-char **putlastslash(char **path)
+char	**putlastslash(char **path)
 {
-	int	i;
+	int		i;
 	char	**path_temp;
 
 	i = 0;
@@ -152,7 +153,7 @@ char **putlastslash(char **path)
 	return (path_temp);
 }
 
-char **pathmaker(char **envp)
+char	**pathmaker(char **envp)
 {
 	char	**path;
 	char	**path_temp;
@@ -162,18 +163,16 @@ char **pathmaker(char **envp)
 	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	path_temp = ft_split((envp[i] + 5), ':');
-
 	path = putlastslash(path_temp);
 	ft_free(path_temp);
 	return (path);
 }
 
-char **check_path(char **envp, char *command)
+char	**check_path(char **envp, char *command)
 {
 	char	**path;
 	char	**match_path;
 	char	*path_temp;
-
 	int		i;
 	int		j;
 
@@ -181,10 +180,10 @@ char **check_path(char **envp, char *command)
 	match_path = malloc(sizeof(char *) * (match_path_count(command, path) + 1));
 	i = 0;
 	j = 0;
-	while(path[i])
+	while (path[i])
 	{
 		path_temp = ft_strjoin(path[i], command);
-		if(access(path_temp, X_OK || W_OK || R_OK) == 0)
+		if (access(path_temp, X_OK || W_OK || R_OK) == 0)
 		{
 			match_path[j] = ft_strdup(path_temp);
 			j++;
@@ -222,7 +221,7 @@ int	child_process(char **argv, char **envp, int *pipefd, t_pipex *files, int com
 	char	*path;
 	char	**path_list;
 	int		id;
-	int		i = 0;
+	int		i;
 
 	id = fork();
 	if (id == 0)
@@ -231,6 +230,7 @@ int	child_process(char **argv, char **envp, int *pipefd, t_pipex *files, int com
 			set_fd1(files->fd1, pipefd);
 		else if (comnum == 2)
 			set_fd2(files->fd2, pipefd);
+		i = 0;
 		if (argv[comnum + 1][0] == '/')
 		{
 			commande = ft_split(argv[comnum + 1], ' ');
@@ -264,24 +264,23 @@ int	files_open(t_pipex *files, char **argv)
 	files->fd1 = open(argv[1], O_RDONLY);
 	if (files->fd1 == -1)
 		perror("pipex ");
-	files->fd2 = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	files->fd2 = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (files->fd2 == -1)
 		return (perror("pipex "), 1);
-	return(0);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_pipex files;
+	t_pipex	files;
 	int		id1;
 	int		id2;
 	int		pipefd[2];
 
-
 	if (argc != 5 || !argv[4])
 		return (1);
-	if(files_open(&files, argv) == 1)
-		return(1);
+	if (files_open(&files, argv) == 1)
+		return (1);
 	pipe(pipefd);
 	if (files.fd1 != -1)
 		id1 = child_process(argv, envp, pipefd, &files, 1);
@@ -293,4 +292,3 @@ int	main(int argc, char **argv, char **envp)
 	waitpid(id2, NULL, 0);
 	return (0);
 }
-
