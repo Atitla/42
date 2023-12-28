@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/22 15:21:27 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/28 16:35:50 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <sys/wait.h>
 
 typedef struct t_pipex

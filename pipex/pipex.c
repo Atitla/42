@@ -6,11 +6,38 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2023/12/22 16:13:49 by ecunha           ###   ########.fr       */
+/*   Updated: 2023/12/28 19:33:30 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		*(unsigned char *)(s + i) = 0;
+		i++;
+	}
+}
+
+void	*ft_calloc( size_t elementCount, size_t elementSize )
+{
+	int		size;
+	void	*tab;
+
+	size = elementCount * elementSize;
+	if (size > 0 && elementCount > ULONG_MAX / elementSize)
+		return (0);
+	tab = (void *)malloc(size);
+	if (!tab)
+		return (NULL);
+	ft_bzero(tab, size);
+	return (tab);
+}
 
 int	ft_strlen(const char *str)
 {
@@ -71,6 +98,15 @@ int	ft_strncmp(const char *s1, const char *s2, int n)
 {
 	int	i;
 
+	if (s1 == NULL || s2 == NULL)
+	{
+		if (s1 == NULL && s2 == NULL)
+			return (0);
+		else if (s1 == NULL)
+			return (-1);
+		else
+			return (1);
+	}
 	i = 0;
 	while ((s1[i] || s2[i]) && i < n)
 	{
@@ -143,13 +179,20 @@ char	**putlastslash(char **path)
 	while (path[i])
 		i++;
 	path_temp = malloc(sizeof(char *) * (i + 1));
+	path_temp[0] = NULL;
 	i = 0;
 	while (path[i])
 	{
 		path_temp[i] = ft_strjoin(path[i], "/");
 		i++;
 	}
-	path_temp[i] = NULL;
+	if (path_temp[0] == NULL)
+	{
+		path_temp[0] = ft_strdup("/usr/bin/");
+		path_temp[1] = NULL;
+	}
+	else
+		path_temp[i] = NULL;
 	return (path_temp);
 }
 
@@ -159,6 +202,13 @@ char	**pathmaker(char **envp)
 	char	**path_temp;
 	int		i;
 
+	if (envp[0] == NULL)
+	{
+		path = malloc(sizeof(char *) * 2);
+		path[0] = ft_strdup("/usr/bin/");
+		path[1] = NULL;
+		return (path);
+	}
 	i = 0;
 	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
@@ -237,7 +287,7 @@ int	child_process(char **argv, char **envp, int *pipefd, t_pipex *files, int com
 			path = commande[0];
 			commande_temp = remove_path(commande);
 			execve(path, commande_temp, envp);
-			perror("pipex ");
+			perror("pipex (command not found) ");
 			ft_free(commande);
 			exit(EXIT_FAILURE);
 		}
@@ -250,7 +300,7 @@ int	child_process(char **argv, char **envp, int *pipefd, t_pipex *files, int com
 				execve(path_list[i], commande, envp);
 				i++;
 			}
-			perror("pipex ");
+			perror("pipex (command not found) ");
 			ft_free(commande);
 			ft_free(path_list);
 			exit(EXIT_FAILURE);
