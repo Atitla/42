@@ -6,7 +6,7 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2023/12/21 11:59:18 by ecunha           ###   ########.fr        #
+#    Updated: 2024/01/01 14:56:11 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -ggdb3
 RM = rm -f
 HEADER = pipex.h
-FILES = pipex \
+FILES = main \
+		strfunc \
+		pipex_utils \
+		pipex \
 		ft_split
 
 OBJS_DIR = ./
