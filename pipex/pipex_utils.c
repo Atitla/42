@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 14:49:16 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/01 15:01:36 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/02 14:27:21 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	**check_path(char **envp, char *command)
 	while (path[i])
 	{
 		path_temp = ft_strjoin(path[i], command);
-		if (access(path_temp, X_OK || W_OK || R_OK) == 0)
+		if (access(path_temp, X_OK) == 0)
 		{
 			match_path[j] = ft_strdup(path_temp);
 			j++;
