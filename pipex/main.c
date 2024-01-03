@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 14:50:23 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/02 21:44:37 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/03 12:04:38 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	set_fd1(int fd_stdin, int *pipefd)
 	dup2(pipefd[1], STDOUT_FILENO);
 	close(fd_stdin);
 	close(pipefd[1]);
-	close(pipefd[0]);
 }
 
 void	set_fd2(int fd_stdout, int *pipefd)
@@ -26,7 +25,6 @@ void	set_fd2(int fd_stdout, int *pipefd)
 	dup2(pipefd[0], STDIN_FILENO);
 	dup2(fd_stdout, STDOUT_FILENO);
 	close(pipefd[0]);
-	close(pipefd[1]);
 	close(fd_stdout);
 }
 
@@ -61,13 +59,15 @@ int	main(int argc, char **argv, char **envp)
 		id1 = child_process1(argv, envp, pipefd, &files);
 	if (files.fd2 != -1)
 		id2 = child_process2(argv, envp, pipefd, &files);
-	close(pipefd[0]);
-	close(pipefd[1]);
 	if (files.fd1 != -1)
 		waitpid(id1, NULL, 0);
 	if (files.fd2 != -1)
 		waitpid(id2, NULL, 0);
-	close(files.fd1);
-	close(files.fd2);
+	close(pipefd[0]);
+	close(pipefd[1]);
+	if (files.fd1 != -1)
+		close(files.fd1);
+	if (files.fd2 != -1)
+		close(files.fd2);
 	return (0);
 }
