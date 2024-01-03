@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/01 14:58:44 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/03 14:10:04 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static void	command_exec_relative(char **argv, char **envp, int comnum)
 	path = commande[0];
 	commande_temp = remove_path(commande);
 	execve(path, commande_temp, envp);
-	perror("pipex (command not found) ");
+	if (comnum == 1)
+		write(2, "pipex : command 1 not found\n", 28);
+	else
+		write(2, "pipex : command 2 not found\n", 28);
 	ft_free(commande);
 	exit(EXIT_FAILURE);
 }
@@ -41,7 +44,10 @@ static void	command_exec_nopath(char **argv, char **envp, int comnum)
 		execve(path_list[i], commande, envp);
 		i++;
 	}
-	perror("pipex (command not found) ");
+	if (comnum == 1)
+		write(2, "pipex 1 : command not found\n", 28);
+	else
+		write(2, "pipex 2 : command not found\n", 28);
 	ft_free(commande);
 	ft_free(path_list);
 	exit(EXIT_FAILURE);
@@ -54,7 +60,7 @@ int	child_process1(char **argv, char **envp, int *pipefd, t_pipex *files)
 	id = fork();
 	if (id == 0)
 	{
-		set_fd1(files->fd1, pipefd);
+		set_fd1(files, pipefd);
 		if (argv[2][0] == '/')
 		{
 			command_exec_relative(argv, envp, 1);
@@ -76,7 +82,7 @@ int	child_process2(char **argv, char **envp, int *pipefd, t_pipex *files)
 	id = fork();
 	if (id == 0)
 	{
-		set_fd2(files->fd2, pipefd);
+		set_fd2(files, pipefd);
 		if (argv[3][0] == '/')
 		{
 			command_exec_relative(argv, envp, 2);

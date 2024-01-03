@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/02 16:55:26 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/03 13:56:38 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ char	**check_path(char **envp, char *command);
 char	**remove_path(char **commande);
 
 char	**ft_free(char **array);
-void	set_fd1(int fd_stdin, int *pipefd);
-void	set_fd2(int fd_stdout, int *pipefd);
+void	set_fd1(t_pipex *files, int *pipefd);
+void	set_fd2(t_pipex *files, int *pipefd);
 int		child_process1(char **argv, char **envp, int *pipefd, t_pipex *files);
 int		child_process2(char **argv, char **envp, int *pipefd, t_pipex *files);
 
