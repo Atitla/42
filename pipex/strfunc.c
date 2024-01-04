@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 14:48:14 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/01 14:59:38 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/04 20:14:42 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,6 @@ static int	ft_strlen(const char *str)
 	while (str[i] != '\0')
 		i++;
 	return (i);
-}
-
-char	*ft_strrchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	while (i > 0)
-	{
-		if ((char)*s == (char)c)
-			return ((char *)s);
-		i--;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -110,4 +92,12 @@ char	*ft_strdup(const char *src)
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+void	close_fds(t_pipex files)
+{
+	if (files.fd1 != -1)
+		close(files.fd1);
+	if (files.fd2 != -1)
+		close(files.fd2);
 }

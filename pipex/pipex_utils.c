@@ -6,23 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 14:49:16 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/04 16:17:24 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/04 20:01:04 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-char	**remove_path(char **commande)
-{
-	char	*last_slash;
-
-	last_slash = ft_strrchr(commande[0], '/');
-	if (last_slash != NULL)
-	{
-		commande[0] = last_slash + 1;
-	}
-	return (commande);
-}
 
 static int	match_path_count(char *command, char **path)
 {
@@ -54,13 +42,15 @@ static char	**putlastslash(char **path)
 	while (path[i])
 		i++;
 	path_temp = malloc(sizeof(char *) * (i + 1));
+	if (!path_temp)
+		return (NULL);
 	path_temp[0] = NULL;
 	i = 0;
 	while (path[i])
 	{
 		path_temp[i] = ft_strjoin(path[i], "/");
 		if (path_temp[i] == NULL)
-			return(NULL);
+			return (NULL);
 		i++;
 	}
 	path_temp[i] = NULL;
@@ -74,6 +64,8 @@ static char	**pathmaker(char **envp)
 	int		i;
 
 	i = 0;
+	if (!envp)
+		return (NULL);
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	if (!envp[i])
@@ -88,20 +80,12 @@ static char	**pathmaker(char **envp)
 	return (path);
 }
 
-char	**check_path(char **envp, char *command)
+static char	**check_path_comnum(char **path, char *command, char **match_path)
 {
-	char	**path;
-	char	**match_path;
-	char	*path_temp;
 	int		i;
 	int		j;
+	char	*path_temp;
 
-	path = pathmaker(envp);
-	if (!path)
-		return (NULL);
-	match_path = malloc(sizeof(char *) * (match_path_count(command, path) + 1));
-	if (!match_path)
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (path[i])
@@ -120,6 +104,21 @@ char	**check_path(char **envp, char *command)
 		free(path_temp);
 	}
 	match_path[j] = NULL;
+	return (match_path);
+}
+
+char	**check_path(char **envp, char *command)
+{
+	char	**path;
+	char	**match_path;
+
+	path = pathmaker(envp);
+	if (!path)
+		return (NULL);
+	match_path = malloc(sizeof(char *) * (match_path_count(command, path) + 1));
+	if (!match_path)
+		return (NULL);
+	match_path = check_path_comnum(path, command, match_path);
 	ft_free(path);
 	return (match_path);
 }
