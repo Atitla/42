@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/03 14:10:04 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/04 14:15:27 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	command_exec_relative(char **argv, char **envp, int comnum)
 	else
 		write(2, "pipex : command 2 not found\n", 28);
 	ft_free(commande);
-	exit(EXIT_FAILURE);
 }
 
 static void	command_exec_nopath(char **argv, char **envp, int comnum)
@@ -62,13 +61,12 @@ int	child_process1(char **argv, char **envp, int *pipefd, t_pipex *files)
 	{
 		set_fd1(files, pipefd);
 		if (argv[2][0] == '/')
-		{
 			command_exec_relative(argv, envp, 1);
-			exit(EXIT_FAILURE);
-		}
 		else
 		{
 			command_exec_nopath(argv, envp, 1);
+			close(1);
+			close(0);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -84,13 +82,12 @@ int	child_process2(char **argv, char **envp, int *pipefd, t_pipex *files)
 	{
 		set_fd2(files, pipefd);
 		if (argv[3][0] == '/')
-		{
 			command_exec_relative(argv, envp, 2);
-			exit(EXIT_FAILURE);
-		}
 		else
 		{
 			command_exec_nopath(argv, envp, 2);
+			close(1);
+			close(0);
 			exit(EXIT_FAILURE);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 14:50:23 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/03 14:28:10 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/04 14:13:26 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	main(int argc, char **argv, char **envp)
 	int		id2;
 	int		pipefd[2];
 
-	if (argc != 5 || !argv[1] || !argv[2] || !argv[3] || !argv[4])
-		return (write(1, "pipex : wrong input in arguments", 32), 1);
+	if (argc != 5 || ft_strncmp(argv[1], "\0", 1) == 0 || ft_strncmp(argv[2], "\0", 1) == 0  || ft_strncmp(argv[3], "\0", 1) == 0 || ft_strncmp(argv[4], "\0", 1) == 0 )
+		return (write(1, "pipex : wrong input in arguments\0", 33), 1);
 	if (files_open(&files, argv) == 1)
 		return (1);
 	pipe(pipefd);
