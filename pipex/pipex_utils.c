@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 14:49:16 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/02 14:27:21 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:17:24 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	match_path_count(char *command, char **path)
 	while (path[i])
 	{
 		path_temp = ft_strjoin(path[i], command);
+		if (!path_temp)
+			return (-1);
 		if (access(path_temp, X_OK) == 0)
 			j++;
 		i++;
@@ -57,15 +59,11 @@ static char	**putlastslash(char **path)
 	while (path[i])
 	{
 		path_temp[i] = ft_strjoin(path[i], "/");
+		if (path_temp[i] == NULL)
+			return(NULL);
 		i++;
 	}
-	if (path_temp[0] == NULL)
-	{
-		path_temp[0] = ft_strdup("/usr/bin/");
-		path_temp[1] = NULL;
-	}
-	else
-		path_temp[i] = NULL;
+	path_temp[i] = NULL;
 	return (path_temp);
 }
 
@@ -75,18 +73,17 @@ static char	**pathmaker(char **envp)
 	char	**path_temp;
 	int		i;
 
-	if (envp[0] == NULL)
-	{
-		path = malloc(sizeof(char *) * 2);
-		path[0] = ft_strdup("/usr/bin/");
-		path[1] = NULL;
-		return (path);
-	}
 	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5) != 0)
+	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
+	if (!envp[i])
+		return (NULL);
 	path_temp = ft_split((envp[i] + 5), ':');
+	if (!path_temp)
+		return (NULL);
 	path = putlastslash(path_temp);
+	if (!path)
+		return (NULL);
 	ft_free(path_temp);
 	return (path);
 }
@@ -100,15 +97,23 @@ char	**check_path(char **envp, char *command)
 	int		j;
 
 	path = pathmaker(envp);
+	if (!path)
+		return (NULL);
 	match_path = malloc(sizeof(char *) * (match_path_count(command, path) + 1));
+	if (!match_path)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (path[i])
 	{
 		path_temp = ft_strjoin(path[i], command);
+		if (!path_temp)
+			return (NULL);
 		if (access(path_temp, X_OK) == 0)
 		{
 			match_path[j] = ft_strdup(path_temp);
+			if (!match_path[j])
+				return (NULL);
 			j++;
 		}
 		i++;

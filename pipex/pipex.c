@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 16:20:27 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/04 14:15:27 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/04 16:20:30 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ static void	command_exec_nopath(char **argv, char **envp, int comnum)
 	int		i;
 
 	commande = ft_split(argv[comnum + 1], ' ');
+	if(!commande)
+		return;
 	path_list = check_path(envp, commande[0]);
+	if(!path_list)
+		return;
 	i = 0;
 	while (path_list[i])
 	{
