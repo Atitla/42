@@ -15,6 +15,7 @@
    "codam-norminette-3.highlight-color": "rgba(255, 0, 0, 0.2)", // highlight norm errors in custom color. Can be in rgba, hex, or vscode.ThemeColor format.
 	"codam-norminette-3.displayErrorName": false,
 	"files.associations": {
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"mlx.h": "c"
 	} // display name of error on hover
 }
