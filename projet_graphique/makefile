@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -Lminilibx/mlx_Linux -Lminilibx/mlx -Lminilibx/mlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-LIB = minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a
+LIB = mlx/libmlx.a mlx/libmlx_Linux.a
 OBJ_DIR = obj
 SRC = main.c
 
