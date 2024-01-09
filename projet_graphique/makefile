@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 LDFLAGS = -Lminilibx/mlx_Linux -Lminilibx/mlx -Lminilibx/mlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 LIB = mlx/libmlx.a mlx/libmlx_Linux.a
 OBJ_DIR = obj
