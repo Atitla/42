@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/09 18:46:03 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:32:48 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define HEIGHT 1080
-# define LENGHT 1920
+# define HEIGHT 600
+# define WIDTH 800
+# define STEP 40
 
 typedef struct	s_vars {
 	void	*mlx;
@@ -34,6 +35,9 @@ typedef struct	s_data {
 	int		color;
 	int		pos_x;
 	int		pos_y;
+	int		count;
+	void	*textures[5];
+	int		textures_size[10];
 	t_vars	ptr;
 }				t_data;
 

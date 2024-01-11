@@ -1,7 +1,7 @@
 #include "N.h"
 
 
-int	close(int keycode, t_data *vars)
+int	close_mlx(int keycode, t_data *vars)
 {
 	(void)keycode;
 	mlx_destroy_image(vars->ptr.mlx, vars->img);
@@ -76,7 +76,7 @@ void	draw_(t_data *data, int h, int l, int color)
 int	key_hook(int keycode, t_data *vars)
 {
 	if (keycode == 65307)
-		close(keycode, vars);
+		close_mlx(keycode, vars);
 	return (1);
 }
 
@@ -106,9 +106,9 @@ int	render_next_frame(t_data *img)
 int	main(void)
 {
 	t_data	img;
-
-	int	longeur;
-	int	hauteur;
+	t_data	oui;
+	int hauteur = 0;
+	int longeur = 0;
 	img.color = create_trgb(0, 0, 0, 255);
 
 
@@ -116,14 +116,18 @@ int	main(void)
 	if (img.ptr.mlx == NULL)
 		return(1);
 
-	img.ptr.mlx = mlx_init();
-	img.ptr.win = mlx_new_window(img.ptr.mlx, hauteur, longeur, "Hello world!");
-	//img.img = mlx_new_image(img.ptr.mlx, LENGHT, HEIGHT);
-	img.img = mlx_xpm_file_to_image(img.ptr.mlx,"./dog.xml", &hauteur, &longeur);
+	img.ptr.win = mlx_new_window(img.ptr.mlx, LENGHT, HEIGHT, "Hello world!");
+	img.img = mlx_new_image(img.ptr.mlx, LENGHT, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
+	oui.img = mlx_xpm_file_to_image(img.ptr.mlx,"gandalf.xpm", &hauteur, &longeur);
+	if(oui.img == NULL)
+		return(close_mlx(0, &img), 1);
+	oui.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+								&img.endian);
 	//draw_background(&img);
-	mlx_put_image_to_window(img.ptr.mlx, img.ptr.win, img.img, 0, 0);
+	mlx_put_image_to_window(img.ptr.mlx, img.ptr.win, oui.img, 0, 0);
+	//mlx_put_image_to_window(img.ptr.mlx, img.ptr.win, oui, 0, 0);
 	//mlx_loop_hook(img.ptr.mlx, render_next_frame, &img);
 	mlx_key_hook(img.ptr.win, key_hook, &img);
 	mlx_loop(img.ptr.mlx);
