@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/15 13:04:57 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:14:26 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data {
 	int		pos_x;
 	int		pos_y;
 	int		count;
+	int		coins_earn;
 	char	**map;
 	int		map_rows;
 	int		map_columns;

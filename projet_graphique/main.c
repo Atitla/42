@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:30:40 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/15 13:42:40 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:20:09 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,12 @@ int	render_next_frame(t_data *img)
 				img->textures[3], \
 				(j * img->textures_size[6]), (i * img->textures_size[7]));
 			}
+			else if (img->map[i][j] == 'E')
+			{
+				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win,\
+				img->textures[4], \
+				(j * img->textures_size[8]), (i * img->textures_size[9]));
+			}
 			else
 			{
 				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
@@ -286,8 +292,50 @@ int	render_next_frame(t_data *img)
 	return (0);
 }
 
-int	fmovements()
+int	coin_left(t_data *data)
 {
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < data->map_rows)
+	{
+		j = 0;
+		while (j < data->map_columns)
+		{
+			if (data->map[i][j] == 'C')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	fmovements(int flag, t_data *data)
+{
+	if (flag == 1)
+		data->pos_y -= STEP;
+	else if (flag == 2)
+		data->pos_y += STEP;
+	else if (flag == 3)
+		data->pos_x -= STEP;
+	else if (flag == 4)
+		data->pos_x += STEP;
+	data->count += 1;
+	printf("Movements count = %i\n", data->count);
+	if (data->map[(data->pos_y / 16)][(data->pos_x / 16)] == 'C')
+	{
+		data->map[(data->pos_y / 16)][(data->pos_x / 16)] = '0';
+		data->coins_earn++;
+		printf("%i\n", data->coins_earn);
+	}
+	if (data->map[(data->pos_y / 16)][(data->pos_x / 16)] == 'E' && coin_left(data) == 0)
+	{
+		close_mlx(0, data);
+	}
+	render_next_frame(data);
+	return (0);
 
 }
 
@@ -298,22 +346,22 @@ int	key_hook(int keycode, t_data *vars)
 	if (keycode == 119 || keycode == 65362)
 	{
 		if (vars->map[(vars->pos_y / 16) - 1][(vars->pos_x / 16)] != '1')
-			return (vars->pos_y -= STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
+			return (fmovements(1, vars), 0);
 	}
 	if (keycode == 115 || keycode == 65364)
 	{
 		if (vars->map[(vars->pos_y / 16) + 1][(vars->pos_x / 16)] != '1')
-			return (vars->pos_y += STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
+			return (fmovements(2, vars), 0);
 	}
 	if (keycode == 97 || keycode == 65361)
 	{
 		if (vars->map[(vars->pos_y / 16)][(vars->pos_x / 16) - 1] != '1')
-			return (vars->pos_x -= STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
+			return (fmovements(3, vars), 0);
 	}
 	if (keycode == 100 || keycode == 65363)
 	{
 		if (vars->map[(vars->pos_y / 16)][(vars->pos_x / 16) + 1] != '1')
-			return (vars->pos_x += STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
+			return (fmovements(4, vars), 0);
 	}
 	//printf("Movements count = %i\n", vars->count);
 	//if (keycode != 65307 && keycode != 119 && keycode != 115 && keycode != 97 && keycode != 100)
@@ -337,6 +385,22 @@ int	main(int argc, char **argv)
 	img.pos_x = 16;
 	img.pos_y = 16;
 	img.count = 0;
+	img.textures[0] = 0;
+	img.textures[1] = 0;
+	img.textures[2] = 0;
+	img.textures[3] = 0;
+	img.textures[4] = 0;
+	img.textures_size[0] = 0;
+	img.textures_size[1] = 0;
+	img.textures_size[2] = 0;
+	img.textures_size[3] = 0;
+	img.textures_size[4] = 0;
+	img.textures_size[5] = 0;
+	img.textures_size[6] = 0;
+	img.textures_size[7] = 0;
+	img.textures_size[8] = 0;
+	img.textures_size[9] = 0;
+
 	img.ptr.mlx = mlx_init();
 	if (img.ptr.mlx == NULL)
 		return (1);
@@ -354,6 +418,9 @@ int	main(int argc, char **argv)
 		return (close_mlx(0, &img), 1);
 	img.textures[3] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/flask.xpm", &img.textures_size[6], &img.textures_size[7]);
 	if (img.textures[3] == NULL)
+		return (close_mlx(0, &img), 1);
+	img.textures[4] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/floor_stairs.xpm", &img.textures_size[8], &img.textures_size[9]);
+	if (img.textures[4] == NULL)
 		return (close_mlx(0, &img), 1);
 	img.ptr.win = mlx_new_window(img.ptr.mlx, ((img.map_columns - 1) * img.textures_size[4]), ((img.map_rows  - 1) * img.textures_size[5]), "Hello world!");
 	render_next_frame(&img);
