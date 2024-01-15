@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:30:40 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/15 18:20:09 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:33:28 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,7 +422,7 @@ int	main(int argc, char **argv)
 	img.textures[4] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/floor_stairs.xpm", &img.textures_size[8], &img.textures_size[9]);
 	if (img.textures[4] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.ptr.win = mlx_new_window(img.ptr.mlx, ((img.map_columns - 1) * img.textures_size[4]), ((img.map_rows  - 1) * img.textures_size[5]), "Hello world!");
+	img.ptr.win = mlx_new_window(img.ptr.mlx, ((img.map_columns - 1) * img.textures_size[4]), ((img.map_rows  - 1) * img.textures_size[5]), "So_long");
 	render_next_frame(&img);
 	mlx_hook(img.ptr.win, 2, 1L << 0, key_hook, &img);
 	mlx_loop(img.ptr.mlx);
