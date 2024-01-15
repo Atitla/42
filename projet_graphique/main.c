@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:30:40 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/15 01:41:33 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:42:40 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,12 @@ int	render_next_frame(t_data *img)
 				img->textures[2], \
 				(j * img->textures_size[4]), (i * img->textures_size[5]));
 			}
+			else if (img->map[i][j] == 'C')
+			{
+				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win,\
+				img->textures[3], \
+				(j * img->textures_size[6]), (i * img->textures_size[7]));
+			}
 			else
 			{
 				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
@@ -280,28 +286,33 @@ int	render_next_frame(t_data *img)
 	return (0);
 }
 
+int	fmovements()
+{
+
+}
+
 int	key_hook(int keycode, t_data *vars)
 {
 	if (keycode == 65307)
 		close_mlx(keycode, vars);
 	if (keycode == 119 || keycode == 65362)
 	{
-		if (vars->map[(vars->pos_y / 64) - 1][(vars->pos_x / 64)] != '1')
+		if (vars->map[(vars->pos_y / 16) - 1][(vars->pos_x / 16)] != '1')
 			return (vars->pos_y -= STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
 	}
 	if (keycode == 115 || keycode == 65364)
 	{
-		if (vars->map[(vars->pos_y / 64) + 1][(vars->pos_x / 64)] != '1')
+		if (vars->map[(vars->pos_y / 16) + 1][(vars->pos_x / 16)] != '1')
 			return (vars->pos_y += STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
 	}
 	if (keycode == 97 || keycode == 65361)
 	{
-		if (vars->map[(vars->pos_y / 64)][(vars->pos_x / 64) - 1] != '1')
+		if (vars->map[(vars->pos_y / 16)][(vars->pos_x / 16) - 1] != '1')
 			return (vars->pos_x -= STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
 	}
 	if (keycode == 100 || keycode == 65363)
 	{
-		if (vars->map[(vars->pos_y / 64)][(vars->pos_x / 64) + 1] != '1')
+		if (vars->map[(vars->pos_y / 16)][(vars->pos_x / 16) + 1] != '1')
 			return (vars->pos_x += STEP, vars->count += 1, printf("Movements count = %i\n", vars->count), render_next_frame(vars), 0);
 	}
 	//printf("Movements count = %i\n", vars->count);
@@ -323,8 +334,8 @@ int	main(int argc, char **argv)
 		return (1);
 
 	img.color = create_trgb(0, 0, 0, 255);
-	img.pos_x = 64;
-	img.pos_y = 64;
+	img.pos_x = 16;
+	img.pos_y = 16;
 	img.count = 0;
 	img.ptr.mlx = mlx_init();
 	if (img.ptr.mlx == NULL)
@@ -332,16 +343,19 @@ int	main(int argc, char **argv)
 	img.img = mlx_new_image(img.ptr.mlx, (img.map_columns * img.textures_size[4]), (img.map_columns * img.textures_size[5]));
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, \
 								&img.endian);
-	img.textures[0] = mlx_xpm_file_to_image(img.ptr.mlx, "mini_ptite_fille.xpm", &img.textures_size[0], &img.textures_size[1]);
+	img.textures[0] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/wizzard_m_idle_anim_f0.xpm", &img.textures_size[0], &img.textures_size[1]);
 	if (img.textures[0] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.textures[1] = mlx_xpm_file_to_image(img.ptr.mlx, "ground.xpm", &img.textures_size[2], &img.textures_size[3]);
+	img.textures[1] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/floor_1.xpm", &img.textures_size[2], &img.textures_size[3]);
 	if (img.textures[1] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.textures[2] = mlx_xpm_file_to_image(img.ptr.mlx, "LAVAROCK.xpm", &img.textures_size[4], &img.textures_size[5]);
+	img.textures[2] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/wall_mid.xpm", &img.textures_size[4], &img.textures_size[5]);
 	if (img.textures[2] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.ptr.win = mlx_new_window(img.ptr.mlx, ((1 + img.map_columns) * img.textures_size[4]), ((1 + img.map_columns) * img.textures_size[5]), "Hello world!");
+	img.textures[3] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/flask.xpm", &img.textures_size[6], &img.textures_size[7]);
+	if (img.textures[3] == NULL)
+		return (close_mlx(0, &img), 1);
+	img.ptr.win = mlx_new_window(img.ptr.mlx, ((img.map_columns - 1) * img.textures_size[4]), ((img.map_rows  - 1) * img.textures_size[5]), "Hello world!");
 	render_next_frame(&img);
 	mlx_hook(img.ptr.win, 2, 1L << 0, key_hook, &img);
 	mlx_loop(img.ptr.mlx);
