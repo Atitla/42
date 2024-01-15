@@ -6,39 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:23 by ecunha            #+#    #+#             */
-/*   Updated: 2023/06/21 15:54:37 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:42:43 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strjoin(char const *str1, char const *str2)
-{
-	int		size;
-	char	*strfnl;
-	int		i;
-	int		j;
-
-	i = 0;
-	size = ft_strlen(str1) + ft_strlen(str2);
-	strfnl = malloc(sizeof(char) * (size + 1));
-	if (!strfnl || !str1 || !str2)
-		return (NULL);
-	while (str1[i])
-	{
-		strfnl[i] = str1[i];
-		i++;
-	}
-	j = 0;
-	while (str2[j])
-	{
-		strfnl[i] = str2[j];
-		i++;
-		j++;
-	}
-	strfnl[size] = 0;
-	return (strfnl);
-}
 
 char	*ft_strchr(const char *string, int searchedChar )
 {
@@ -78,7 +50,7 @@ void	*ft_calloc(size_t elementCount, size_t elementSize)
 	return (strfnl);
 }
 
-size_t	ft_strlen(const char *tstrfnltring)
+size_t	ft_strlen_st(const char *tstrfnltring)
 {
 	int	i;
 

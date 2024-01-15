@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/13 19:20:11 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/15 00:34:27 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 # include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
+#include <fcntl.h>
+# include "get_next_line.h"
 
 # define HEIGHT 1080
 # define WIDTH 1920
-# define STEP 20
+# define STEP 64
 
 typedef struct s_vars {
 	void	*mlx;
@@ -36,11 +38,14 @@ typedef struct s_data {
 	int		pos_x;
 	int		pos_y;
 	int		count;
+	char	**map;
 	int		map_rows;
-	int		map_columns
+	int		map_columns;
 	void	*textures[5];
 	int		textures_size[10];
 	t_vars	ptr;
 }				t_data;
+
+char	**ft_split(const char *str, char c);
 
 #endif

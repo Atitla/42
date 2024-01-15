@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 01:21:23 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/15 01:47:16 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:56:01 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "N.h"
 
 static char	**ft_free(char **array)
 {
@@ -84,13 +84,12 @@ char	**ft_split(const char *str, char c)
 	int		i;
 	char	**split;
 
-	i = 1;
+	i = 0;
 	if (!str)
 		return (NULL);
-	split = malloc(sizeof(char *) * (count_word(str, c) + 2));
+	split = malloc(sizeof(char *) * (count_word(str, c) + 1));
 	if (!split)
 		return (NULL);
-	split[0] = ft_strndup("push_swap", 11);
 	while (*str)
 	{
 		while (*str && c == str[0])
@@ -98,8 +97,9 @@ char	**ft_split(const char *str, char c)
 		if (*str)
 		{
 			split[i] = ft_strndup(str, range_to_sep(str, c));
-			if (!split[i++])
+			if (!split[i])
 				return (ft_free(split));
+			i++;
 		}
 		while (*str && c != str[0])
 			str++;

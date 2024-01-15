@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:47 by ecunha            #+#    #+#             */
-/*   Updated: 2023/06/21 15:57:57 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/14 20:39:01 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	line = ft_calloc((ft_strlen_st(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
 	while (buffer[i])
