@@ -6,13 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 01:21:23 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/14 20:56:01 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/16 16:04:29 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N.h"
 
-static char	**ft_free(char **array)
+char	**ft_free(char **array)
 {
 	int	i;
 

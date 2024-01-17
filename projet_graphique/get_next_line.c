@@ -6,13 +6,13 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:47 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/14 20:39:01 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/17 13:06:55 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_free(char *buffer, char *buf)
+char	*ft_freee(char *buffer, char *buf)
 {
 	char	*temp;
 
@@ -82,7 +82,7 @@ char	*read_file(int fd, char *res)
 			return (NULL);
 		}
 		buffer[byte_read] = 0;
-		res = ft_free(res, buffer);
+		res = ft_freee(res, buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -146,5 +146,10 @@ char	*get_next_line(int fd)
 	}
 	line = ft_line(buffer);
 	buffer = ft_next(buffer);
+	if (!buffer)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	return (line);
 }

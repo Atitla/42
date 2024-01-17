@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/15 18:14:26 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/17 16:59:10 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define HEIGHT 1080
 # define WIDTH 1920
-# define STEP 16
+# define STEP 64
 
 typedef struct s_vars {
 	void	*mlx;
@@ -47,6 +47,7 @@ typedef struct s_data {
 	t_vars	ptr;
 }				t_data;
 
+char	**ft_free(char **array);
 char	**ft_split(const char *str, char c);
 
 #endif
