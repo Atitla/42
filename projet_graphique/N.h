@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/17 16:59:10 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/18 17:56:40 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define HEIGHT 1080
 # define WIDTH 1920
-# define STEP 64
+# define STEP 16
 
 typedef struct s_vars {
 	void	*mlx;
@@ -29,22 +29,16 @@ typedef struct s_vars {
 }				t_vars;
 
 typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		color;
+	t_vars	ptr;
 	int		pos_x;
 	int		pos_y;
 	int		count;
 	int		coins_earn;
-	char	**map;
 	int		map_rows;
 	int		map_columns;
+	char	**map;
 	void	*textures[5];
 	int		textures_size[10];
-	t_vars	ptr;
 }				t_data;
 
 char	**ft_free(char **array);

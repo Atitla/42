@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:30:40 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/17 16:59:05 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/18 18:18:51 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,63 @@ char	*ft_strdup(const char *src)
 	return (str);
 }
 
+char	**matrix_cpy_alloc(t_data *data)
+{
+	char	**temp_matrix;
+	int		i;
+	int		j;
+
+	i = 0;
+	temp_matrix = (char **)malloc(sizeof(char *) * (data->map_rows + 1));
+	while (i < data->map_rows - 1)
+	{
+		j = -1;
+		temp_matrix[i] = (char *)malloc(sizeof(char) * (data->map_columns + 1));
+		while (++j < data->map_columns - 1)
+			temp_matrix[i][j] = data->map[i][j];
+		temp_matrix[i][j] = '\0';
+		i++;
+	}
+	temp_matrix[i] = NULL;
+	return (temp_matrix);
+}
+
+void	fill_map(char **temp_matrix, int x, int y)
+{
+	if (temp_matrix[y][x] == '1' || temp_matrix[y][x] == 'X')
+		return ;
+	temp_matrix[y][x] = 'X';
+	fill_map(temp_matrix, x + 1, y);
+	fill_map(temp_matrix, x - 1, y);
+	fill_map(temp_matrix, x, y + 1);
+	fill_map(temp_matrix, x, y - 1);
+}
+
+int	pathfinding(t_data *data)
+{
+	char	**temp_matrix;
+	int		i;
+	int		j;
+
+	i = 0;
+	temp_matrix = matrix_cpy_alloc(data);
+	fill_map(temp_matrix, (data->pos_x / STEP), (data->pos_y / STEP));
+	while (temp_matrix[i] != NULL)
+	{
+		j = 0;
+		while (temp_matrix[i][j] != '\0')
+		{
+			if (temp_matrix[i][j] == 'E' || temp_matrix[i][j] == 'C')
+				return (write(2, "So_long : Collectible or Exit unreachable\n", 42), \
+						ft_free(temp_matrix), ft_free(data->map), exit(1), 0);
+			j++;
+		}
+		i++;
+	}
+	ft_free(temp_matrix);
+	return (0);
+}
+
 void	place_player(t_data *data)
 {
 	int i;
@@ -93,6 +150,8 @@ void	place_player(t_data *data)
 	}
 	data->pos_y = i * STEP;
 	data->pos_x = j * STEP;
+	pathfinding(data);
+
 }
 
 int	check_required(int exit_count, int player, int collectibles, t_data *data)
@@ -148,7 +207,7 @@ int	map_border_valid(char *str, t_data *data)
 
 	data->map = ft_split(str, '\n');
 	if (!data->map)
-		return (write(1, "So_long : malloc failed\n", 24), free(str), exit(1), 1);
+		return (write(2, "So_long : malloc failed\n", 24), free(str), exit(1), 1);
 	i = 0;
 	while (data->map[i] != NULL)
 	{
@@ -176,7 +235,7 @@ char	*get_first_row(char *str, int *fd, t_data *data)
 
 	(*fd) = open(str, O_RDONLY);
 	if ((*fd) == -1)
-		return (perror("So_long :"), exit(1), NULL);
+		return (perror("So_long "), exit(1), NULL);
 	first_row = get_next_line((*fd));
 	if (first_row == NULL)
 		return (write(2, "So_long : file is empty\n", 24), exit(1), \
@@ -202,8 +261,8 @@ int	map_parser(char *str, t_data *data)
 	{
 		temp_matrix = ft_strjoin(matrix, row);
 		if (ft_strlen(row) != data->map_columns)
-			return (write(1, "So_long : Columns don't match\n", 30), \
-			free(row), close(fd), free(matrix), free(temp_matrix), exit(1), 1);
+			return (write(2, "So_long : Columns don't match\n", 30), \
+			free(row), free(matrix), free(temp_matrix), close(fd), exit(1), 1);
 		data->map_rows++;
 		free(row);
 		free(matrix);
@@ -251,88 +310,6 @@ int	close_mlx(int keycode, t_data *vars)
 	//return (0);
 }
 
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-int	get_t(int trgb)
-{
-	return ((trgb >> 24) & 0xFF);
-}
-
-int	get_r(int trgb)
-{
-	return ((trgb >> 16) & 0xFF);
-}
-
-int	get_g(int trgb)
-{
-	return ((trgb >> 8) & 0xFF);
-}
-
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
-}
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	draw_square(t_data *data, int h, int l)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < h)
-	{
-		j = 0;
-		while (j < l)
-		{
-			my_mlx_pixel_put(data, (i + data->pos_x), (j + data->pos_y), \
-							0x00FF0000);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_(t_data *data, int h, int l, int color)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < h)
-	{
-		j = 0;
-		while (j < l)
-			my_mlx_pixel_put(data, i, j++, color);
-		i++;
-	}
-}
-
-void	draw_background(t_data *img)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < WIDTH)
-	{
-		j = 0;
-		while (j < HEIGHT)
-			my_mlx_pixel_put(img, i, j++, img->color);
-		i++;
-	}
-}
-
 int	coin_left(t_data *data)
 {
 	int	i;
@@ -361,10 +338,15 @@ int	render_next_frame(t_data *img)
 	i = 0;
 	while (i < img->map_rows - 1)
 	{
-		j = 0;
-		while (j < img->map_columns - 1)
+		j = -1;
+		while (++j < img->map_columns - 1)
 		{
-			if (img->map[i][j] == '0')
+			if ((j * STEP) == img->pos_x && ((i * STEP) == img->pos_y))
+			{
+				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win,\
+										img->textures[0], img->pos_x, img->pos_y);
+			}
+			else if (img->map[i][j] == '0')
 			{
 				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
 				img->textures[1], \
@@ -388,19 +370,22 @@ int	render_next_frame(t_data *img)
 				img->textures[4], \
 				(j * img->textures_size[8]), (i * img->textures_size[9]));
 			}
-			else
+			else if (img->map[i][j] == 'E' && coin_left(img) == 1)
 			{
 				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
 				img->textures[1], \
 				(j * img->textures_size[2]), (i * img->textures_size[3]));
 			}
-			j++;
+			else if (img->map[i][j] == 'P' && img->count != 0)
+			{
+				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
+				img->textures[1], \
+				(j * img->textures_size[2]), (i * img->textures_size[3]));
+			}
 		}
 		i++;
 	}
-	mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
-							img->textures[0], img->pos_x, img->pos_y);
-	return (0);
+	return (img->count);
 }
 
 int	fmovements(int flag, t_data *data)
@@ -451,9 +436,6 @@ int	key_hook(int keycode, t_data *vars)
 		if (vars->map[(vars->pos_y / STEP)][(vars->pos_x / STEP) + 1] != '1')
 			return (fmovements(4, vars), 0);
 	}
-	//printf("Movements count = %i\n", vars->count);
-	//if (keycode != 65307 && keycode != 119 && keycode != 115 && keycode != 97 && keycode != 100)
-	//	printf("keycode : %i\n", keycode);
 	return (1);
 }
 
@@ -463,46 +445,34 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
+		img.count = 0;
+		img.coins_earn = 0;
+		img.textures[0] = 0;
+		img.textures[1] = 0;
+		img.textures[2] = 0;
+		img.textures[3] = 0;
+		img.textures[4] = 0;
 		is_map_dot_ber(argv[1], &img);
 	}
 	else
 		return (1);
-	img.color = create_trgb(0, 0, 0, 255);
-	img.count = 0;
-	img.textures[0] = 0;
-	img.textures[1] = 0;
-	img.textures[2] = 0;
-	img.textures[3] = 0;
-	img.textures[4] = 0;
-	img.textures_size[0] = 0;
-	img.textures_size[1] = 0;
-	img.textures_size[2] = 0;
-	img.textures_size[3] = 0;
-	img.textures_size[4] = 0;
-	img.textures_size[5] = 0;
-	img.textures_size[6] = 0;
-	img.textures_size[7] = 0;
-	img.textures_size[8] = 0;
-	img.textures_size[9] = 0;
+
 	img.ptr.mlx = mlx_init();
 	if (img.ptr.mlx == NULL)
 		return (1);
-	//img.img = mlx_new_image(img.ptr.mlx, (img.map_columns * img.textures_size[4]), (img.map_columns * img.textures_size[5]));
-	//img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-	//							&img.endian);
-	img.textures[0] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/player_64x64.xpm", &img.textures_size[0], &img.textures_size[1]);
+	img.textures[0] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/player_16x16.xpm", &img.textures_size[0], &img.textures_size[1]);
 	if (img.textures[0] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.textures[1] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/floor_64x64.xpm", &img.textures_size[2], &img.textures_size[3]);
+	img.textures[1] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/floor_16x16.xpm", &img.textures_size[2], &img.textures_size[3]);
 	if (img.textures[1] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.textures[2] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/wall_64x64.xpm", &img.textures_size[4], &img.textures_size[5]);
+	img.textures[2] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/wall_16x16.xpm", &img.textures_size[4], &img.textures_size[5]);
 	if (img.textures[2] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.textures[3] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/coin_64x64.xpm", &img.textures_size[6], &img.textures_size[7]);
+	img.textures[3] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/coin_16x16.xpm", &img.textures_size[6], &img.textures_size[7]);
 	if (img.textures[3] == NULL)
 		return (close_mlx(0, &img), 1);
-	img.textures[4] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/exit_64x64.xpm", &img.textures_size[8], &img.textures_size[9]);
+	img.textures[4] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/exit_16x16.xpm", &img.textures_size[8], &img.textures_size[9]);
 	if (img.textures[4] == NULL)
 		return (close_mlx(0, &img), 1);
 	img.ptr.win = mlx_new_window(img.ptr.mlx, ((img.map_columns - 1) * img.textures_size[4]), ((img.map_rows - 1) * img.textures_size[5]), "So_long");

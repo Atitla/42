@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:47 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/17 13:06:55 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/18 14:04:05 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,5 @@ char	*get_next_line(int fd)
 	}
 	line = ft_line(buffer);
 	buffer = ft_next(buffer);
-	if (!buffer)
-	{
-		free(buffer);
-		return (NULL);
-	}
 	return (line);
 }
