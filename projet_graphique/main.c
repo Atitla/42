@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:30:40 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/18 18:18:51 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/18 22:40:27 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ int	pathfinding(t_data *data)
 		while (temp_matrix[i][j] != '\0')
 		{
 			if (temp_matrix[i][j] == 'E' || temp_matrix[i][j] == 'C')
-				return (write(2, "So_long : Collectible or Exit unreachable\n", 42), \
-						ft_free(temp_matrix), ft_free(data->map), exit(1), 0);
+				return (ft_free(temp_matrix), ft_free(data->map), exit(1), \
+				write(2, "Error\nCollectible or Exit unreachable\n", 39), 0);
 			j++;
 		}
 		i++;
@@ -130,8 +130,8 @@ int	pathfinding(t_data *data)
 
 void	place_player(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	i = 0;
@@ -142,34 +142,45 @@ void	place_player(t_data *data)
 		{
 			j++;
 			if (data->map[i][j] == 'P')
-				break;
+				break ;
 		}
 		if (data->map[i][j] == 'P')
-			break;
+			break ;
 		i++;
 	}
 	data->pos_y = i * STEP;
 	data->pos_x = j * STEP;
 	pathfinding(data);
-
 }
 
 int	check_required(int exit_count, int player, int collectibles, t_data *data)
 {
-	(void)data;
+	int	i;
+	int	j;
+
 	if (exit_count == 1 && player == 1 && collectibles >= 1)
 		return (place_player(data), 0);
 	else if (exit_count < 1 || exit_count > 1)
-		return (write(2, "So_long : One and only one exit\n", 32), \
+		return (write(2, "Error\nOne and only one exit\n", 29), \
 				ft_free(data->map), exit(1), 1);
 	else if (player < 1 || player > 1)
-		return (write(2, "So_long : One and only one player\n", 34), \
+		return (write(2, "Error\nOne and only one player\n", 31), \
 				ft_free(data->map), exit(1), 1);
 	else if (collectibles < 1)
-		return (write(2, "So_long : At least one collectible\n", 35), \
+		return (write(2, "Error\nAt least one collectible\n", 32), \
 				ft_free(data->map), exit(1), 1);
-	return (write(2, "So_long : bizarre la\n", 21), \
+	return (write(2, "Error\nbizarre la\n", 18), \
 				ft_free(data->map), exit(1), 1);
+	i = 0;
+	while (data->map[i] != NULL )
+	{
+		j = -1;
+		while (++j < data->map_columns - 1)
+		{
+
+		}
+		i++;
+	}
 }
 
 int	map_inside_valid(t_data *data)
@@ -201,29 +212,41 @@ int	map_inside_valid(t_data *data)
 	return (check_required(exit_count, player, collectible, data));
 }
 
+int	check_1(char *str, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map[i] != NULL)
+	{
+		if (data->map[i][0] != '1')
+			return (write(2, "Error\nmap not close\n", 21), \
+					ft_free(data->map), free(str), exit(1), 1);
+		if (data->map[i][data->map_columns - 2] != '1')
+			return (write(2, "Error\nmap not close\n", 21), \
+					ft_free(data->map), free(str), exit(1), 1);
+		i++;
+	}
+	return (0);
+}
+
 int	map_border_valid(char *str, t_data *data)
 {
 	int	i;
 
 	data->map = ft_split(str, '\n');
 	if (!data->map)
-		return (write(2, "So_long : malloc failed\n", 24), free(str), exit(1), 1);
-	i = 0;
-	while (data->map[i] != NULL)
-	{
-		if (data->map[i][0] != '1')
-			return (write(2, "So_long : map not close\n", 24), ft_free(data->map), free(str), exit(1), 1);
-		if (data->map[i][data->map_columns - 2] != '1')
-			return (write(2, "So_long : map not close\n", 24), ft_free(data->map), free(str), exit(1), 1);
-		i++;
-	}
+		return (write(2, "Error\nmalloc failed\n", 21), free(str), exit(1), 1);
+	check_1(str, data);
 	i = 0;
 	while (data->map[0][i] != '\0')
 	{
 		if (data->map[0][i] != '1')
-			return (write(2, "So_long : map not close\n", 24), ft_free(data->map), free(str), exit(1), 1);
+			return (write(2, "Error\nmap not close\n", 21), \
+					ft_free(data->map), free(str), exit(1), 1);
 		if (data->map[data->map_rows -2][i] != '1')
-			return (write(2, "So_long : map not close\n", 24), ft_free(data->map), free(str), exit(1), 1);
+			return (write(2, "Error\nmap not close\n", 21), \
+					ft_free(data->map), free(str), exit(1), 1);
 		i++;
 	}
 	return (free(str), map_inside_valid(data));
@@ -235,10 +258,10 @@ char	*get_first_row(char *str, int *fd, t_data *data)
 
 	(*fd) = open(str, O_RDONLY);
 	if ((*fd) == -1)
-		return (perror("So_long "), exit(1), NULL);
+		return (perror("Error\n"), exit(1), NULL);
 	first_row = get_next_line((*fd));
 	if (first_row == NULL)
-		return (write(2, "So_long : file is empty\n", 24), exit(1), \
+		return (write(2, "Error\nfile is empty\n", 21), exit(1), \
 				close((*fd)), NULL);
 	data->map_columns = ft_strlen(first_row);
 	data->map_rows = 1;
@@ -255,13 +278,13 @@ int	map_parser(char *str, t_data *data)
 	row = get_first_row(str, &fd, data);
 	matrix = ft_strdup("");
 	if (matrix == NULL)
-		return (write(2, "So_long : malloc failed\n", 24), \
+		return (write(2, "Error\nmalloc failed\n", 21), \
 				close(fd), free(row), free(matrix), exit(1), 1);
 	while (row)
 	{
 		temp_matrix = ft_strjoin(matrix, row);
 		if (ft_strlen(row) != data->map_columns)
-			return (write(2, "So_long : Columns don't match\n", 30), \
+			return (write(2, "Error\nColumns don't match\n", 27), \
 			free(row), free(matrix), free(temp_matrix), close(fd), exit(1), 1);
 		data->map_rows++;
 		free(row);
@@ -277,10 +300,17 @@ void	is_map_dot_ber(char *str, t_data *data)
 {
 	int	i;
 
+	data->count = 0;
+	data->coins_earn = 0;
+	data->textures[0] = 0;
+	data->textures[1] = 0;
+	data->textures[2] = 0;
+	data->textures[3] = 0;
+	data->textures[4] = 0;
 	i = ft_strlen(str);
 	if (i < 5)
 	{
-		write(2, "So_long : Not a actual file\n", 28);
+		write(2, "Error\nNot a actual file\n", 25);
 		exit(1);
 	}
 	else if (str[i - 4] == '.' && str[i - 3] == 'b' \
@@ -288,7 +318,7 @@ void	is_map_dot_ber(char *str, t_data *data)
 		map_parser(str, data);
 	else
 	{
-		write(2, "So_long : Not a .ber file\n", 26);
+		write(2, "Error\nNot a .ber file\n", 23);
 		exit(1);
 	}
 }
@@ -296,7 +326,6 @@ void	is_map_dot_ber(char *str, t_data *data)
 int	close_mlx(int keycode, t_data *vars)
 {
 	(void)keycode;
-	//mlx_destroy_image(vars->ptr.mlx, vars->img);
 	ft_free(vars->map);
 	mlx_destroy_image(vars->ptr.mlx, vars->textures[0]);
 	mlx_destroy_image(vars->ptr.mlx, vars->textures[1]);
@@ -307,7 +336,6 @@ int	close_mlx(int keycode, t_data *vars)
 	mlx_destroy_display(vars->ptr.mlx);
 	free((*vars).ptr.mlx);
 	exit(0);
-	//return (0);
 }
 
 int	coin_left(t_data *data)
@@ -330,6 +358,35 @@ int	coin_left(t_data *data)
 	return (0);
 }
 
+void	print_texture(t_data *img, int i, int j, int text_index)
+{
+	mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
+				img->textures[text_index], \
+				(j * img->text_size[(text_index * 2)]), \
+				(i * img->text_size[(text_index * 2) + 1]));
+}
+
+void	render_with_map(t_data *img, int i, int j)
+{
+	if ((j * STEP) == img->pos_x && ((i * STEP) == img->pos_y))
+	{
+		mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
+					img->textures[0], img->pos_x, img->pos_y);
+	}
+	else if (img->map[i][j] == '0')
+		print_texture(img, i, j, 1);
+	else if (img->map[i][j] == '1')
+		print_texture(img, i, j, 2);
+	else if (img->map[i][j] == 'C')
+		print_texture(img, i, j, 3);
+	else if (img->map[i][j] == 'E' && coin_left(img) == 0)
+		print_texture(img, i, j, 4);
+	else if (img->map[i][j] == 'E' && coin_left(img) == 1)
+		print_texture(img, i, j, 1);
+	else if (img->map[i][j] == 'P' && img->count != 0)
+		print_texture(img, i, j, 1);
+}
+
 int	render_next_frame(t_data *img)
 {
 	int	i;
@@ -340,49 +397,7 @@ int	render_next_frame(t_data *img)
 	{
 		j = -1;
 		while (++j < img->map_columns - 1)
-		{
-			if ((j * STEP) == img->pos_x && ((i * STEP) == img->pos_y))
-			{
-				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win,\
-										img->textures[0], img->pos_x, img->pos_y);
-			}
-			else if (img->map[i][j] == '0')
-			{
-				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
-				img->textures[1], \
-				(j * img->textures_size[2]), (i * img->textures_size[3]));
-			}
-			else if (img->map[i][j] == '1')
-			{
-				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
-				img->textures[2], \
-				(j * img->textures_size[4]), (i * img->textures_size[5]));
-			}
-			else if (img->map[i][j] == 'C')
-			{
-				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
-				img->textures[3], \
-				(j * img->textures_size[6]), (i * img->textures_size[7]));
-			}
-			else if (img->map[i][j] == 'E' && coin_left(img) == 0)
-			{
-				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
-				img->textures[4], \
-				(j * img->textures_size[8]), (i * img->textures_size[9]));
-			}
-			else if (img->map[i][j] == 'E' && coin_left(img) == 1)
-			{
-				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
-				img->textures[1], \
-				(j * img->textures_size[2]), (i * img->textures_size[3]));
-			}
-			else if (img->map[i][j] == 'P' && img->count != 0)
-			{
-				mlx_put_image_to_window(img->ptr.mlx, img->ptr.win, \
-				img->textures[1], \
-				(j * img->textures_size[2]), (i * img->textures_size[3]));
-			}
-		}
+			render_with_map(img, i, j);
 		i++;
 	}
 	return (img->count);
@@ -405,11 +420,11 @@ int	fmovements(int flag, t_data *data)
 		data->map[(data->pos_y / STEP)][(data->pos_x / STEP)] = '0';
 		data->coins_earn++;
 	}
-	if (data->map[(data->pos_y / STEP)][(data->pos_x / STEP)] == 'E' && coin_left(data) == 0)
+	if (data->map[(data->pos_y / STEP)][(data->pos_x / STEP)] == 'E' \
+		&& coin_left(data) == 0)
 		close_mlx(0, data);
 	render_next_frame(data);
 	return (0);
-
 }
 
 int	key_hook(int keycode, t_data *vars)
@@ -439,43 +454,50 @@ int	key_hook(int keycode, t_data *vars)
 	return (1);
 }
 
+void	import_textures(t_data *data)
+{
+	data->textures[0] = mlx_xpm_file_to_image(data->ptr.mlx, PLAYER, \
+						&data->text_size[0], &data->text_size[1]);
+	if (data->textures[0] == NULL)
+		return (mlx_destroy_display(data->ptr.mlx), ft_free(data->map), \
+				exit(1));
+	data->textures[1] = mlx_xpm_file_to_image(data->ptr.mlx, FLOOR, \
+						&data->text_size[2], &data->text_size[3]);
+	if (data->textures[1] == NULL)
+		return (mlx_destroy_display(data->ptr.mlx), ft_free(data->map), \
+				exit(1));
+	data->textures[2] = mlx_xpm_file_to_image(data->ptr.mlx, WALL, \
+						&data->text_size[4], &data->text_size[5]);
+	if (data->textures[2] == NULL)
+		return (mlx_destroy_display(data->ptr.mlx), ft_free(data->map), \
+				exit(1));
+	data->textures[3] = mlx_xpm_file_to_image(data->ptr.mlx, COIN, \
+						&data->text_size[6], &data->text_size[7]);
+	if (data->textures[3] == NULL)
+		return (mlx_destroy_display(data->ptr.mlx), ft_free(data->map), \
+				exit(1));
+	data->textures[4] = mlx_xpm_file_to_image(data->ptr.mlx, EXITS, \
+						&data->text_size[8], &data->text_size[9]);
+	if (data->textures[4] == NULL)
+		return (mlx_destroy_display(data->ptr.mlx), ft_free(data->map), \
+				exit(1));
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	img;
 
 	if (argc == 2)
-	{
-		img.count = 0;
-		img.coins_earn = 0;
-		img.textures[0] = 0;
-		img.textures[1] = 0;
-		img.textures[2] = 0;
-		img.textures[3] = 0;
-		img.textures[4] = 0;
 		is_map_dot_ber(argv[1], &img);
-	}
 	else
 		return (1);
-
 	img.ptr.mlx = mlx_init();
 	if (img.ptr.mlx == NULL)
 		return (1);
-	img.textures[0] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/player_16x16.xpm", &img.textures_size[0], &img.textures_size[1]);
-	if (img.textures[0] == NULL)
-		return (close_mlx(0, &img), 1);
-	img.textures[1] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/floor_16x16.xpm", &img.textures_size[2], &img.textures_size[3]);
-	if (img.textures[1] == NULL)
-		return (close_mlx(0, &img), 1);
-	img.textures[2] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/wall_16x16.xpm", &img.textures_size[4], &img.textures_size[5]);
-	if (img.textures[2] == NULL)
-		return (close_mlx(0, &img), 1);
-	img.textures[3] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/coin_16x16.xpm", &img.textures_size[6], &img.textures_size[7]);
-	if (img.textures[3] == NULL)
-		return (close_mlx(0, &img), 1);
-	img.textures[4] = mlx_xpm_file_to_image(img.ptr.mlx, "textures/exit_16x16.xpm", &img.textures_size[8], &img.textures_size[9]);
-	if (img.textures[4] == NULL)
-		return (close_mlx(0, &img), 1);
-	img.ptr.win = mlx_new_window(img.ptr.mlx, ((img.map_columns - 1) * img.textures_size[4]), ((img.map_rows - 1) * img.textures_size[5]), "So_long");
+	import_textures(&img);
+	img.ptr.win = mlx_new_window(img.ptr.mlx, \
+	((img.map_columns - 1) * img.text_size[4]), \
+	((img.map_rows - 1) * img.text_size[5]), "So_long");
 	render_next_frame(&img);
 	mlx_hook(img.ptr.win, 2, 1L << 0, key_hook, &img);
 	mlx_loop(img.ptr.mlx);

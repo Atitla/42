@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/18 17:56:40 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/18 21:45:33 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 # include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include "get_next_line.h"
 
 # define HEIGHT 1080
 # define WIDTH 1920
 # define STEP 16
+# define PLAYER "textures/player_16x16.xpm"
+# define FLOOR "textures/floor_16x16.xpm"
+# define WALL "textures/wall_16x16.xpm"
+# define COIN "textures/coin_16x16.xpm"
+# define EXITS "textures/exit_16x16.xpm"
 
 typedef struct s_vars {
 	void	*mlx;
@@ -38,7 +43,7 @@ typedef struct s_data {
 	int		map_columns;
 	char	**map;
 	void	*textures[5];
-	int		textures_size[10];
+	int		text_size[10];
 }				t_data;
 
 char	**ft_free(char **array);
