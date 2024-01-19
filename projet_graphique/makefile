@@ -9,6 +9,7 @@ SRC = so_long.c \
 		map_2.c \
 		string_func.c \
 		ft_split.c \
+		ft_putnbr.c \
 		get_next_line.c \
 		get_next_line_utils.c
 

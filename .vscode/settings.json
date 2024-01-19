@@ -17,6 +17,7 @@
 	"files.associations": {
 		"stdio.h": "c",
 		"mlx.h": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"ft_printf.h": "c"
 	} // display name of error on hover
 }

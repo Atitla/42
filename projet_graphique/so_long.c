@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:30:40 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/19 12:59:18 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/19 14:05:04 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	fmovements(int flag, t_data *data)
 	else if (flag == 4)
 		data->pos_x += STEP;
 	data->count += 1;
-	printf("Movements count = %i\n", data->count);
+	write(1, "Movements count = ", 19);
+	ft_putnbr(data->count);
+	write(1, "\n", 1);
 	if (data->map[(data->pos_y / STEP)][(data->pos_x / STEP)] == 'C')
 	{
 		data->map[(data->pos_y / STEP)][(data->pos_x / STEP)] = '0';

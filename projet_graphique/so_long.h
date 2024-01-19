@@ -6,17 +6,17 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/19 11:30:31 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/19 14:06:10 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "mlx.h"
 # include "get_next_line.h"
 
 # define HEIGHT 1080
@@ -70,6 +70,7 @@ int		ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *src);
 char	**matrix_cpy_alloc(t_data *data);
+int		ft_putnbr(int nb);
 void	fill_map(char **temp_matrix, int x, int y);
 
 #endif
