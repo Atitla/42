@@ -16,6 +16,7 @@
 	"codam-norminette-3.displayErrorName": false,
 	"files.associations": {
 		"stdio.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"so_long.h": "c"
 	} // display name of error on hover
 }

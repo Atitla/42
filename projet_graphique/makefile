@@ -3,7 +3,11 @@ CFLAGS = -Wall -Wextra -Werror -ggdb3
 LDFLAGS = -Lminilibx/mlx_Linux -Lminilibx/mlx -Lminilibx/mlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 LIB = mlx/libmlx.a mlx/libmlx_Linux.a
 OBJ_DIR = obj
-SRC = main.c \
+SRC = so_long.c \
+		render_map.c \
+		map.c \
+		map_2.c \
+		string_func.c \
 		ft_split.c \
 		get_next_line.c \
 		get_next_line_utils.c

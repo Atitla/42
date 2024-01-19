@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 01:21:23 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/16 16:04:29 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/19 11:10:52 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "N.h"
+#include "so_long.h"
 
 char	**ft_free(char **array)
 {
