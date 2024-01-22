@@ -6,16 +6,14 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:17:09 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/19 11:19:02 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/22 14:28:02 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	close_mlx(int keycode, t_data *vars)
+int	close_mlx(t_data *vars)
 {
-	(void)keycode;
-	ft_free(vars->map);
 	mlx_destroy_image(vars->ptr.mlx, vars->textures[0]);
 	mlx_destroy_image(vars->ptr.mlx, vars->textures[1]);
 	mlx_destroy_image(vars->ptr.mlx, vars->textures[2]);
@@ -24,6 +22,7 @@ int	close_mlx(int keycode, t_data *vars)
 	mlx_destroy_window(vars->ptr.mlx, vars->ptr.win);
 	mlx_destroy_display(vars->ptr.mlx);
 	free((*vars).ptr.mlx);
+	ft_free(vars->map);
 	exit(0);
 }
 

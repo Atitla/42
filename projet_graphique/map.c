@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:13:12 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/19 11:25:07 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/19 17:08:34 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	map_border_valid(char *str, t_data *data)
 	data->map = ft_split(str, '\n');
 	if (!data->map)
 		return (write(2, "Error\nmalloc failed\n", 21), free(str), exit(1), 1);
+	i = -1;
+	while (data->map[++i] != NULL)
+		if (ft_strlen(data->map[i]) != data->map_columns - 1)
+			return (write(2, "Error\nColumns don't match\n", 27), \
+					ft_free(data->map), free(str), exit(1), 1);
 	check_first_line(str, data);
 	i = 0;
 	while (data->map[0][i] != '\0')
@@ -79,13 +84,13 @@ int	map_parser(char *str, t_data *data)
 	matrix = ft_strdup("");
 	if (matrix == NULL)
 		return (write(2, "Error\nmalloc failed\n", 21), \
-				close(fd), free(row), free(matrix), exit(1), 1);
+				close(fd), free(row), exit(1), 1);
 	while (row)
 	{
 		temp_matrix = ft_strjoin(matrix, row);
-		if (ft_strlen(row) != data->map_columns)
-			return (write(2, "Error\nColumns don't match\n", 27), \
-			free(row), free(matrix), free(temp_matrix), close(fd), exit(1), 1);
+		if (temp_matrix == NULL)
+			return (write(2, "Error\nmalloc failed\n", 21), \
+					close(fd), free(row), exit(1), 1);
 		data->map_rows++;
 		free(row);
 		free(matrix);

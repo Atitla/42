@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/19 14:06:10 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/22 14:37:32 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 # define HEIGHT 1080
 # define WIDTH 1920
-# define STEP 16
-# define PLAYER "textures/player_16x16.xpm"
-# define FLOOR "textures/floor_16x16.xpm"
-# define WALL "textures/wall_16x16.xpm"
-# define COIN "textures/coin_16x16.xpm"
-# define EXITS "textures/exit_16x16.xpm"
+# define STEP 64
+# define PLAYER "textures/player_64x64.xpm"
+# define FLOOR "textures/floor_64x64.xpm"
+# define WALL "textures/wall_64x64.xpm"
+# define COIN "textures/coin_64x64.xpm"
+# define EXITS "textures/exit_64x64.xpm"
 
 typedef struct s_vars
 {
@@ -54,7 +54,7 @@ int		render_next_frame(t_data *img);
 void	render_with_map(t_data *img, int i, int j);
 void	print_texture(t_data *img, int i, int j, int text_index);
 void	import_textures(t_data *data);
-int		close_mlx(int keycode, t_data *vars);
+int		close_mlx(t_data *vars);
 void	is_map_dot_ber(char *str, t_data *data);
 int		map_parser(char *str, t_data *data);
 char	*get_first_row(char *str, int *fd, t_data *data);
@@ -72,5 +72,6 @@ char	*ft_strdup(const char *src);
 char	**matrix_cpy_alloc(t_data *data);
 int		ft_putnbr(int nb);
 void	fill_map(char **temp_matrix, int x, int y);
+int		ft_putcharcount(int nbr, int lgt);
 
 #endif
