@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:47 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/18 14:04:05 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/22 16:20:39 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 char	*ft_freee(char *buffer, char *buf)
 {

@@ -6,27 +6,29 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/22 14:37:32 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/22 16:30:57 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include "mlx.h"
-# include "get_next_line.h"
 
-# define HEIGHT 1080
-# define WIDTH 1920
 # define STEP 64
 # define PLAYER "textures/player_64x64.xpm"
 # define FLOOR "textures/floor_64x64.xpm"
 # define WALL "textures/wall_64x64.xpm"
 # define COIN "textures/coin_64x64.xpm"
 # define EXITS "textures/exit_64x64.xpm"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 typedef struct s_vars
 {
@@ -73,5 +75,11 @@ char	**matrix_cpy_alloc(t_data *data);
 int		ft_putnbr(int nb);
 void	fill_map(char **temp_matrix, int x, int y);
 int		ft_putcharcount(int nbr, int lgt);
+char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *string, int searchedChar );
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t elementCount, size_t elementSize);
+size_t	ft_strlen_st(const char *theString);
 
 #endif

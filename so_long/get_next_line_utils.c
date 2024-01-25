@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:54:23 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/14 20:42:43 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/22 16:20:45 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 char	*ft_strchr(const char *string, int searchedChar )
 {
