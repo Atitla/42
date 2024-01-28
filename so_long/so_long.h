@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 15:27:31 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/22 16:30:57 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/28 18:40:30 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include <fcntl.h>
 # include "mlx.h"
 
-# define STEP 64
-# define PLAYER "textures/player_64x64.xpm"
-# define FLOOR "textures/floor_64x64.xpm"
-# define WALL "textures/wall_64x64.xpm"
-# define COIN "textures/coin_64x64.xpm"
-# define EXITS "textures/exit_64x64.xpm"
+# define STEP 16
+# define PLAYER "textures/player_16x16.xpm"
+# define FLOOR "textures/floor_16x16.xpm"
+# define WALL "textures/wall_16x16.xpm"
+# define COIN "textures/coin_16x16.xpm"
+# define EXITS "textures/exit_16x16.xpm"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
