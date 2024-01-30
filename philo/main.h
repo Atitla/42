@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:56:49 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/29 13:10:22 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/30 11:05:01 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define PHILO_MAX 200
 
-typedef struct s_philo
+typedef struct s_phi
 {
 	pthread_t		thread;
 	int				id;
@@ -41,7 +41,7 @@ typedef struct s_philo
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*dead_lock;
-}					t_philo;
+}					t_phi;
 
 typedef struct s_data
 {
@@ -50,7 +50,7 @@ typedef struct s_data
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	dead_lock;
-	t_philo			*philos;
+	t_phi			*philos;
 }					t_data;
 
 int	ft_atoi(const char *str);
