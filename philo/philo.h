@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:56:49 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/30 11:05:01 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/31 16:44:57 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <unistd.h>
 # include <stdio.h>
@@ -41,6 +41,7 @@ typedef struct s_phi
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*dead_lock;
+	//int				*bool_start;
 }					t_phi;
 
 typedef struct s_data
@@ -50,6 +51,7 @@ typedef struct s_data
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	dead_lock;
+	//int				bool_start;
 	t_phi			*philos;
 }					t_data;
 

@@ -6,11 +6,11 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:37:57 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/29 11:08:55 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/01/31 12:39:41 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "philo.h"
 
 int	ft_isspace(const char *str)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:18:01 by ecunha            #+#    #+#             */
-/*   Updated: 2024/01/30 14:25:32 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/02/01 14:08:30 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "philo.h"
 
 size_t	get_time(void)
 {
@@ -112,7 +112,7 @@ int	monitor_if_phi_dead(t_phi *phi)
 		{
 			time = get_time() - phi->start_time;
 			pthread_mutex_lock(phi->write_lock);
-			printf("%zu %d is thinking\n", time, phi->id);
+			printf("%zu %d died\n", time, phi->id);
 			pthread_mutex_unlock(phi->write_lock);
 			pthread_mutex_lock(phi[0].dead_lock);
 			*phi->dead = 1;
@@ -176,8 +176,6 @@ void	ft_sleep(t_phi *phi)
 
 void	ft_eat(t_phi *phi, size_t time)
 {
-	if (phi->id % 2 == 0 && phi->meals_eaten == 0)
-		ft_sleep(phi);
 	time = get_time() - phi->start_time;
 	pthread_mutex_lock(phi->write_lock);
 	if (!is_dead(phi))
@@ -196,8 +194,8 @@ void	ft_eat(t_phi *phi, size_t time)
 		printf("%zu %d is eating\n", time, phi->id);
 	pthread_mutex_unlock(phi->write_lock);
 	pthread_mutex_lock(phi->meal_lock);
-	phi->last_meal = get_time();
 	phi->meals_eaten++;
+	phi->last_meal = get_time();
 	pthread_mutex_unlock(phi->meal_lock);
 	ft_usleep(phi->time_to_eat);
 	phi->eating = 0;
@@ -212,10 +210,14 @@ void	*routine(void *pointer)
 
 	phi = (t_phi *)pointer;
 	time = 0;
+	//while (*(phi->bool_start) == 0)
+	//	ft_usleep(1);
 	if (phi->id % 2 == 0)
-		ft_usleep(1);
+		ft_usleep(phi->time_to_sleep);
 	while (!is_dead(phi))
 	{
+	//	if (phi->meals_eaten == 0 && phi->id % 2 == 0)
+	//		ft_sleep(phi);
 		ft_eat(phi, time);
 		ft_sleep(phi);
 		ft_think(phi);
@@ -241,7 +243,7 @@ int	exec_thread(t_data *data, pthread_mutex_t *forks)
 
 	if (pthread_create(&monitor, NULL, &monitor_routine, \
 			data->philos) != 0)
-		return (mutex_destroy(data, forks), 1);
+		return (1);
 	i = 0;
 	while (i < data->philos[0].num_of_philos)
 	{
@@ -250,6 +252,7 @@ int	exec_thread(t_data *data, pthread_mutex_t *forks)
 			return (mutex_destroy(data, forks), 1);
 		i++;
 	}
+	// data->bool_start = 1;
 	if (pthread_join(monitor, NULL) != 0)
 		return (mutex_destroy(data, forks), 1);
 	i = 0;
@@ -280,7 +283,7 @@ void	make_philos(t_data *data, pthread_mutex_t *forks, int i)
 		else
 			data->philos[i].num_times_to_eat = -1;
 		data->philos[i].dead = &data->dead_flag;
-		if (i == 0)
+		if (i == 1)
 			data->philos[i].r_fork = &forks[data->philos[i].num_of_philos - 1];
 		else
 			data->philos[i].r_fork = &forks[i - 1];
@@ -291,11 +294,18 @@ void	make_philos(t_data *data, pthread_mutex_t *forks, int i)
 	}
 }
 
+// void	pointer_start_philos(t_data *data, int i)
+// {
+// 	while (++i < data->args[0])
+// 		data->philos[i].bool_start = &data->bool_start;
+// }
+
 int	init_structs(t_data *data, pthread_mutex_t *forks)
 {
 	int	i;
 
 	data->dead_flag = 0;
+	//data->bool_start = 0;
 	pthread_mutex_init(&data->write_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->dead_lock, NULL);
@@ -307,6 +317,7 @@ int	init_structs(t_data *data, pthread_mutex_t *forks)
 	}
 	i = -1;
 	make_philos(data, forks, i);
+	// pointer_start_philos(data, i);
 	return (0);
 }
 
@@ -322,5 +333,6 @@ int	main(int argc, char **argv)
 	init_structs(&data, forks);
 	if (exec_thread(&data, forks) == 1)
 		return (1);
+	mutex_destroy(&data, forks);
 	return (0);
 }
