@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:18:01 by ecunha            #+#    #+#             */
-/*   Updated: 2024/02/01 14:08:30 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/02/02 15:06:32 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,12 +182,12 @@ void	ft_eat(t_phi *phi, size_t time)
 		printf("%zu %d has taken a fork\n", time, phi->id);
 	pthread_mutex_unlock(phi->write_lock);
 	pthread_mutex_lock(phi->l_fork);
+	phi->eating = 1;
 	time = get_time() - phi->start_time;
 	pthread_mutex_lock(phi->write_lock);
 	if (!is_dead(phi))
 		printf("%zu %d has taken a fork\n", time, phi->id);
 	pthread_mutex_unlock(phi->write_lock);
-	phi->eating = 1;
 	time = get_time() - phi->start_time;
 	pthread_mutex_lock(phi->write_lock);
 	if (!is_dead(phi))
@@ -213,7 +213,7 @@ void	*routine(void *pointer)
 	//while (*(phi->bool_start) == 0)
 	//	ft_usleep(1);
 	if (phi->id % 2 == 0)
-		ft_usleep(phi->time_to_sleep);
+		ft_sleep(phi);
 	while (!is_dead(phi))
 	{
 	//	if (phi->meals_eaten == 0 && phi->id % 2 == 0)
