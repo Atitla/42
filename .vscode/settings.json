@@ -18,6 +18,7 @@
 		"stdio.h": "c",
 		"mlx.h": "c",
 		"so_long.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"numbers": "c"
 	} // display name of error on hover
 }

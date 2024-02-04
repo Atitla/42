@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:18:01 by ecunha            #+#    #+#             */
-/*   Updated: 2024/02/02 15:06:32 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/02/04 13:41:19 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	get_time(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
-		write(2, "gettimeofday() error\n", 22);
+		(void) write(2, "gettimeofday() error\n", 22);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
@@ -41,13 +41,13 @@ int	check_params(char **argv, t_data *data, int flag)
 		data->args[i] = ft_atoi(argv[i + 1]);
 		if (data->args[i] <= 0)
 		{
-			return (write(2, "Philo : Wrong number in argument ", 34), \
+			return ((void)write(2, "Philo : Wrong number in argument ", 34), \
 				printf("%i\n", (i + 1)), 1);
 		}
 		i++;
 	}
 	if (data->args[0] > PHILO_MAX)
-		return (write(2, "Philo : Too many philosophers\n", 30), 1);
+		return ((void)write(2, "Philo : Too many philosophers\n", 30), 1);
 	if (flag == 0)
 		data->args[4] = -1;
 	return (0);
@@ -63,7 +63,7 @@ int	init_params(int argc, char **argv, t_data *data)
 			return (check_params(argv, data, 1));
 	}
 	else
-		return (write(2, "Philo : wrong number of arguments\n", 34), 1);
+		return ((void)write(2, "Philo : wrong number of arguments\n", 34), 1);
 }
 
 void	mutex_destroy(t_data *data, pthread_mutex_t *forks)
@@ -91,7 +91,7 @@ int	is_phi_dead(t_phi *phi)
 	return (0);
 }
 
-int	is_dead(t_phi *phi)
+int	 is_dead(t_phi *phi)
 {
 	pthread_mutex_lock(phi->dead_lock);
 	if (*(phi)->dead == 1)
@@ -115,7 +115,7 @@ int	monitor_if_phi_dead(t_phi *phi)
 			printf("%zu %d died\n", time, phi->id);
 			pthread_mutex_unlock(phi->write_lock);
 			pthread_mutex_lock(phi[0].dead_lock);
-			*phi->dead = 1;
+			*(phi->dead) = 1;
 			pthread_mutex_unlock(phi[0].dead_lock);
 			return (1);
 		}
