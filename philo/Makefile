@@ -6,13 +6,13 @@
 #    By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/29 03:21:58 by ecunha            #+#    #+#              #
-#    Updated: 2024/02/06 12:12:28 by ecunha           ###   ########.fr        #
+#    Updated: 2024/02/12 17:14:28 by ecunha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -O2 -fsanitize=thread -pthread
+CFLAGS = -Wall -Wextra -O2  -pthread  -g3 #-fsanitize=thread
 DFLAGS = -ggdb3
 RM = rm -f
 HEADER = philo.h

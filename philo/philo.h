@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:56:49 by ecunha            #+#    #+#             */
-/*   Updated: 2024/02/04 12:53:10 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/02/12 16:57:16 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_phi
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*meal_lock;
 	pthread_mutex_t	*dead_lock;
-	//int				*bool_start;
+	pthread_mutex_t	*start_mutex;
+	int				*bool_start;
 }					t_phi;
 
 typedef struct s_data
@@ -51,7 +52,8 @@ typedef struct s_data
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	dead_lock;
-	//int				bool_start;
+	pthread_mutex_t	start_mutex;
+	int				bool_start;
 	t_phi			*philos;
 }					t_data;
 
