@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:18:01 by ecunha            #+#    #+#             */
-/*   Updated: 2024/02/04 13:41:19 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/02/06 12:31:53 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void	ft_sleep(t_phi *phi)
 
 void	ft_eat(t_phi *phi, size_t time)
 {
+	pthread_mutex_lock(phi->r_fork);
 	time = get_time() - phi->start_time;
 	pthread_mutex_lock(phi->write_lock);
 	if (!is_dead(phi))
@@ -196,9 +197,9 @@ void	ft_eat(t_phi *phi, size_t time)
 	pthread_mutex_lock(phi->meal_lock);
 	phi->meals_eaten++;
 	phi->last_meal = get_time();
+	phi->eating = 0;
 	pthread_mutex_unlock(phi->meal_lock);
 	ft_usleep(phi->time_to_eat);
-	phi->eating = 0;
 	pthread_mutex_unlock(phi->l_fork);
 	pthread_mutex_unlock(phi->r_fork);
 }
@@ -216,8 +217,8 @@ void	*routine(void *pointer)
 		ft_sleep(phi);
 	while (!is_dead(phi))
 	{
-	//	if (phi->meals_eaten == 0 && phi->id % 2 == 0)
-	//		ft_sleep(phi);
+		if (phi->meals_eaten == 0 && phi->id % 2 == 0)
+			ft_sleep(phi);
 		ft_eat(phi, time);
 		ft_sleep(phi);
 		ft_think(phi);
