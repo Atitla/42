@@ -6,7 +6,7 @@
 /*   By: ecunha <ecunha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:56:49 by ecunha            #+#    #+#             */
-/*   Updated: 2024/02/12 16:57:16 by ecunha           ###   ########.fr       */
+/*   Updated: 2024/02/21 15:49:49 by ecunha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <pthread.h>
 
 # define PHILO_MAX 200
+
+typedef struct s_mut
+{
+	pthread_mutex_t	mutex;
+	int				variable;
+}					t_mut;
 
 typedef struct s_phi
 {
@@ -38,10 +44,11 @@ typedef struct s_phi
 	int				*dead;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*write_lock;
-	pthread_mutex_t	*meal_lock;
-	pthread_mutex_t	*dead_lock;
+	pthread_mutex_t	*write_mutex;
+	pthread_mutex_t	*meal_mutex;
+	pthread_mutex_t	*dead_mutex;
 	pthread_mutex_t	*start_mutex;
+	pthread_mutex_t	*start_time_mutex;
 	int				*bool_start;
 }					t_phi;
 
@@ -49,10 +56,11 @@ typedef struct s_data
 {
 	int				args[5];
 	int				dead_flag;
-	pthread_mutex_t	write_lock;
-	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	write_mutex;
+	pthread_mutex_t	meal_mutex;
+	pthread_mutex_t	dead_mutex;
 	pthread_mutex_t	start_mutex;
+	pthread_mutex_t	start_time_mutex;
 	int				bool_start;
 	t_phi			*philos;
 }					t_data;
